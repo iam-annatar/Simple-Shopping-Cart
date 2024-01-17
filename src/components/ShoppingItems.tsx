@@ -15,7 +15,7 @@ export const ShoppingItems = ({
   price,
   name,
 }: ShoppingItemsProps) => {
-  const count = 1;
+  const count = 0;
 
   return (
     <Card className=" mb-4 shadow-md dark:bg-slate-900">

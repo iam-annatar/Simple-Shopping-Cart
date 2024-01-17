@@ -7,7 +7,7 @@ import { ThemeProvider } from './context/ThemeProvider';
 
 const App = () => {
   return (
-    <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">
+    <ThemeProvider defaultTheme="system" storageKey="Theme">
       <Navbar />
       <div className="container">
         <Routes>
