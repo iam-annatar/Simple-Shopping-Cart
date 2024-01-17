@@ -1,9 +1,9 @@
 [
   {
     "id": 1,
-    "name": "Book",
-    "price": 10.99,
-    "imgUrl": "/imgs/book.jpg"
+    "name": "PS5 Console",
+    "price": 549.99,
+    "imgUrl": "/imgs/ps5.jpg"
   },
   {
     "id": 2,
@@ -13,14 +13,14 @@
   },
   {
     "id": 3,
-    "name": "Banana",
-    "price": 2.99,
-    "imgUrl": "/imgs/banana.jpg"
+    "name": "Phone",
+    "price": 490.99,
+    "imgUrl": "/imgs/phone.jpg"
   },
   {
     "id": 4,
-    "name": "Car",
-    "price": 12499,
-    "imgUrl": "/imgs/car.jpg"
+    "name": "Gamepad",
+    "price": 76.99,
+    "imgUrl": "/imgs/gamepad.jpg"
   }
 ]
