@@ -3,10 +3,11 @@ import { Navbar } from './components/Navbar';
 import { About } from './pages/About';
 import { Store } from './pages/Store';
 import { Home } from './pages/Home';
+import { ThemeProvider } from './context/ThemeProvider';
 
 const App = () => {
   return (
-    <>
+    <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">
       <Navbar />
       <div className="container">
         <Routes>
@@ -15,7 +16,7 @@ const App = () => {
           <Route path="/about" element={<About />} />
         </Routes>
       </div>
-    </>
+    </ThemeProvider>
   );
 };
 

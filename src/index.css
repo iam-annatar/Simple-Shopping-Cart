@@ -66,10 +66,6 @@
   }
 }
 
-body {
-  background-color: ghostwhite;
-}
-
 @layer base {
   * {
     @apply border-border;

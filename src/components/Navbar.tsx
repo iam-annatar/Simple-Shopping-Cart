@@ -1,14 +1,44 @@
+import { Button } from '@/@/components/ui/button';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/@/components/ui/dropdown-menu';
+import { useTheme } from '@/hooks/useTheme';
+import { Moon, Sun } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 
 export const Navbar = () => {
+  const { setTheme } = useTheme();
   return (
-    <div className=" sticky top-0 bg-white flex items-center justify-between shadow-sm text-sm p-[10px] ">
-      <nav className="flex gap-4 text-gray-400 hover:*:text-slate-900">
+    <div className=" sticky top-0 bg-white dark:bg-slate-950 flex items-center justify-between shadow-sm dark:border-b text-sm p-[10px] ">
+      <nav className="flex items-center gap-4  text-gray-400 hover:*:text-black dark:hover:*:text-white ">
         <NavLink to="/">Home</NavLink>
         <NavLink to="/store">Store</NavLink>
         <NavLink to="/about">About</NavLink>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" size="icon">
+              <Sun className="h-[1rem] w-[1rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+              <Moon className="absolute h-[1rem] w-[1rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+              <span className="sr-only">Toggle theme</span>
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuItem onClick={() => setTheme('light')}>
+              Light
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => setTheme('dark')}>
+              Dark
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => setTheme('system')}>
+              System
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </nav>
-      <button className="relative rounded-full border-2 bg-white w-[3rem] h-[3rem] text-blue-500 hover:bg-blue-500 hover:text-white">
+      <button className="relative rounded-full border-2 bg-white w-[3rem] h-[3rem] text-blue-500 hover:bg-blue-500 hover:text-white dark:bg-blue-500 dark:hover:bg-white dark:text-white dark:hover:text-blue-500">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 576 512"
