@@ -1,5 +1,6 @@
 import { Button } from '@/@/components/ui/button';
 import { Card, CardContent, CardFooter } from '@/@/components/ui/card';
+import { useShoppingContext } from '@/hooks/useShoppingContext';
 import { formatCurrency } from '@/utilities/formattCurrency';
 
 type ShoppingItemsProps = {
@@ -15,7 +16,10 @@ export const ShoppingItems = ({
   price,
   name,
 }: ShoppingItemsProps) => {
-  const count = 0;
+  const { getItemsCount, increaseCount, decreaseCount, removeItem } =
+    useShoppingContext();
+
+  const count = getItemsCount(id);
 
   return (
     <Card className=" mb-4 shadow-md dark:bg-slate-900">
@@ -32,13 +36,19 @@ export const ShoppingItems = ({
       </CardContent>
       <CardFooter>
         {count === 0 ? (
-          <Button className="w-full bg-blue-600 hover:bg-blue-600/90 dark:text-white">
+          <Button
+            onClick={() => increaseCount(id)}
+            className="w-full bg-blue-600 hover:bg-blue-600/90 dark:text-white"
+          >
             + Add To Cart
           </Button>
         ) : (
           <div className="grid grid-cols-1 grid-rows-2 place-items-center mx-auto gap-2">
             <div className="flex items-center gap-2">
-              <Button className="bg-blue-600 hover:bg-blue-600/90 p-[12px] h-[1.7rem] rounded-sm dark:text-white ">
+              <Button
+                onClick={() => decreaseCount(id)}
+                className="bg-blue-600 hover:bg-blue-600/90 p-[12px] h-[1.7rem] rounded-sm dark:text-white "
+              >
                 -
               </Button>
               <div className="">
@@ -46,11 +56,17 @@ export const ShoppingItems = ({
                   {count} <span>in cart</span>
                 </div>
               </div>
-              <Button className="bg-blue-600 hover:bg-blue-600/90 p-2 h-[1.7rem] rounded-sm dark:text-white">
+              <Button
+                onClick={() => increaseCount(id)}
+                className="bg-blue-600 hover:bg-blue-600/90 p-2 h-[1.7rem] rounded-sm dark:text-white"
+              >
                 +
               </Button>
             </div>
-            <Button className="bg-red-600 hover:bg-red-600/90 w-16 h-7 rounded-sm dark:text-white">
+            <Button
+              onClick={() => removeItem(id)}
+              className="bg-red-600 hover:bg-red-600/90 w-16 h-7 rounded-sm dark:text-white"
+            >
               Remove
             </Button>
           </div>
