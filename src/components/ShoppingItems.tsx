@@ -2,6 +2,7 @@ import { Button } from '@/@/components/ui/button';
 import { Card, CardContent, CardFooter } from '@/@/components/ui/card';
 import { useShoppingContext } from '@/hooks/useShoppingContext';
 import { formatCurrency } from '@/utilities/formattCurrency';
+import { toast } from 'sonner';
 
 type ShoppingItemsProps = {
   id: number;
@@ -37,7 +38,10 @@ export const ShoppingItems = ({
       <CardFooter>
         {count === 0 ? (
           <Button
-            onClick={() => increaseCount(id)}
+            onClick={() => {
+              toast.success('Item added to your cart');
+              increaseCount(id);
+            }}
             className="w-full bg-blue-600 hover:bg-blue-600/90 dark:text-white"
           >
             + Add To Cart
@@ -62,7 +66,10 @@ export const ShoppingItems = ({
               </Button>
             </div>
             <Button
-              onClick={() => removeItem(id)}
+              onClick={() => {
+                toast.warning('Item removed form your card');
+                removeItem(id);
+              }}
               className="bg-red-600 hover:bg-red-600/90 w-16 h-7 rounded-sm dark:text-white"
             >
               Remove

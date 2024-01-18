@@ -5,6 +5,7 @@ import { Store } from './pages/Store';
 import { Home } from './pages/Home';
 import { ThemeProvider } from './context/ThemeProvider';
 import { ShoppingCartContext } from './context/ShoppingCartContext';
+import { Toaster } from 'sonner';
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
             <Route path="/about" element={<About />} />
           </Routes>
         </div>
+        <Toaster duration={1500} richColors closeButton />
       </ShoppingCartContext>
     </ThemeProvider>
   );
