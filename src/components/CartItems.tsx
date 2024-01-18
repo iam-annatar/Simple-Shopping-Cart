@@ -14,11 +14,11 @@ export const CartItems = ({ id, count }: CartItemsProps) => {
   const item = storeItems.find((item) => item.id === id);
 
   return (
-    <div className="grid grid-cols-2 place-items-center gap-2 grid-rows-[1fr 1/2fr] mt-4 border-b">
+    <div className="grid grid-cols-2 place-items-center gap-2 grid-rows-[1fr 1/2fr] mt-4 border-b xs:flex xs:items-center ">
       <img
         src={item?.imgUrl}
         alt=""
-        className="object-cover w-[128px] h-[75px]"
+        className="object-cover w-[128px] h-[75px] xs:mb-4"
       />
       <div className="me-auto">
         <div className="flex justify-center items-center">
@@ -33,10 +33,9 @@ export const CartItems = ({ id, count }: CartItemsProps) => {
           {formatCurrency(item?.price || 0)}
         </div>
       </div>
-
       <Button
         onClick={() => removeItem(id)}
-        className="w-4 h-4 mb-2 bg-inherit border border-red-500 rounded-full outline-red-500 text-red-500 hover:text-white hover:bg-red-500"
+        className="w-4 h-4 mb-2 bg-inherit border border-red-500 rounded-full outline-red-500 text-red-500 hover:text-white hover:bg-red-500 "
       >
         &times;
       </Button>
