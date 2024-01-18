@@ -22,5 +22,29 @@
     "name": "Gamepad",
     "price": 76.99,
     "imgUrl": "/imgs/gamepad.jpg"
+  },
+  {
+    "id": 5,
+    "name": "Speakers",
+    "price": 98.99,
+    "imgUrl": "/imgs/speakers.jpg"
+  },
+  {
+    "id": 6,
+    "name": "Keyboard",
+    "price": 135,
+    "imgUrl": "/imgs/keyboard.jpg"
+  },
+  {
+    "id": 7,
+    "name": "Headphone",
+    "price": 78.99,
+    "imgUrl": "/imgs/headphone.jpg"
+  },
+  {
+    "id": 8,
+    "name": "Mouse",
+    "price": 47.99,
+    "imgUrl": "/imgs/mouse.jpg"
   }
 ]
