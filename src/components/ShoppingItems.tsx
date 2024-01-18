@@ -29,8 +29,8 @@ export const ShoppingItems = ({
         alt=""
       />
       <CardContent>
-        <div className="flex justify-between items-center mt-4">
-          <div className="text-lg">{name}</div>{' '}
+        <div className="flex justify-between items-center align-baseline mt-4">
+          <span className="text-lg font-medium">{name}</span>{' '}
           <span className="text-gray-400">{formatCurrency(price)}</span>
         </div>
       </CardContent>
@@ -51,10 +51,8 @@ export const ShoppingItems = ({
               >
                 -
               </Button>
-              <div className="">
-                <div className="text-lg">
-                  {count} <span>in cart</span>
-                </div>
+              <div>
+                <span className="text-lg">{count}</span> in cart
               </div>
               <Button
                 onClick={() => increaseCount(id)}
