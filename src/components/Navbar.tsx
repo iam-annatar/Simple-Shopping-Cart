@@ -7,40 +7,23 @@ import {
 } from '@/@/components/ui/dropdown-menu';
 import { useShoppingContext } from '@/hooks/useShoppingContext';
 import { useTheme } from '@/hooks/useTheme';
-import { Moon, Sun } from 'lucide-react';
+import { Menu, Moon, Sun } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 
 export const Navbar = () => {
-  const { setTheme } = useTheme();
   const { cartCount, openCart } = useShoppingContext();
 
   return (
-    <div className=" sticky top-0 bg-white dark:bg-slate-950 flex items-center justify-between shadow-sm dark:border-b text-sm p-[10px] ">
-      <nav className="flex items-center gap-4  text-gray-400 hover:*:text-black dark:hover:*:text-white ">
-        <NavLink to="/">Home</NavLink>
-        <NavLink to="/store">Store</NavLink>
-        <NavLink to="/about">About</NavLink>
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" size="icon">
-              <Sun className="h-[1rem] w-[1rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-              <Moon className="absolute h-[1rem] w-[1rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-              <span className="sr-only">Toggle theme</span>
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="start">
-            <DropdownMenuItem onClick={() => setTheme('light')}>
-              Light
-            </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => setTheme('dark')}>
-              Dark
-            </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => setTheme('system')}>
-              System
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      </nav>
+    <div className=" sticky top-0 bg-white dark:bg-slate-950 flex justify-between items-center  shadow-sm dark:border-b text-sm p-[10px] ">
+      <div className="flex gap-x-2">
+        <nav className="hidden sm:flex items-center gap-4  text-gray-400 hover:*:text-black dark:hover:*:text-white ">
+          <NavLink to="/">Home</NavLink>
+          <NavLink to="/store">Store</NavLink>
+          <NavLink to="/about">About</NavLink>
+        </nav>
+        <MobileMenu />
+        <ToggleTheme />
+      </div>
       {cartCount > 0 && (
         <button
           onClick={openCart}
@@ -60,5 +43,55 @@ export const Navbar = () => {
         </button>
       )}
     </div>
+  );
+};
+
+const ToggleTheme = () => {
+  const { setTheme } = useTheme();
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button className="" variant="ghost" size="icon">
+          <Sun className="h-[1rem] w-[1rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+          <Moon className="absolute h-[1rem] w-[1rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+          <span className="sr-only">Toggle theme</span>
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="start">
+        <DropdownMenuItem onClick={() => setTheme('light')}>
+          Light
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => setTheme('dark')}>
+          Dark
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => setTheme('system')}>
+          System
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+};
+
+const MobileMenu = () => {
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger className="flex sm:hidden" asChild>
+        <Button variant="ghost" size="icon">
+          <Menu />
+          <span className="sr-only">Toggle Menu</span>
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="start">
+        <DropdownMenuItem asChild>
+          <NavLink to="/">Home</NavLink>
+        </DropdownMenuItem>
+        <DropdownMenuItem asChild>
+          <NavLink to="/store">Store</NavLink>
+        </DropdownMenuItem>
+        <DropdownMenuItem asChild>
+          <NavLink to="/about">About</NavLink>
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 };

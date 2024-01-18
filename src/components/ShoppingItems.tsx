@@ -23,7 +23,7 @@ export const ShoppingItems = ({
   const count = getItemsCount(id);
 
   return (
-    <Card className=" mb-4 shadow-md dark:bg-slate-900">
+    <Card className="xs:h-[19rem] mb-4 shadow-md dark:bg-slate-900">
       <img
         src={imgUrl}
         className="object-cover w-full h-[200px] rounded-t-sm"
