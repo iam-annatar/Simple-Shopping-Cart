@@ -5,9 +5,11 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/@/components/ui/dropdown-menu';
+import { Sheet, SheetContent } from '@/@/components/ui/sheet';
 import { useShoppingContext } from '@/hooks/useShoppingContext';
 import { useTheme } from '@/hooks/useTheme';
 import { Menu, Moon, Sun } from 'lucide-react';
+import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
 export const Navbar = () => {
@@ -72,25 +74,31 @@ const ToggleTheme = () => {
 };
 
 const MobileMenu = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger className="flex sm:hidden" asChild>
-        <Button variant="ghost" size="icon">
-          <Menu className="h-[1.3rem] w-[1.3rem]" />
-          <span className="sr-only">Toggle Menu</span>
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="start">
-        <DropdownMenuItem asChild>
-          <NavLink to="/">Home</NavLink>
-        </DropdownMenuItem>
-        <DropdownMenuItem asChild>
-          <NavLink to="/store">Store</NavLink>
-        </DropdownMenuItem>
-        <DropdownMenuItem asChild>
-          <NavLink to="/about">About</NavLink>
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
+    <>
+      <Button
+        className="sm:hidden"
+        onClick={() => setIsOpen(true)}
+        variant="ghost"
+        size="icon"
+      >
+        <Menu className="h-[1.3rem] w-[1.3rem]" />
+        <span className="sr-only">Toggle Menu</span>
+      </Button>
+      <Sheet open={isOpen} onOpenChange={() => setIsOpen(false)}>
+        <SheetContent className="w-full h-[25vh]" side={'left'}>
+          <nav
+            onClick={() => setIsOpen(false)}
+            className="grid gap-4 place-items-center text-gray-400 hover:*:text-black dark:hover:*:text-white"
+          >
+            <NavLink to="/">Home</NavLink>
+            <NavLink to="/store">Store</NavLink>
+            <NavLink to="/about">About</NavLink>
+          </nav>
+        </SheetContent>
+      </Sheet>
+    </>
   );
 };
