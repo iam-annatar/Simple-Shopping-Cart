@@ -23,7 +23,7 @@ export const ShoppingItems = ({
   const count = getItemsCount(id);
 
   return (
-    <Card className="xs:h-[19rem] mb-4 shadow-md dark:bg-slate-900">
+    <Card className="h-[21.5rem] mb-9 shadow-md dark:bg-slate-900 sm:mx-3">
       <img
         src={imgUrl}
         className="object-cover w-full h-[200px] rounded-t-sm"
@@ -39,7 +39,7 @@ export const ShoppingItems = ({
         {count === 0 ? (
           <Button
             onClick={() => {
-              toast.success('Item added to your cart');
+              toast.success(`Item "${name}" added to your cart`);
               increaseCount(id);
             }}
             className="w-full bg-blue-600 hover:bg-blue-600/90 dark:text-white"
@@ -50,8 +50,13 @@ export const ShoppingItems = ({
           <div className="grid grid-cols-1 grid-rows-2 place-items-center mx-auto gap-2">
             <div className="flex items-center gap-2">
               <Button
-                onClick={() => decreaseCount(id)}
-                className="bg-blue-600 hover:bg-blue-600/90 p-[12px] h-[1.7rem] rounded-sm dark:text-white "
+                size={'sm'}
+                onClick={() => {
+                  count === 1 &&
+                    toast.warning(`Item "${name}" removed from your cart`);
+                  decreaseCount(id);
+                }}
+                className="bg-blue-600 hover:bg-blue-600/90 w-3 h-7 rounded-sm dark:text-white "
               >
                 -
               </Button>
@@ -59,15 +64,16 @@ export const ShoppingItems = ({
                 <span className="text-lg">{count}</span> in cart
               </div>
               <Button
+                size={'sm'}
                 onClick={() => increaseCount(id)}
-                className="bg-blue-600 hover:bg-blue-600/90 p-2 h-[1.7rem] rounded-sm dark:text-white"
+                className="bg-blue-600 hover:bg-blue-600/90 w-3 h-7  rounded-sm dark:text-white"
               >
                 +
               </Button>
             </div>
             <Button
               onClick={() => {
-                toast.warning('Item removed form your card');
+                toast.warning(`Item "${name}" removed from your cart`);
                 removeItem(id);
               }}
               className="bg-red-600 hover:bg-red-600/90 w-16 h-7 rounded-sm dark:text-white"

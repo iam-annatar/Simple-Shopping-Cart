@@ -1,3 +1,3 @@
 export const Home = () => {
-  return <h1 className="text-xl my-4">Home</h1>;
+  return <h1 className="text-xl font-bold my-4">Home</h1>;
 };
