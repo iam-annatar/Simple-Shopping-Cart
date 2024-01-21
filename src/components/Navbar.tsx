@@ -16,7 +16,7 @@ export const Navbar = () => {
   const { cartCount, openCart } = useShoppingContext();
 
   return (
-    <div className="container bg-white dark:bg-slate-950 mx-auto sticky top-0">
+    <div className="container z-10 bg-white dark:bg-slate-950 mx-auto sticky top-0">
       <div className="py-3 bg-white dark:bg-slate-950 flex justify-between items-center border-b dark:border-b ">
         <div className="flex gap-x-2">
           <nav className="hidden sm:flex items-center gap-4  text-gray-400 hover:*:text-black dark:hover:*:text-white ">
