@@ -9,7 +9,7 @@ type ShoppingCartProps = {
 };
 
 export const ShoppingCart = ({ isOpen }: ShoppingCartProps) => {
-  const { closeCart, items } = useShoppingContext();
+  const { closeCart, items, cartCount } = useShoppingContext();
 
   return (
     <Sheet open={isOpen} onOpenChange={closeCart}>
@@ -18,15 +18,19 @@ export const ShoppingCart = ({ isOpen }: ShoppingCartProps) => {
         {items.map((item) => (
           <CartItems key={item.id} {...item} />
         ))}
-        <div className="text-xl mt-4 text-right">
-          Total :{' '}
-          {formatCurrency(
-            items.reduce((total, cartItem) => {
-              const item = storeItems.find((item) => item.id === cartItem.id);
-              return total + (item?.price || 0) * cartItem.count;
-            }, 0)
-          )}
-        </div>
+        {cartCount === 0 ? (
+          <div className="text-xl mt-4 text-center">Your Cart is empty!</div>
+        ) : (
+          <div className="text-xl mt-4 text-right">
+            Total :{' '}
+            {formatCurrency(
+              items.reduce((total, cartItem) => {
+                const item = storeItems.find((item) => item.id === cartItem.id);
+                return total + (item?.price || 0) * cartItem.count;
+              }, 0)
+            )}
+          </div>
+        )}
       </SheetContent>
     </Sheet>
   );
