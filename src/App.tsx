@@ -11,8 +11,8 @@ const App = () => {
   return (
     <ThemeProvider defaultTheme="system" storageKey="Theme">
       <ShoppingCartContext>
+        <Navbar />
         <div className="container">
-          <Navbar />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/store" element={<Store />} />
