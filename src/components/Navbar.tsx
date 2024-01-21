@@ -94,13 +94,16 @@ const MobileMenu = () => {
           className="w-full h-[10rem] dark:bg-slate-950"
           side={'left'}
         >
-          <nav
-            onClick={() => setIsOpen(false)}
-            className="grid gap-4 place-items-center text-gray-400 hover:*:text-black dark:hover:*:text-white"
-          >
-            <NavLink to="/">Home</NavLink>
-            <NavLink to="/store">Store</NavLink>
-            <NavLink to="/about">About</NavLink>
+          <nav className="grid gap-5 place-items-center text-gray-400 hover:*:text-black dark:hover:*:text-white">
+            <NavLink onClick={() => setIsOpen(false)} to="/">
+              Home
+            </NavLink>
+            <NavLink onClick={() => setIsOpen(false)} to="/store">
+              Store
+            </NavLink>
+            <NavLink onClick={() => setIsOpen(false)} to="/about">
+              About
+            </NavLink>
           </nav>
         </SheetContent>
       </Sheet>
