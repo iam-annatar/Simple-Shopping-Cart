@@ -1,8 +1,14 @@
-import { Sheet, SheetContent, SheetTitle } from '@/components/ui/sheet';
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetTitle,
+} from '@/components/ui/sheet';
 import { useShoppingContext } from '@/hooks/useShoppingContext';
 import { CartItems } from './CartItems';
 import { formatCurrency } from '@/utilities/formattCurrency';
 import storeItems from '@/data/item.json';
+import { X } from 'lucide-react';
 
 type ShoppingCartProps = {
   isOpen: boolean;
@@ -14,7 +20,13 @@ export const ShoppingCart = ({ isOpen }: ShoppingCartProps) => {
   return (
     <Sheet open={isOpen} onOpenChange={closeCart}>
       <SheetContent className="overflow-y-scroll">
-        <SheetTitle>Cart</SheetTitle>
+        <div className="flex items-center justify-between">
+          <SheetTitle>Cart</SheetTitle>{' '}
+          <SheetClose className="rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-secondary">
+            <X className="h-5 w-5" />
+            <span className="sr-only">Close</span>
+          </SheetClose>
+        </div>
         {items.map((item) => (
           <CartItems key={item.id} {...item} />
         ))}
