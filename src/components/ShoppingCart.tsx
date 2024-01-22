@@ -1,4 +1,4 @@
-import { Sheet, SheetContent, SheetTitle } from '@/@/components/ui/sheet';
+import { Sheet, SheetContent, SheetTitle } from '@/components/ui/sheet';
 import { useShoppingContext } from '@/hooks/useShoppingContext';
 import { CartItems } from './CartItems';
 import { formatCurrency } from '@/utilities/formattCurrency';

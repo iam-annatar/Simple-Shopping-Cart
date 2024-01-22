@@ -1,11 +1,11 @@
-import { Button } from '@/@/components/ui/button';
+import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@/@/components/ui/dropdown-menu';
-import { Sheet, SheetContent } from '@/@/components/ui/sheet';
+} from '@/components/ui/dropdown-menu';
+import { Sheet, SheetContent } from '@/components/ui/sheet';
 import { useShoppingContext } from '@/hooks/useShoppingContext';
 import { useTheme } from '@/hooks/useTheme';
 import { Menu, Moon, Sun } from 'lucide-react';

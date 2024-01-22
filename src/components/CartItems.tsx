@@ -1,4 +1,4 @@
-import { Button } from '@/@/components/ui/button';
+import { Button } from '@/components/ui/button';
 import storeItems from '@/data/item.json';
 import { useShoppingContext } from '@/hooks/useShoppingContext';
 import { formatCurrency } from '@/utilities/formattCurrency';
