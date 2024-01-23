@@ -5,6 +5,7 @@ import { formatCurrency } from '@/utilities/formattCurrency';
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 import { LazyLoading } from './LazyLoading';
+import { useNavigate } from 'react-router-dom';
 
 type ShoppingItemsProps = {
   id: number;
@@ -21,7 +22,8 @@ export const ShoppingItems = ({
 }: ShoppingItemsProps) => {
   const { getItemsCount, increaseCount, decreaseCount, removeItem } =
     useShoppingContext();
-
+  const count = getItemsCount(id);
+  const navigate = useNavigate();
   const [isLoadig, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -29,8 +31,6 @@ export const ShoppingItems = ({
       setIsLoading(false);
     }, 2000);
   }, [isLoadig]);
-
-  const count = getItemsCount(id);
 
   if (isLoadig) {
     return <LazyLoading />;
@@ -40,13 +40,17 @@ export const ShoppingItems = ({
     <>
       <Card className="h-[21.5rem] shadow-md dark:bg-slate-900 ">
         <img
+          onClick={() => navigate('/product')}
           src={imgUrl}
-          className="object-cover w-full h-[200px] rounded-t-sm"
+          className="cursor-pointer object-cover w-full h-[200px] rounded-t-sm"
           alt=""
         />
         <CardContent>
-          <div className="flex justify-between items-center align-baseline mt-4">
-            <span className="text-lg font-medium">{name}</span>{' '}
+          <div
+            onClick={() => navigate('/product')}
+            className="cursor-pointer flex justify-between items-center align-baseline mt-4"
+          >
+            <span className=" text-lg font-medium">{name}</span>{' '}
             <span className="text-gray-400">{formatCurrency(price)}</span>
           </div>
         </CardContent>

@@ -19,7 +19,7 @@ export const ShoppingCart = ({ isOpen }: ShoppingCartProps) => {
 
   return (
     <Sheet open={isOpen} onOpenChange={closeCart}>
-      <SheetContent className="overflow-y-scroll">
+      <SheetContent className="overflow-scroll">
         <div className="flex items-center justify-between">
           <SheetTitle>Cart</SheetTitle>{' '}
           <SheetClose className="rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-secondary">

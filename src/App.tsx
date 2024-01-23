@@ -6,6 +6,7 @@ import { Home } from './pages/Home';
 import { ThemeProvider } from './context/ThemeProvider';
 import { ShoppingCartContext } from './context/ShoppingCartContext';
 import { Toaster } from 'sonner';
+import { Product } from './pages/Product';
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/store" element={<Store />} />
+            <Route path="/product" element={<Product />} />
             <Route path="/about" element={<About />} />
           </Routes>
         </div>
