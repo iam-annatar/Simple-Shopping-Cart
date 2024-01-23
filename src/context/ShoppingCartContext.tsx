@@ -26,7 +26,6 @@ export const ShoppingContext = createContext({} as ShoppingContextType);
 
 export const ShoppingCartContext = ({ children }: ShoppingCartContextProps) => {
   const [items, setItems] = useLocalStorage<CartItem[]>('ShoppingInfo', []);
-
   const [isOpen, setIsOpen] = useState(false);
 
   const openCart = () => setIsOpen(true);

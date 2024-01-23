@@ -1,33 +1,52 @@
-import { Button } from '@/components/ui/button';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { Sheet, SheetClose, SheetContent } from '@/components/ui/sheet';
 import { useShoppingContext } from '@/hooks/useShoppingContext';
-import { useTheme } from '@/hooks/useTheme';
-import { Menu, Moon, Sun, X } from 'lucide-react';
-import { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
+import { MobileMenu } from './MobileMenu';
+import { ToggleTheme } from './ToggleTheme';
+import { useSearchContext } from '@/hooks/useSearchContext';
+import { ChangeEvent } from 'react';
+import { Input } from './ui/input';
 
 export const Navbar = () => {
   const { cartCount, openCart } = useShoppingContext();
 
-  return (
-    <div className="container z-10 bg-white dark:bg-slate-950 mx-auto sticky top-0">
-      <div className="py-3 bg-white dark:bg-slate-950 flex justify-between items-center border-b dark:border-b ">
-        <div className="flex gap-x-2">
-          <nav className="hidden sm:flex items-center gap-4  text-gray-400 hover:*:text-black dark:hover:*:text-white ">
-            <NavLink to="/">Home</NavLink>
-            <NavLink to="/store">Store</NavLink>
-            <NavLink to="/about">About</NavLink>
-          </nav>
-          <MobileMenu />
-          <ToggleTheme />
-        </div>
+  const { setSearchValue } = useSearchContext();
 
+  const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
+    const query = e.target.value;
+    setSearchValue(query);
+  };
+
+  const location = useLocation();
+
+  const pages = {
+    home: '/',
+    store: '/store',
+    about: '/about',
+  };
+
+  return (
+    <div className="container z-10 bg-white dark:bg-slate-950 sticky top-0">
+      <div className="py-3 bg-white dark:bg-slate-950 flex justify-between items-center border-b dark:border-b ">
+        <div className="flex gap-x-2 items-center">
+          <nav className="hidden sm:flex items-center gap-4  text-gray-400 hover:*:text-black dark:hover:*:text-white ">
+            <NavLink to={pages.home}>Home</NavLink>
+            <NavLink to={pages.store}>Store</NavLink>
+            <NavLink to={pages.about}>About</NavLink>
+          </nav>
+          <div className="flex gap-x-2">
+            <MobileMenu />
+            <ToggleTheme />
+          </div>
+          {location.pathname === pages.store && (
+            <Input
+              className=""
+              type="search"
+              id="quary"
+              placeholder="Search ..."
+              onChange={handleSearch}
+            />
+          )}
+        </div>
         <button
           onClick={openCart}
           className="relative rounded-full border-2 bg-white w-[3rem] h-[3rem] text-blue-500 hover:bg-blue-500 hover:text-white dark:bg-blue-500 dark:hover:bg-white dark:text-white dark:hover:text-blue-500 "
@@ -46,71 +65,5 @@ export const Navbar = () => {
         </button>
       </div>
     </div>
-  );
-};
-
-const ToggleTheme = () => {
-  const { setTheme } = useTheme();
-  return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="icon">
-          <Sun className="h-[1rem] w-[1rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-          <Moon className="absolute h-[1rem] w-[1rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-          <span className="sr-only">Toggle theme</span>
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="start">
-        <DropdownMenuItem onClick={() => setTheme('light')}>
-          Light
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme('dark')}>
-          Dark
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme('system')}>
-          System
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
-  );
-};
-
-const MobileMenu = () => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  return (
-    <>
-      <Button
-        className="sm:hidden"
-        onClick={() => setIsOpen(true)}
-        variant="ghost"
-        size="icon"
-      >
-        <Menu className="h-[1.3rem] w-[1.3rem]" />
-        <span className="sr-only">Toggle Menu</span>
-      </Button>
-      <Sheet open={isOpen} onOpenChange={() => setIsOpen(false)}>
-        <SheetContent
-          className="w-full h-[10rem] dark:bg-slate-950"
-          side={'left'}
-        >
-          <nav className="grid gap-5 place-items-center text-gray-400 hover:*:text-black dark:hover:*:text-white">
-            <NavLink onClick={() => setIsOpen(false)} to="/">
-              Home
-            </NavLink>
-            <NavLink onClick={() => setIsOpen(false)} to="/store">
-              Store
-            </NavLink>
-            <NavLink onClick={() => setIsOpen(false)} to="/about">
-              About
-            </NavLink>
-          </nav>
-          <SheetClose className="absolute left-7 top-[25.7px] rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-secondary">
-            <X className="h-5 w-5" />
-            <span className="sr-only">Close</span>
-          </SheetClose>
-        </SheetContent>
-      </Sheet>
-    </>
   );
 };
