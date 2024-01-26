@@ -6,22 +6,25 @@ import { Home } from './pages/Home';
 import { ThemeProvider } from './context/ThemeProvider';
 import { ShoppingCartContext } from './context/ShoppingCartContext';
 import { Toaster } from 'sonner';
-import { Product } from './pages/Product';
+import { ProductPage } from './pages/ProductPage';
+import { SearchContextProvider } from './context/SearchContext';
 
 const App = () => {
   return (
     <ThemeProvider defaultTheme="system" storageKey="Theme">
       <ShoppingCartContext>
-        <Navbar />
-        <div className="container">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/store" element={<Store />} />
-            <Route path="/product" element={<Product />} />
-            <Route path="/about" element={<About />} />
-          </Routes>
-        </div>
-        <Toaster duration={1500} richColors closeButton />
+        <SearchContextProvider>
+          <Navbar />
+          <div className="container">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/store" element={<Store />} />
+              <Route path="/store/:productId" element={<ProductPage />} />
+              <Route path="/about" element={<About />} />
+            </Routes>
+          </div>
+          <Toaster duration={1500} richColors closeButton />
+        </SearchContextProvider>
       </ShoppingCartContext>
     </ThemeProvider>
   );

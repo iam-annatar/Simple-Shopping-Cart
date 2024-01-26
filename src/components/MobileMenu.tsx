@@ -19,10 +19,7 @@ export const MobileMenu = () => {
         <span className="sr-only">Toggle Menu</span>
       </Button>
       <Sheet open={isOpen} onOpenChange={() => setIsOpen(false)}>
-        <SheetContent
-          className="w-full h-[10rem] dark:bg-slate-950"
-          side={'left'}
-        >
+        <SheetContent className="w-full  dark:bg-slate-950" side={'left'}>
           <nav className="grid gap-5 place-items-center text-gray-400 hover:*:text-black dark:hover:*:text-white">
             <NavLink onClick={() => setIsOpen(false)} to="/">
               Home

@@ -5,7 +5,7 @@ import { formatCurrency } from '@/utilities/formattCurrency';
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 import { LazyLoading } from './LazyLoading';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 type ShoppingItemsProps = {
   id: number;
@@ -23,7 +23,6 @@ export const ShoppingItems = ({
   const { getItemsCount, increaseCount, decreaseCount, removeItem } =
     useShoppingContext();
   const count = getItemsCount(id);
-  const navigate = useNavigate();
   const [isLoadig, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -39,20 +38,20 @@ export const ShoppingItems = ({
   return (
     <>
       <Card className="h-[21.5rem] shadow-md dark:bg-slate-900 ">
-        <img
-          onClick={() => navigate('/product')}
-          src={imgUrl}
-          className="cursor-pointer object-cover w-full h-[200px] rounded-t-sm"
-          alt=""
-        />
+        <Link to={`/store/${id}`}>
+          <img
+            src={imgUrl}
+            className="object-cover w-full h-[200px] rounded-t-sm"
+            alt=""
+          />
+        </Link>
         <CardContent>
-          <div
-            onClick={() => navigate('/product')}
-            className="cursor-pointer flex justify-between items-center align-baseline mt-4"
-          >
-            <span className=" text-lg font-medium">{name}</span>{' '}
-            <span className="text-gray-400">{formatCurrency(price)}</span>
-          </div>
+          <Link to={`/store/${id}`}>
+            <div className="cursor-pointer flex justify-between items-center align-baseline mt-4">
+              <span className=" text-lg font-medium">{name}</span>{' '}
+              <span className="text-gray-400">{formatCurrency(price)}</span>
+            </div>
+          </Link>
         </CardContent>
         <CardFooter>
           {count === 0 ? (
