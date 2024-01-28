@@ -79,8 +79,7 @@ export const Product = ({ id, imgUrl, name, price }: ProductProps) => {
             commodo varius lacus vel dignissim. Mauris dignissim placerat ex, a
             fringilla orci. Donec aliquet ex quis sapien porta
             condimentum.Mauris dignissim, ante non fringilla finibus, libero
-            lectus sodales dui, at interdum urna nisi ac ex. Vestibulum in
-            tempus nibh.
+            lectus dui, at interdum urna nisi ac ex. Vestibulum in tempus nibh.
           </p>
           <span className="text-2xl font-bold ">
             {formatCurrency(price ?? 0)}
