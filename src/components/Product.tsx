@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Button } from './ui/button';
 import { formatCurrency } from '@/utilities/formattCurrency';
-import { LikeButton, RateButton } from '@lyket/react';
 import { useShoppingContext } from '@/hooks/useShoppingContext';
 import { useState } from 'react';
 import { toast } from 'sonner';
@@ -76,7 +75,7 @@ export const Product = ({ id, imgUrl, name, price }: ProductProps) => {
                 </svg>
               </button>
             </div>
-            <LikeButton id="likes" component={LikeButton.templates.Twitter} />
+            <div>Like</div>
           </div>
         </div>
         <main className="sm:flex flex-col">
@@ -86,7 +85,7 @@ export const Product = ({ id, imgUrl, name, price }: ProductProps) => {
               <span className="text-sm text-muted-foreground">
                 Click to rate!
               </span>
-              <RateButton id="rating" showRating="user" />
+              <div>Rate</div>
             </div>
           </div>
           <p className="text-sm mb-4 text-gray-400">
