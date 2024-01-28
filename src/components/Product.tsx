@@ -92,9 +92,9 @@ export const Product = ({ id, imgUrl, name, price }: ProductProps) => {
           <p className="text-sm mb-4 text-gray-400">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
             commodo varius lacus vel dignissim. Mauris dignissim placerat ex, a
-            fringilla orci. Donec aliquet ex quis sapien porta
-            condimentum.Mauris dignissim, ante non fringilla finibus, libero
-            lectus dui, at interdum urna nisi ac ex. Vestibulum in tempus nibh.
+            fringilla orci. Donec aliquet quis sapien porta condimentum.Mauris
+            dignissim, ante non fringilla finibus, libero lectus dui, at
+            interdum urna nisi ac ex. Vestibulum in tempus nibh.
           </p>
           <span className="text-2xl font-bold ">
             {formatCurrency(price ?? 0)}
