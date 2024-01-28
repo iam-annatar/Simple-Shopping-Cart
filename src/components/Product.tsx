@@ -2,6 +2,9 @@ import { Link } from 'react-router-dom';
 import { Button } from './ui/button';
 import { formatCurrency } from '@/utilities/formattCurrency';
 import { LikeButton, RateButton } from '@lyket/react';
+import { useShoppingContext } from '@/hooks/useShoppingContext';
+import { useState } from 'react';
+import { toast } from 'sonner';
 
 type ProductProps = {
   id?: number;
@@ -11,6 +14,18 @@ type ProductProps = {
 };
 
 export const Product = ({ id, imgUrl, name, price }: ProductProps) => {
+  const [count, setCount] = useState(1);
+  const { increaseCount } = useShoppingContext();
+
+  const increaseHanler = () => {
+    setCount((c) => c + 1);
+  };
+  const decreaseHandler = () => {
+    count > 1 && setCount((c) => c - 1);
+  };
+
+  const totalPrice = formatCurrency((price ?? 0) * count);
+
   return (
     <>
       <div className="flex gap-2 text-gray-400 mb-4">
@@ -88,7 +103,7 @@ export const Product = ({ id, imgUrl, name, price }: ProductProps) => {
           <div className=" mb-8 mt-4  sm:flex sm:mb-8 sm:gap-2 items-center justify-between">
             <div className="grid place-items-center items-center gap-2 mt-6">
               <div className="text-lg text-muted-foreground">Choose Color</div>
-              <div className="flex gap-2">
+              <div className="flex gap-3">
                 <Button
                   size={'sm'}
                   className="rounded-full  outline outline-white bg-slate-600 h-6 hover:bg-slate-600"
@@ -109,13 +124,15 @@ export const Product = ({ id, imgUrl, name, price }: ProductProps) => {
               </div>
               <div className="flex gap-2">
                 <Button
+                  onClick={decreaseHandler}
                   size={'sm'}
                   className="w-7 h-7 bg-blue-600 hover:bg-blue-600/90 text-white"
                 >
                   -
                 </Button>
-                <span>1</span>
+                <span>{count}</span>
                 <Button
+                  onClick={increaseHanler}
                   size={'sm'}
                   className="w-7 h-7 bg-blue-600 hover:bg-blue-600/90 text-white"
                 >
@@ -125,11 +142,18 @@ export const Product = ({ id, imgUrl, name, price }: ProductProps) => {
             </div>
           </div>
           <div className="flex items-center gap-4 py-4  border-t ">
-            <Button className="w-full text-lg bg-blue-600 hover:bg-blue-600/90 text-white">
+            <Button
+              onClick={() => {
+                if (id == null) return;
+                toast.success(`Item "${name}" added to your cart`);
+                increaseCount(id, count);
+              }}
+              className="w-full text-lg bg-blue-600 hover:bg-blue-600/90 text-white"
+            >
               Add to cart
             </Button>
             <div className="text-2xl font-bold">
-              {formatCurrency(price ?? 0)}
+              {count === 1 ? formatCurrency(price ?? 0) : totalPrice}
             </div>
           </div>
         </main>

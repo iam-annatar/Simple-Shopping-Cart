@@ -8,10 +8,13 @@ export const ProductPage = () => {
 
   return (
     <>
-      {/* <h1 className="text-xl font-bold my-4">Product</h1> */}
       <div className="mt-4">
-        <Product {...product} />
+        {product != null ? <Product {...product} /> : <ProductError />}
       </div>
     </>
   );
+};
+
+const ProductError = () => {
+  return <div className="text-center text-3xl">Product Not Found!</div>;
 };

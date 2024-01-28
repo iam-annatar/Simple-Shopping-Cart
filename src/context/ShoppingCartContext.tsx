@@ -13,7 +13,7 @@ type CartItem = {
 
 type ShoppingContextType = {
   getItemsCount: (id: number) => number;
-  increaseCount: (id: number) => void;
+  increaseCount: (id: number, count?: number) => void;
   decreaseCount: (id: number) => void;
   removeItem: (id: number) => void;
   items: CartItem[];
@@ -36,14 +36,14 @@ export const ShoppingCartContext = ({ children }: ShoppingCartContextProps) => {
   function getItemsCount(id: number) {
     return items.find((item) => item.id === id)?.count || 0;
   }
-  function increaseCount(id: number) {
+  function increaseCount(id: number, count: number = 1) {
     setItems((currentItem) => {
       if (currentItem.find((item) => item.id === id) == null) {
-        return [...currentItem, { id, count: 1 }];
+        return [...currentItem, { id, count: count }];
       } else {
         return currentItem.map((item) => {
           if (item.id === id) {
-            return { ...item, count: item.count + 1 };
+            return { ...item, count: item.count + count };
           } else {
             return item;
           }
