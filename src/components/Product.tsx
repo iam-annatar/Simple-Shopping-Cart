@@ -4,12 +4,13 @@ import { formatCurrency } from '@/utilities/formattCurrency';
 import { useShoppingContext } from '@/hooks/useShoppingContext';
 import { useState } from 'react';
 import { toast } from 'sonner';
+import { HeartLike } from './ui/heart';
 
 type ProductProps = {
-  id?: number;
-  imgUrl?: string;
-  name?: string;
-  price?: number;
+  id: number;
+  imgUrl: string;
+  name: string;
+  price: number;
 };
 
 export const Product = ({ id, imgUrl, name, price }: ProductProps) => {
@@ -43,8 +44,8 @@ export const Product = ({ id, imgUrl, name, price }: ProductProps) => {
             src={imgUrl}
             alt="img"
           />
-          <div className="flex items-center justify-between">
-            <div className="flex gap-2 mt-2">
+          <div className="flex items-center justify-between mt-2">
+            <div className="flex gap-2">
               <button className="text-muted-foreground w-7 hover:text-blue-600 transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110  duration-300">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -75,7 +76,7 @@ export const Product = ({ id, imgUrl, name, price }: ProductProps) => {
                 </svg>
               </button>
             </div>
-            <div>Like</div>
+            <HeartLike />
           </div>
         </div>
         <main className="sm:flex flex-col">
@@ -99,25 +100,25 @@ export const Product = ({ id, imgUrl, name, price }: ProductProps) => {
             {formatCurrency(price ?? 0)}
           </span>
 
-          <div className=" mb-8 mt-4  sm:flex sm:mb-8 sm:gap-2 items-center justify-between">
-            <div className="grid place-items-center items-center gap-2 mt-6">
+          <div className="grid place-items-start gap-6 mb-8 mt-4  sm:flex sm:mb-8 sm:gap-2 sm:items-center sm:justify-between">
+            <div className="grid  sm:place-items-center gap-2 ">
               <div className="text-lg text-muted-foreground">Choose Color</div>
               <div className="flex gap-3">
                 <Button
                   size={'sm'}
-                  className="rounded-full  outline outline-white bg-slate-600 h-6 hover:bg-slate-600"
+                  className="rounded-full  outline outline-2 outline-white bg-slate-600 h-6 hover:bg-slate-600"
                 ></Button>
                 <Button
                   size={'sm'}
-                  className="rounded-full outline outline-white h-6 bg-black hover:bg-black"
+                  className="rounded-full outline outline-2 outline-white h-6 bg-black hover:bg-black"
                 ></Button>
                 <Button
                   size={'sm'}
-                  className="rounded-full outline outline-white bg-stone-700 h-6 hover:bg-stone-700"
+                  className="rounded-full outline outline-2 outline-white bg-stone-700 h-6 hover:bg-stone-700"
                 ></Button>
               </div>
             </div>
-            <div className=" grid place-items-center gap-2 mt-6">
+            <div className=" grid sm:place-items-center gap-[6px]">
               <div className="text-lg text-muted-foreground">
                 Choose quantity
               </div>
@@ -151,7 +152,7 @@ export const Product = ({ id, imgUrl, name, price }: ProductProps) => {
             >
               Add to cart
             </Button>
-            <div className="text-2xl font-bold">
+            <div className="2xs:text-2xl font-bold">
               {count === 1 ? formatCurrency(price ?? 0) : totalPrice}
             </div>
           </div>

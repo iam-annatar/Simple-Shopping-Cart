@@ -74,3 +74,41 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer components {
+  .heart-icon {
+    width: 100px;
+    height: 100px;
+    background: url('/imgs/heart.png');
+    background-position: left;
+    cursor: pointer;
+  }
+
+  .heart-bg {
+    background: rgba(255, 192, 200, 0);
+    border-radius: 50%;
+    height: 60px;
+    width: 60px;
+    display: grid;
+    place-items: center;
+    transition: all 100ms ease;
+  }
+
+  .heart-bg:hover {
+    background: rgba(255, 192, 200, 0.7);
+  }
+
+  .heart-icon.liked {
+    animation: like-anim 0.7s steps(28) forwards;
+  }
+
+  @keyframes like-anim {
+    to {
+      background-position: right;
+    }
+  }
+
+  .likes-amount.liked {
+    color: red;
+  }
+}
