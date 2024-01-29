@@ -112,3 +112,10 @@
     color: red;
   }
 }
+@layer utilities {
+  @media (hover: none) {
+    .touch-disabled:hover {
+      @apply pointer-events-none;
+    }
+  }
+}
