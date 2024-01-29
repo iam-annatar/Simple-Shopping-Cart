@@ -95,7 +95,10 @@
   }
 
   .heart-bg:hover {
-    background: rgba(255, 192, 200, 0.7);
+    background: rgba(120, 3, 54, 0.4);
+  }
+  .heart-bg:active {
+    background-color: none;
   }
 
   .heart-icon.liked {
