@@ -1,6 +1,6 @@
 import { ShoppingCart } from '@/components/ShoppingCart';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
-import { ReactNode, createContext, useState } from 'react';
+import { ReactNode, createContext, useEffect, useState } from 'react';
 
 type ShoppingCartContextProps = {
   children: ReactNode;
@@ -25,6 +25,7 @@ type ShoppingContextType = {
   likesCount: number;
   rateCount: number;
   rateHandler: (value: number) => void;
+  isLoading: boolean;
 };
 
 export const ShoppingContext = createContext({} as ShoppingContextType);
@@ -36,6 +37,13 @@ export const ShoppingCartContext = ({ children }: ShoppingCartContextProps) => {
   const [likesCount, setLikesCount] = useState(0);
   const [liked, setLiked] = useState(false);
   const [rateCount, setRateCount] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+  }, [isLoading]);
 
   const rateHandler = (value: number) => {
     setRateCount(value);
@@ -111,6 +119,7 @@ export const ShoppingCartContext = ({ children }: ShoppingCartContextProps) => {
         toggleLike,
         rateCount,
         rateHandler,
+        isLoading,
       }}
     >
       {children}

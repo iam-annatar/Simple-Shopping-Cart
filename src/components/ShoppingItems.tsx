@@ -20,18 +20,11 @@ export const ShoppingItems = ({
   price,
   name,
 }: ShoppingItemsProps) => {
-  const { getItemsCount, increaseCount, decreaseCount, removeItem } =
+  const { getItemsCount, increaseCount, decreaseCount, removeItem, isLoading } =
     useShoppingContext();
   const count = getItemsCount(id);
-  const [isLoadig, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
-  }, []);
-
-  if (isLoadig) {
+  if (isLoading) {
     return <LazyLoading />;
   }
 
