@@ -5,6 +5,7 @@ import { useShoppingContext } from '@/hooks/useShoppingContext';
 import { useState } from 'react';
 import { toast } from 'sonner';
 import { HeartLike } from './ui/heart';
+import { Rate } from './ui/rate';
 
 type ProductProps = {
   id: number;
@@ -86,7 +87,7 @@ export const Product = ({ id, imgUrl, name, price }: ProductProps) => {
               <span className="text-sm text-muted-foreground">
                 Click to rate!
               </span>
-              <div>Rate</div>
+              <Rate />
             </div>
           </div>
           <p className="text-sm mb-4 text-gray-400">

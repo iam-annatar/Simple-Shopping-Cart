@@ -34,7 +34,7 @@ export const CartItems = ({ id, count }: CartItemsProps) => {
         </div>
       </div>
 
-      <div className="flex gap-10 col-[1/-1] row-[3/3] xs:flex items-center xs:gap-4 flex-row-reverse">
+      <div className="flex gap-[5rem] col-[1/-1] row-[3/3] xs:flex items-center xs:gap-4 flex-row-reverse">
         <Button
           onClick={() => removeItem(id)}
           className="w-4 h-4 mb-2 bg-inherit  border border-red-500 rounded-full outline-red-500 text-red-500 hover:text-white hover:bg-red-500 "
