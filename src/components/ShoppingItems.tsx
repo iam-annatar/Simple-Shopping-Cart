@@ -2,7 +2,6 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { useShoppingContext } from '@/hooks/useShoppingContext';
 import { formatCurrency } from '@/utilities/formattCurrency';
-import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 import { LazyLoading } from './LazyLoading';
 import { Link } from 'react-router-dom';
