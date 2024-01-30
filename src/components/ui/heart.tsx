@@ -1,18 +1,9 @@
-import { useState } from 'react';
+// import { useState } from 'react';
+
+import { useShoppingContext } from '@/hooks/useShoppingContext';
 
 export const HeartLike = () => {
-  const [likesCount, setLikesCount] = useState(0);
-  const [liked, setLiked] = useState(false);
-
-  const toggleLike = () => {
-    if (!liked) {
-      setLikesCount((c) => c + 1);
-      setLiked(true);
-    } else {
-      setLikesCount((c) => c - 1);
-      setLiked(false);
-    }
-  };
+  const { liked, likesCount, toggleLike } = useShoppingContext();
 
   return (
     <div className="flex items-center gap-2 relative">

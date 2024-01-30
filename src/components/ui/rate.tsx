@@ -1,12 +1,8 @@
-import { useLocalStorage } from '@/hooks/useLocalStorage';
+import { useShoppingContext } from '@/hooks/useShoppingContext';
 import { Rating, Typography } from '@material-tailwind/react';
 
 export const Rate = () => {
-  const [rateCount, setRateCount] = useLocalStorage('rate', 0);
-
-  const rateHanler = (value: number) => {
-    setRateCount(value);
-  };
+  const { rateCount, rateHandler } = useShoppingContext();
 
   return (
     <div className="flex gap-2">
@@ -14,7 +10,7 @@ export const Rate = () => {
         className="text-yellow-500"
         placeholder="rate"
         value={rateCount}
-        onChange={rateHanler}
+        onChange={rateHandler}
       />
       <Typography
         className="text-muted-foreground"

@@ -29,7 +29,7 @@ export const ShoppingItems = ({
     setTimeout(() => {
       setIsLoading(false);
     }, 2000);
-  }, [isLoadig]);
+  }, []);
 
   if (isLoadig) {
     return <LazyLoading />;

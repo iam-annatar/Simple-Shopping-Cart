@@ -20,16 +20,39 @@ type ShoppingContextType = {
   cartCount: number;
   openCart: () => void;
   closeCart: () => void;
+  toggleLike: () => void;
+  liked: boolean;
+  likesCount: number;
+  rateCount: number;
+  rateHandler: (value: number) => void;
 };
 
 export const ShoppingContext = createContext({} as ShoppingContextType);
 
 export const ShoppingCartContext = ({ children }: ShoppingCartContextProps) => {
   const [items, setItems] = useLocalStorage<CartItem[]>('ShoppingInfo', []);
+
   const [isOpen, setIsOpen] = useState(false);
+  const [likesCount, setLikesCount] = useState(0);
+  const [liked, setLiked] = useState(false);
+  const [rateCount, setRateCount] = useState(0);
+
+  const rateHandler = (value: number) => {
+    setRateCount(value);
+  };
 
   const openCart = () => setIsOpen(true);
   const closeCart = () => setIsOpen(false);
+
+  const toggleLike = () => {
+    if (!liked) {
+      setLikesCount((c) => c + 1);
+      setLiked(true);
+    } else {
+      setLikesCount((c) => c - 1);
+      setLiked(false);
+    }
+  };
 
   const cartCount = items.reduce((count, item) => count + item.count, 0);
 
@@ -83,6 +106,11 @@ export const ShoppingCartContext = ({ children }: ShoppingCartContextProps) => {
         openCart,
         closeCart,
         items,
+        liked,
+        likesCount,
+        toggleLike,
+        rateCount,
+        rateHandler,
       }}
     >
       {children}
