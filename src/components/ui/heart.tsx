@@ -18,13 +18,11 @@ export const HeartLike = () => {
     <div className="flex items-center gap-2 relative">
       <div className="heart-bg">
         <div
-          className={`heart-icon ${liked ? 'liked' : ''} absolute `}
+          className={`heart-icon ${liked ? 'liked' : ''}`}
           onClick={toggleLike}
         ></div>
       </div>
-      <div className="text-muted-foreground">
-        {likesCount !== 0 && likesCount}
-      </div>
+      <div className="text-muted-foreground">{likesCount}</div>
     </div>
   );
 };

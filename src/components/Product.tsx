@@ -24,7 +24,7 @@ export const Product = ({ id, imgUrl, name, price }: ProductProps) => {
     count > 1 && setCount((c) => c - 1);
   };
 
-  const totalPrice = formatCurrency((price ?? 0) * count);
+  const totalPrice = formatCurrency(price * count);
 
   return (
     <>
@@ -96,9 +96,7 @@ export const Product = ({ id, imgUrl, name, price }: ProductProps) => {
             dignissim, ante non fringilla finibus, libero lectus dui, at
             interdum urna nisi ac ex. Vestibulum in tempus nibh.
           </p>
-          <span className="text-2xl font-bold ">
-            {formatCurrency(price ?? 0)}
-          </span>
+          <span className="text-2xl font-bold ">{formatCurrency(price)}</span>
 
           <div className="grid place-items-start gap-6 mb-8 mt-4  sm:flex sm:mb-8 sm:gap-2 sm:items-center sm:justify-between">
             <div className="grid  sm:place-items-center gap-2 ">
@@ -153,7 +151,7 @@ export const Product = ({ id, imgUrl, name, price }: ProductProps) => {
               Add to cart
             </Button>
             <div className="2xs:text-2xl font-bold">
-              {count === 1 ? formatCurrency(price ?? 0) : totalPrice}
+              {count === 1 ? formatCurrency(price) : totalPrice}
             </div>
           </div>
         </main>

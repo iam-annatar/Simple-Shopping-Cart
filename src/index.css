@@ -82,9 +82,12 @@
     background: url('/imgs/heart.png');
     background-position: left;
     cursor: pointer;
+    position: absolute;
+    margin-inline: auto;
   }
 
   .heart-bg {
+    position: relative;
     background: rgba(255, 192, 200, 0);
     border-radius: 50%;
     height: 60px;
@@ -94,11 +97,10 @@
     transition: all 100ms ease;
   }
 
-  .heart-bg:hover {
-    background: rgba(120, 3, 54, 0.4);
-  }
-  .heart-bg:active {
-    background-color: none;
+  @media (hover: hover), (-ms-high-contrast: none) {
+    .heart-bg:hover {
+      background: rgba(120, 3, 54, 0.4);
+    }
   }
 
   .heart-icon.liked {
