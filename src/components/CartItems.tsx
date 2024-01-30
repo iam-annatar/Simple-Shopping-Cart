@@ -14,7 +14,7 @@ export const CartItems = ({ id, count }: CartItemsProps) => {
   const item = storeItems.find((item) => item.id === id);
 
   return (
-    <div className="grid grid-cols-2 place-items-center gap-2 grid-rows-[1fr 1/2fr] mt-4 border-b xs:flex xs:items-center ">
+    <div className="grid grid-cols-2 place-items-center  gap-2 mt-4 border-b xs:flex xs:items-center ">
       <img
         src={item?.imgUrl}
         alt=""
@@ -33,14 +33,17 @@ export const CartItems = ({ id, count }: CartItemsProps) => {
           {formatCurrency(item?.price || 0)}
         </div>
       </div>
-      <Button
-        onClick={() => removeItem(id)}
-        className="w-4 h-4 mb-2 bg-inherit border border-red-500 rounded-full outline-red-500 text-red-500 hover:text-white hover:bg-red-500 "
-      >
-        &times;
-      </Button>
-      <div className="text-sm mb-2 text-muted-foreground">
-        {formatCurrency((item?.price || 0) * count)}
+
+      <div className="flex gap-10 col-[1/-1] row-[3/3] xs:flex items-center xs:gap-4 flex-row-reverse">
+        <Button
+          onClick={() => removeItem(id)}
+          className="w-4 h-4 mb-2 bg-inherit  border border-red-500 rounded-full outline-red-500 text-red-500 hover:text-white hover:bg-red-500 "
+        >
+          &times;
+        </Button>
+        <div className="text-sm mb-2 text-muted-foreground">
+          {formatCurrency((item?.price || 0) * count)}
+        </div>
       </div>
     </div>
   );
