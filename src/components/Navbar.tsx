@@ -2,19 +2,10 @@ import { useShoppingContext } from '@/hooks/useShoppingContext';
 import { NavLink, useLocation } from 'react-router-dom';
 import { MobileMenu } from './MobileMenu';
 import { ToggleTheme } from './ToggleTheme';
-import { useSearchContext } from '@/hooks/useSearchContext';
-import { ChangeEvent } from 'react';
-import { Input } from './ui/input';
+import { Search } from './SearchBar';
 
 export const Navbar = () => {
   const { cartCount, openCart } = useShoppingContext();
-
-  const { setSearchValue } = useSearchContext();
-
-  const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
-    const query = e.target.value;
-    setSearchValue(query);
-  };
 
   const location = useLocation();
 
@@ -37,15 +28,7 @@ export const Navbar = () => {
             <MobileMenu />
             <ToggleTheme />
           </div>
-          {location.pathname === pages.store && (
-            <Input
-              className=""
-              type="search"
-              id="quary"
-              placeholder="Search ..."
-              onChange={handleSearch}
-            />
-          )}
+          {location.pathname === pages.store && <Search />}
         </div>
         <button
           onClick={openCart}
