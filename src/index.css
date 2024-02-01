@@ -99,7 +99,7 @@
 
   @media (hover: hover), (-ms-high-contrast: none) {
     .heart-bg:hover {
-      background: rgba(120, 3, 54, 0.4);
+      background: rgba(255, 58, 97, 0.4);
     }
   }
 

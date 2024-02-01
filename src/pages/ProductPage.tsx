@@ -1,3 +1,6 @@
+import { Comments } from '@/components/Comment';
+import { CommentForm } from '@/components/CommentForm';
+import { CommentsList } from '@/components/CommentsList';
 import { Product } from '@/components/Product';
 import storeItems from '@/data/item.json';
 import { useParams } from 'react-router-dom';
@@ -11,6 +14,10 @@ export const ProductPage = () => {
       <div className="mt-4">
         {product != null ? <Product {...product} /> : <ProductError />}
       </div>
+      <h2 className="text-lg">Comments</h2>
+      <CommentForm />
+      <CommentsList />
+      <Comments />
     </>
   );
 };
