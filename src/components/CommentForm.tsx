@@ -3,14 +3,14 @@ import { Button } from './ui/button';
 
 type CommentFormProps = {
   loading: boolean;
-  onSubmit: (message: string) => Promise<void>;
+  // onSubmit: (message: string) => Promise<void>;
   initialValue: string;
   autoFocus: boolean;
 };
 
 export const CommentForm = ({
   loading,
-  onSubmit,
+  // onSubmit,
   autoFocus = false,
   initialValue = '',
 }: CommentFormProps) => {
@@ -18,7 +18,7 @@ export const CommentForm = ({
 
   const submitHandler = (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
-    onSubmit(message).then(() => setMessage(''));
+    // onSubmit(message).then(() => setMessage(''));
   };
 
   return (

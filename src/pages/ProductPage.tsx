@@ -14,7 +14,7 @@ export const ProductPage = () => {
         {product != null ? <Product {...product} /> : <ProductError />}
       </div>
       <h2 className="text-xl mb-4 mt-8">Comments</h2>
-      <CommentForm />
+      <CommentForm loading autoFocus initialValue="" />
       <CommentsList />
     </>
   );
