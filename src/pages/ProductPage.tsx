@@ -3,7 +3,6 @@ import { CommentsList } from '@/components/CommentsList';
 import { Product } from '@/components/Product';
 import storeItems from '@/data/item.json';
 import { useParams } from 'react-router-dom';
-import users from '@/data/user.json';
 
 export const ProductPage = () => {
   const { productId } = useParams();
@@ -16,9 +15,7 @@ export const ProductPage = () => {
       </div>
       <h2 className="text-xl mb-4 mt-8">Comments</h2>
       <CommentForm />
-      {users.map((user) => (
-        <CommentsList key={user.id} {...user} />
-      ))}
+      <CommentsList />
     </>
   );
 };

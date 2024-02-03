@@ -1,25 +1,20 @@
 import { useCommentRenderStore } from '@/store/store';
 import { Comments } from './Comment';
 import { useParams } from 'react-router-dom';
+import users from '@/data/user.json';
 
-type CommentsListProps = {
-  id: number;
-  name: string;
-  postId: number;
-  body: string;
-};
-
-export const CommentsList = ({ id, name, postId, body }: CommentsListProps) => {
+export const CommentsList = () => {
   const { productId } = useParams();
-  const user = useCommentRenderStore((state) =>
-    state.getUser(Number(productId))
+  const rootComments = useCommentRenderStore((state) =>
+    state.getComments(Number(productId))
   );
 
-  if (user == null) return;
+  if (rootComments == null) return;
 
-  return (
-    user?.postId === postId && (
-      <Comments userName={name} body={body} key={id} postId={postId} />
-    )
+  return users.map(
+    (comment) =>
+      rootComments.postId === comment.postId && (
+        <Comments key={comment.id} {...comment} />
+      )
   );
 };
