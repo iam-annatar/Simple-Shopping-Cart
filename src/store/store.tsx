@@ -56,7 +56,7 @@ type Comment = {
 type CommentRenderType = {
   comments: Comment[];
   getComments: (id: number) => Comment | undefined;
-  getReplies: (parentId: number) => Comment['replies'] | undefined;
+  getReplies: (parentId: number, id: number) => Comment['replies'] | undefined;
 };
 
 export const useCommentRenderStore = create<CommentRenderType>(() => ({
@@ -65,8 +65,12 @@ export const useCommentRenderStore = create<CommentRenderType>(() => ({
     if (id == null) return;
     return comments.find((comment) => comment.postId === id);
   },
-  getReplies: (parentId) => {
+  getReplies: (parentId, id) => {
     if (parentId == null) return;
-    return comments.find((comment) => comment.postId === parentId)?.replies;
+    return comments
+      .filter((comment) => comment.postId === parentId)
+      .map((comment) => comment.replies)
+      .flat()
+      .filter((c) => c.id === id);
   },
 }));

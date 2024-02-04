@@ -5,7 +5,7 @@ type CommentFormProps = {
   loading: boolean;
   // onSubmit: (message: string) => Promise<void>;
   initialValue: string;
-  autoFocus: boolean;
+  autoFocus?: boolean;
 };
 
 export const CommentForm = ({

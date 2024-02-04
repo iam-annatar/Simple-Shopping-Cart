@@ -12,15 +12,13 @@ type CommentProps = {
   name: string;
   postId: number;
   body: string;
+  id: number;
 };
 
-export const Comments = ({ name, postId, body }: CommentProps) => {
+export const Comments = ({ name, postId, body, id }: CommentProps) => {
   const childComments = useCommentRenderStore((state) =>
-    state.getReplies(postId)
+    state.getReplies(postId, id)
   );
-
-  console.log('the parent id is ', postId);
-  console.log('the reply of this postId is', childComments);
 
   return (
     <>
@@ -53,7 +51,7 @@ export const Comments = ({ name, postId, body }: CommentProps) => {
       </Card>
       {childComments?.length !== 0 &&
         childComments?.map((comment) => (
-          <div className="flex justify-end" key={comment.id}>
+          <div key={comment.email} className="flex justify-end">
             <Card className="ml-4 w-full border shadow-sm rounded-md mt-4 p-2 bg-slate-50 dark:bg-slate-950 dark:border ">
               <div className="flex items-center justify-between">
                 <span className="text-muted-foreground font-bold">
