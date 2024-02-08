@@ -84,7 +84,7 @@ export const Product = ({ id, imgUrl, name, price }: ProductProps) => {
           <div className="grid gap-4 2xs:flex items-center justify-between mb-8">
             <h1 className="text-3xl">{name}</h1>
             <div className="flex items-center gap-1 flex-col">
-              <span className="self-start 2xs:text-sm text-muted-foreground">
+              <span className="self-start 2xs:text-sm 2xs:self-center text-muted-foreground">
                 Click to rate!
               </span>
               <Rate />

@@ -1,287 +1,333 @@
 [
   {
     "postId": 1,
-    "id": 1,
+    "parentId": 100,
     "name": "labore",
-    "email": "Eliseo@gardner.biz",
     "body": "laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium",
     "replies": [
       {
-        "id": 1,
+        "id": 100,
+        "parentId": 101,
         "name": "Eliseo",
-        "email": "Marie@example.com",
-        "body": "I completely agree with your assessment."
+        "body": "I completely agree with your assessment.",
+        "replies": [
+          {
+            "id": 101,
+            "parentId": null,
+            "name": "Rodo",
+            "body": "I completely disagree",
+            "replies": []
+          }
+        ]
       },
       {
-        "id": 1,
+        "id": 100,
+        "parentId": null,
         "name": "leo",
-        "email": "AnotherUser@example.com",
-        "body": "I think there are additional factors to consider."
+        "body": "I think there are additional factors to consider.",
+        "replies": []
       }
     ]
   },
   {
     "postId": 1,
-    "id": 2,
+    "parentId": 200,
     "name": "quo",
-    "email": "Jayne_Kuhic@sydney.com",
     "body": "est natus enim nihil est dolore omnis voluptatem numquam\net omnis occaecati quod ullam at\nvoluptatem error expedita pariatur\nnihil sint nostrum voluptatem reiciendis et",
     "replies": []
   },
   {
     "postId": 1,
-    "id": 3,
+    "parentId": 300,
     "name": "odio",
-    "email": "Nikita@garfield.biz",
     "body": "quia molestiae reprehenderit quasi aspernatur\naut expedita occaecati aliquam eveniet laudantium\nomnis quibusdam delectus saepe quia accusamus maiores nam est\ncum et ducimus et vero voluptates excepturi deleniti ratione",
     "replies": []
   },
   {
     "postId": 2,
-    "id": 4,
+    "parentId": 400,
     "name": "fugit",
-    "email": "Presley.Mueller@myrl.com",
     "body": "doloribus at sed quis culpa deserunt consectetur qui praesentium\naccusamus fugiat dicta\nvoluptatem rerum ut voluptate autem\nvoluptatem repellendus aspernatur dolorem in",
     "replies": []
   },
   {
     "postId": 2,
-    "id": 5,
+    "parentId": 500,
     "name": "repellat",
-    "email": "Dallas@ole.me",
     "body": "maiores sed dolores similique labore et inventore et\nquasi temporibus esse sunt id et\neos voluptatem aliquam\naliquid ratione corporis molestiae mollitia quia et magnam dolor",
     "replies": [
       {
-        "id": 5,
-        "name": "I share your sentiments.",
-        "email": "Supporter@example.com",
-        "body": "Your concerns are valid, Nikita."
+        "parentId": null,
+        "id": 500,
+        "name": "ubke",
+        "body": "Your concerns are valid, Nikita.",
+        "replies": []
       }
     ]
   },
   {
     "postId": 2,
-    "id": 6,
+    "parentId": 600,
     "name": "et omnis",
-    "email": "Mallory_Kunze@marie.org",
     "body": "ut voluptatem corrupti velit\nad voluptatem maiores\net nisi velit vero accusamus maiores\nvoluptates quia aliquid ullam eaque",
     "replies": []
   },
   {
     "postId": 3,
-    "id": 7,
+    "parentId": 700,
     "name": "fugit",
-    "email": "Veronica_Goodwin@timmothy.net",
     "body": "ut dolorum nostrum id quia aut est\nfuga est inventore vel eligendi explicabo quis consectetur\naut occaecati repellat id natus quo est\nut blanditiis quia ut vel ut maiores ea",
     "replies": [
       {
-        "id": 7,
+        "id": 700,
+        "parentId": 701,
         "name": "kacy",
-        "email": "Supporter@example.com",
-        "body": "im not sure."
+        "body": "im not sure.",
+        "replies": [
+          {
+            "id": 701,
+            "parentId": null,
+            "name": "ali",
+            "body": "hye quod minus alias",
+            "replies": []
+          }
+        ]
       }
     ]
   },
   {
     "postId": 3,
-    "id": 8,
+    "parentId": 800,
     "name": "modi",
-    "email": "Oswald.Vandervort@leanne.org",
     "body": "expedita maiores dignissimos facilis\nipsum est rem est fugit velit sequi\neum odio dolores dolor totam\noccaecati ratione eius rem velit",
     "replies": []
   },
   {
     "postId": 3,
-    "id": 9,
+    "parentId": 900,
     "name": "aut",
-    "email": "Kariane@jadyn.tv",
     "body": "fuga eos qui dolor rerum\ninventore corporis exercitationem\ncorporis cupiditate et deserunt recusandae est sed quis culpa\neum maiores corporis et",
     "replies": []
   },
   {
     "postId": 4,
-    "id": 10,
+    "parentId": 1000,
     "name": "autet",
-    "email": "Vincenza_Klocko@albertha.name",
     "body": "veritatis voluptates necessitatibus maiores corrupti\nneque et exercitationem amet sit et\nullam velit sit magnam laborum\nmagni ut molestias",
     "replies": []
   },
   {
     "postId": 4,
-    "id": 11,
+    "parentId": 1100,
     "name": "sed",
-    "email": "Madelynn.Gorczany@darion.biz",
     "body": "doloribus est illo sed minima aperiam\nut dignissimos accusantium tempore atque et aut molestiae\nmagni ut accusamus voluptatem quos ut voluptates\nquisquam porro sed architecto ut",
     "replies": [
       {
-        "id": 11,
-        "name": "Well said, Hayden.",
-        "email": "AgreeableUser@example.com",
-        "body": "Your insights are thought-provoking."
+        "id": 1100,
+        "parentId": null,
+        "name": "Hayden",
+        "body": "Your insights are thought-provoking.",
+        "replies": []
       },
       {
-        "id": 11,
-        "name": "I have a similar perspective.",
-        "email": "Thoughtful@example.com",
-        "body": "I understand and concur with your analysis."
+        "id": 1100,
+        "parentId": 1101,
+        "name": "dhie",
+        "body": "I understand and concur with your analysis.",
+        "replies": [
+          {
+            "id": 1101,
+            "parentId": null,
+            "name": "hsem",
+            "body": "abs idnsl ill good",
+            "replies": []
+          }
+        ]
       }
     ]
   },
   {
     "postId": 4,
-    "id": 12,
+    "parentId": 1200,
     "name": "molestias",
-    "email": "Mariana_Orn@preston.org",
-    "body": "qui harum consequatur fugiat\net eligendi perferendis at molestiae commodi ducimus\ndoloremque asperiores numquam qui\nut sit dignissimos reprehenderit tempore",
+    "body": "qui harum consequatur fugiatnet eligendi perferendis at molestiae commodi ducimus\ndoloremque asperiores numquam qui\nut sit dignissimos reprehenderit tempore",
     "replies": [
       {
-        "id": 12,
+        "id": 1200,
+        "parentId": null,
         "name": "ahmed",
-        "email": "AgreeableUser@example.com",
-        "body": "do not make this viral please."
+        "body": "do not make this viral please.",
+        "replies": []
       }
     ]
   },
   {
     "postId": 5,
-    "id": 13,
+    "parentId": 1300,
     "name": "aliquid",
-    "email": "Noemie@marques.me",
-    "body": "deleniti aut sjed molestias explicabo\ncommodi odio ratione nesciunt\nvoluptate doloremque est\nnam autem error delectus",
+    "body": "deleniti aut sjed molestias explicaboncommodi odio ratione nesciuntnvoluptate doloremque est\nnam autem error delectus",
     "replies": []
   },
   {
     "postId": 5,
-    "id": 14,
+    "parentId": 1400,
     "name": "intempore",
-    "email": "Jeffery@juwan.us",
     "body": "jrepudiandae repellat quia\nsequi est dolore explicabo nihil et\net sit et\net praesentium iste atque asperiores tenetur",
     "replies": []
   },
   {
     "postId": 5,
-    "id": 15,
+    "parentId": 1500,
     "name": "autem",
-    "email": "Isaias_Kuhic@jarrett.net",
     "body": "sunt aut quae laboriosam sit ut impedit\nadipisci harum laborum totam deleniti voluptas odit rem ea\nnon iure distinctio ut velit doloribus\net non ex",
     "replies": [
       {
-        "id": 15,
+        "id": 1500,
+        "parentId": 1501,
         "name": "jax",
-        "email": "Supporter@example.com",
-        "body": "is it good for long term?"
+        "body": "is it good for long term?",
+        "replies": [
+          {
+            "id": 1501,
+            "parentId": null,
+            "name": "ghems",
+            "body": " odio ratione nesciuntnvoluptate doloremque",
+            "replies": []
+          }
+        ]
       }
     ]
   },
   {
     "postId": 6,
-    "id": 16,
+    "parentId": 1600,
     "name": "deleniti",
-    "email": "Russel.Parker@kameron.io",
     "body": "incidunt sapiente eaque dolor eos\nad est molestias\nquas sit et nihil exercitationem at cumque ullam\nnihil magnam et",
     "replies": []
   },
   {
     "postId": 6,
-    "id": 17,
+    "parentId": 1700,
     "name": "doloribus",
-    "email": "Francesco.Gleason@nella.us",
     "body": "nisi vel quas ut laborum ratione\nrerum magni eum\nunde et voluptatem saepe\nvoluptas corporis modi amet ipsam eos saepe porro",
     "replies": [
       {
-        "id": 17,
+        "id": 1700,
+        "parentId": null,
         "name": "Weny",
-        "email": "AgreeableUser@example.com",
-        "body": "thought-provoking and nice."
+        "body": "thought-provoking and nice.",
+        "replies": []
       },
       {
-        "id": 17,
+        "id": 1700,
+        "parentId": 1701,
         "name": "nate",
-        "email": "Thoughtful@example.com",
-        "body": "no way you could say that"
+        "body": "no way you could say that",
+        "replies": [
+          {
+            "id": 1701,
+            "parentId": null,
+            "name": "tores",
+            "body": "nothing helpful",
+            "replies": []
+          }
+        ]
       }
     ]
   },
   {
     "postId": 6,
-    "id": 18,
+    "parentId": 1800,
     "name": "voluptates",
-    "email": "Ronny@rosina.org",
     "body": "voluptatem repellendus quo alias at laudantium\nmollitia quidem esse\ntemporibus consequuntur vitae rerum illum\nid corporis sit id",
     "replies": []
   },
   {
     "postId": 7,
-    "id": 19,
+    "parentId": 1900,
     "name": "exvelit",
-    "email": "Buford@shaylee.biz",
     "body": "quia incidunt ut\naliquid est ut rerum deleniti iure est\nipsum quia ea sint et\nvoluptatem quaerat eaque repudiandae eveniet aut",
     "replies": []
   },
   {
     "postId": 7,
-    "id": 20,
+    "parentId": 2000,
     "name": "omnis",
-    "email": "Ethelyn.Schneider@emelia.co.uk",
     "body": "omnis temporibus quasi ab omnis\nfacilis et omnis illum quae quasi aut\nminus iure ex rem ut reprehenderit\nin non fugit",
     "replies": [
       {
-        "id": 20,
+        "id": 2000,
+        "parentId": 2001,
         "name": "kpl",
-        "email": "AgreeableUser@example.com",
-        "body": "make this viral please."
+        "body": "make this viral please.",
+        "replies": [
+          {
+            "id": 2001,
+            "parentId": null,
+            "name": "kyle",
+            "body": "how much did you get?",
+            "replies": []
+          }
+        ]
       },
       {
-        "id": 20,
+        "id": 2000,
+        "parentId": null,
         "name": "nirei",
-        "email": "Thoughtful@example.com",
-        "body": "thoughtful of you"
+        "body": "thoughtful of you",
+        "replies": []
       }
     ]
   },
   {
     "postId": 7,
-    "id": 21,
+    "parentId": 2100,
     "name": "repellendus",
-    "email": "Georgianna@florence.io",
     "body": "dolor mollitia quidem facere et\nvel est ut\nut repudiandae est quidem dolorem sed atque\nrem quia aut adipisci sunt",
     "replies": [
       {
-        "id": 21,
+        "id": 2100,
+        "parentId": 2101,
         "name": "Elio.",
-        "email": "Marie@example.com",
-        "body": "This is just a start"
+        "body": "This is just a start",
+        "replies": [
+          {
+            "id": 2101,
+            "parentId": null,
+            "name": "kimi",
+            "body": "I completely disagree",
+            "replies": []
+          }
+        ]
       }
     ]
   },
   {
     "postId": 8,
-    "id": 22,
+    "parentId": 2200,
     "name": "maiores",
-    "email": "Piper@linwood.us",
     "body": "unde voluptatem qui dicta\nvel ad aut eos error consequatur voluptatem\nadipisci doloribus qui est sit aut\nvelit aut et ea ratione eveniet iure fuga",
     "replies": []
   },
   {
     "postId": 8,
-    "id": 23,
+    "parentId": 2300,
     "name": "necessi",
-    "email": "Gaylord@russell.net",
     "body": "atque consequatur dolorem sunt\nadipisci autem et\nvoluptatibus et quae necessitatibus rerum eaque aperiam nostrum nemo\neligendi sed et beatae et inventore",
     "replies": [
       {
-        "id": 23,
+        "id": 2300,
+        "parentId": null,
         "name": "kiara",
-        "email": "Supporter@example.com",
-        "body": "I share your sentiments."
+        "body": "I share your sentiments.",
+        "replies": []
       }
     ]
   },
   {
     "postId": 8,
-    "id": 24,
+    "parentId": 2400,
     "name": "nonminim",
-    "email": "Clare.Aufderhar@nicole.ca",
     "body": "quod minus alias quos\nperferendis labore molestias quae ut ut corporis deserunt vitae\net quaerat ut et ullam unde asperiores\ncum voluptatem cumque",
     "replies": []
   }

@@ -76,6 +76,47 @@
 }
 
 @layer components {
+  .icon-btn-active {
+    color: var(--muted-foreground);
+    position: relative;
+  }
+
+  .icon-btn-active::before {
+    content: '\00D7';
+    color: hsl(12, 54%, 52%);
+    position: absolute;
+    font-size: 1em;
+    width: 1em;
+    height: 1em;
+    background-color: var(--color);
+    border-radius: 50%;
+    bottom: 0.1em;
+    right: -0.2em;
+  }
+
+  .child {
+    position: relative;
+    border: none;
+    background: none;
+    padding: 0;
+    width: 15px;
+    margin-top: 0.5rem;
+    cursor: pointer;
+    outline: none;
+    transform: translateX(-50%);
+  }
+
+  .child::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 60%;
+    width: 1px;
+    background-color: rgb(148, 163, 184);
+    transition: background-color 100ms ease-in-out;
+  }
+
   .heart-icon {
     width: 100px;
     height: 100px;

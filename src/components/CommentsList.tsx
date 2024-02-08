@@ -1,5 +1,5 @@
 import { useCommentRenderStore } from '@/store/store';
-import { Comments } from './Comment';
+import { Comments } from './Comments';
 import { useParams } from 'react-router-dom';
 import users from '@/data/user.json';
 
@@ -14,7 +14,7 @@ export const CommentsList = () => {
   return users.map(
     (comment) =>
       rootComments.postId === comment.postId && (
-        <Comments key={comment.id} {...comment} />
+        <Comments key={comment.parentId} {...comment} />
       )
   );
 };

@@ -2,7 +2,7 @@ import { ChangeEvent, useState } from 'react';
 import { Button } from './ui/button';
 
 type CommentFormProps = {
-  loading: boolean;
+  loading?: boolean;
   // onSubmit: (message: string) => Promise<void>;
   initialValue: string;
   autoFocus?: boolean;
@@ -12,6 +12,7 @@ export const CommentForm = ({
   loading,
   // onSubmit,
   autoFocus = false,
+
   initialValue = '',
 }: CommentFormProps) => {
   const [message, setMessage] = useState(initialValue);
