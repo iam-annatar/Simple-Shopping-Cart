@@ -2,11 +2,18 @@ import { CommentForm } from '@/components/CommentForm';
 import { CommentsList } from '@/components/CommentsList';
 import { Product } from '@/components/Product';
 import storeItems from '@/data/item.json';
-import { useParams } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useLocation, useParams } from 'react-router-dom';
 
 export const ProductPage = () => {
   const { productId } = useParams();
+  const { pathname } = useLocation();
   const product = storeItems.find((item) => item.id === Number(productId));
+
+  // to fix the scroll restoration in product page
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   return (
     <>
