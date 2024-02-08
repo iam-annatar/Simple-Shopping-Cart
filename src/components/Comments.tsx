@@ -15,7 +15,9 @@ export const Comments = ({ name, parentId, body, id = 0 }: CommentProps) => {
   const childComments = useCommentRenderStore((state) =>
     state.getReplies(users, parentId, id)
   );
-  const [hideChild, setHideChild] = useState(false);
+  const [hideChild, setHideChild] = useState(true);
+
+  const rep = childComments.map((r) => r.replies?.length);
 
   return (
     <div className="mb-4">
@@ -23,7 +25,7 @@ export const Comments = ({ name, parentId, body, id = 0 }: CommentProps) => {
       <Button
         size={'sm'}
         className={`bg-slate-500 hover:bg-slate-600 mt-2 dark:text-white ${
-          !hideChild ? 'hidden' : ''
+          !hideChild || rep.length === 0 ? 'hidden' : ''
         }`}
         onClick={() => setHideChild(false)}
       >
