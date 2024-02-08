@@ -81,10 +81,10 @@ export const Product = ({ id, imgUrl, name, price }: ProductProps) => {
           </div>
         </div>
         <main className="sm:flex flex-col">
-          <div className="flex items-center justify-between mb-8">
+          <div className="grid gap-4 2xs:flex items-center justify-between mb-8">
             <h1 className="text-3xl">{name}</h1>
             <div className="flex items-center gap-1 flex-col">
-              <span className="text-sm text-muted-foreground">
+              <span className="self-start 2xs:text-sm text-muted-foreground">
                 Click to rate!
               </span>
               <Rate />
@@ -151,7 +151,7 @@ export const Product = ({ id, imgUrl, name, price }: ProductProps) => {
             >
               Add to cart
             </Button>
-            <div className="2xs:text-2xl font-bold">
+            <div className="3xs:text-2xl font-bold">
               {count === 1 ? formatCurrency(price) : totalPrice}
             </div>
           </div>

@@ -12,7 +12,8 @@ module.exports = {
   prefix: '',
   theme: {
     screens: {
-      '2xs': '300px',
+      '3xs': '300px',
+      '2xs': '370px',
       xs: '560px',
       sm: '640px',
       // => @media (min-width: 640px) { ... }
