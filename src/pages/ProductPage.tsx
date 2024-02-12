@@ -1,4 +1,3 @@
-import { CommentForm } from '@/components/CommentForm';
 import { CommentsList } from '@/components/CommentsList';
 import { Product } from '@/components/Product';
 import storeItems from '@/data/item.json';
@@ -21,7 +20,6 @@ export const ProductPage = () => {
         {product != null ? <Product {...product} /> : <ProductError />}
       </div>
       <h2 className="text-xl mb-4 mt-8">Comments</h2>
-      <CommentForm initialValue="" />
       <CommentsList />
     </>
   );

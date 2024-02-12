@@ -1,20 +1,26 @@
-import { useCommentRenderStore } from '@/store/store';
+import { useCommentStore } from '@/store/store';
 import { Comments } from './Comments';
 import { useParams } from 'react-router-dom';
-import users from '@/data/user.json';
+import { CommentForm } from './CommentForm';
 
 export const CommentsList = () => {
   const { productId } = useParams();
-  const rootComments = useCommentRenderStore((state) =>
+  const comments = useCommentStore((state) => state.comments);
+  const rootComments = useCommentStore((state) =>
     state.getComments(Number(productId))
   );
 
   if (rootComments == null) return;
 
-  return users.map(
-    (comment) =>
-      rootComments.postId === comment.postId && (
-        <Comments key={comment.parentId} {...comment} />
-      )
+  return (
+    <>
+      <CommentForm initialValue="" postId={Number(productId)} />
+      {comments.map(
+        (comment) =>
+          comment.postId === rootComments.postId && (
+            <Comments key={comment.parentId} {...comment} />
+          )
+      )}
+    </>
   );
 };

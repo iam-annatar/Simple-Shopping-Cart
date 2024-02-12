@@ -1,25 +1,37 @@
 import { ChangeEvent, useState } from 'react';
 import { Button } from './ui/button';
+import { useCommentStore } from '@/store/store';
 
 type CommentFormProps = {
-  loading?: boolean;
-  // onSubmit: (message: string) => Promise<void>;
   initialValue: string;
   autoFocus?: boolean;
+  postId: number;
 };
 
 export const CommentForm = ({
-  loading,
-  // onSubmit,
+  initialValue,
+  postId,
   autoFocus = false,
-
-  initialValue = '',
 }: CommentFormProps) => {
   const [message, setMessage] = useState(initialValue);
+  const addComment = useCommentStore((state) => state.addComment);
+  const [error, setError] = useState(false);
 
   const submitHandler = (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // onSubmit(message).then(() => setMessage(''));
+    if (message.length <= 1) {
+      setError(true);
+    } else {
+      setError(false);
+    }
+    addComment({
+      postId: postId,
+      parentId: Math.floor(Math.random() * 1000),
+      body: message,
+      name: 'User',
+      replies: [],
+    });
+    setMessage('');
   };
 
   return (
@@ -27,7 +39,7 @@ export const CommentForm = ({
       <form id="comment" onSubmit={submitHandler}>
         <div className="flex items-end gap-2">
           <textarea
-            placeholder="share your comment"
+            placeholder="What are your thoughts?"
             className="resize-none flex-grow  text-sm p-[.5em] h-[4.5rem]  bg-slate-50 dark:bg-slate-950 border-2 rounded-sm "
             id="comment"
             autoFocus={autoFocus}
@@ -37,12 +49,12 @@ export const CommentForm = ({
           <Button
             type="submit"
             className="text-base bg-slate-500 font-bold hover:bg-slate-600 dark:text-white"
-            disabled={loading}
           >
-            {loading ? 'Loading' : 'Post'}
+            Post
           </Button>
         </div>
       </form>
+      {error && <div className="text-red-500">Error</div>}
     </>
   );
 };

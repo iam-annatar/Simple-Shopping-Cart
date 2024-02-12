@@ -1,11 +1,13 @@
 import { EditIcon, HeartIcon, ReplyIcon, TrashIcon } from 'lucide-react';
 import { CommentIcons } from './CommentIcons';
 import { Card, CardContent } from './ui/card';
+import { useCommentStore } from '@/store/store';
 
 type CommentCardProps = {
   body: string;
   userName?: string;
   name: string;
+  parentId: number;
 };
 
 const dateFormatter = new Intl.DateTimeFormat(undefined, {
@@ -13,7 +15,14 @@ const dateFormatter = new Intl.DateTimeFormat(undefined, {
   timeStyle: 'short',
 });
 
-export const CommentCard = ({ body, name, userName }: CommentCardProps) => {
+export const CommentCard = ({
+  body,
+  name,
+  userName,
+  parentId,
+}: CommentCardProps) => {
+  const removeComment = useCommentStore((state) => state.removeComment);
+
   return (
     <Card className="w-full border shadow-sm rounded-md mt-4 p-2 bg-slate-50 dark:bg-slate-950 dark:border ">
       <div className="flex items-center justify-between">
@@ -45,7 +54,12 @@ export const CommentCard = ({ body, name, userName }: CommentCardProps) => {
         <CommentIcons icon={<ReplyIcon className="w-5" />} aria-label="Reply" />
         <CommentIcons icon={<EditIcon className="w-5" />} aria-label="Edit" />
         <CommentIcons
-          icon={<TrashIcon className="w-5" />}
+          icon={
+            <TrashIcon
+              onClick={() => removeComment(parentId)}
+              className="w-5"
+            />
+          }
           aria-label="Delete"
           color="red"
         />

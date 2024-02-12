@@ -6,14 +6,16 @@
     "body": "laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium",
     "replies": [
       {
+        "postId": 1,
         "id": 100,
         "parentId": 101,
         "name": "Eliseo",
         "body": "I completely agree with your assessment.",
         "replies": [
           {
+            "postId": 1,
             "id": 101,
-            "parentId": null,
+            "parentId": 11111,
             "name": "Rodo",
             "body": "I completely disagree",
             "replies": []
@@ -22,7 +24,7 @@
       },
       {
         "id": 100,
-        "parentId": null,
+        "parentId": 22222,
         "name": "leo",
         "body": "I think there are additional factors to consider.",
         "replies": []
@@ -57,7 +59,8 @@
     "body": "maiores sed dolores similique labore et inventore et\nquasi temporibus esse sunt id et\neos voluptatem aliquam\naliquid ratione corporis molestiae mollitia quia et magnam dolor",
     "replies": [
       {
-        "parentId": null,
+        "postId": 2,
+        "parentId": 33333,
         "id": 500,
         "name": "ubke",
         "body": "Your concerns are valid, Nikita.",
@@ -79,14 +82,16 @@
     "body": "ut dolorum nostrum id quia aut est\nfuga est inventore vel eligendi explicabo quis consectetur\naut occaecati repellat id natus quo est\nut blanditiis quia ut vel ut maiores ea",
     "replies": [
       {
+        "postId": 3,
         "id": 700,
         "parentId": 701,
         "name": "kacy",
         "body": "im not sure.",
         "replies": [
           {
+            "postId": 3,
             "id": 701,
-            "parentId": null,
+            "parentId": 44444,
             "name": "ali",
             "body": "hye quod minus alias",
             "replies": []
@@ -123,21 +128,24 @@
     "body": "doloribus est illo sed minima aperiam\nut dignissimos accusantium tempore atque et aut molestiae\nmagni ut accusamus voluptatem quos ut voluptates\nquisquam porro sed architecto ut",
     "replies": [
       {
+        "postId": 4,
         "id": 1100,
-        "parentId": null,
+        "parentId": 55555,
         "name": "Hayden",
         "body": "Your insights are thought-provoking.",
         "replies": []
       },
       {
+        "postId": 4,
         "id": 1100,
         "parentId": 1101,
         "name": "dhie",
         "body": "I understand and concur with your analysis.",
         "replies": [
           {
+            "postId": 4,
             "id": 1101,
-            "parentId": null,
+            "parentId": 66666,
             "name": "hsem",
             "body": "abs idnsl ill good",
             "replies": []
@@ -153,8 +161,9 @@
     "body": "qui harum consequatur fugiatnet eligendi perferendis at molestiae commodi ducimus\ndoloremque asperiores numquam qui\nut sit dignissimos reprehenderit tempore",
     "replies": [
       {
+        "postId": 4,
         "id": 1200,
-        "parentId": null,
+        "parentId": 77777,
         "name": "ahmed",
         "body": "do not make this viral please.",
         "replies": []
@@ -182,14 +191,16 @@
     "body": "sunt aut quae laboriosam sit ut impedit\nadipisci harum laborum totam deleniti voluptas odit rem ea\nnon iure distinctio ut velit doloribus\net non ex",
     "replies": [
       {
+        "postId": 5,
         "id": 1500,
         "parentId": 1501,
         "name": "jax",
         "body": "is it good for long term?",
         "replies": [
           {
+            "postId": 5,
             "id": 1501,
-            "parentId": null,
+            "parentId": 88888,
             "name": "ghems",
             "body": " odio ratione nesciuntnvoluptate doloremque",
             "replies": []
@@ -212,21 +223,24 @@
     "body": "nisi vel quas ut laborum ratione\nrerum magni eum\nunde et voluptatem saepe\nvoluptas corporis modi amet ipsam eos saepe porro",
     "replies": [
       {
+        "postId": 6,
         "id": 1700,
-        "parentId": null,
+        "parentId": 99999,
         "name": "Weny",
         "body": "thought-provoking and nice.",
         "replies": []
       },
       {
+        "postId": 6,
         "id": 1700,
         "parentId": 1701,
         "name": "nate",
         "body": "no way you could say that",
         "replies": [
           {
+            "postId": 6,
             "id": 1701,
-            "parentId": null,
+            "parentId": 12345,
             "name": "tores",
             "body": "nothing helpful",
             "replies": []
@@ -256,14 +270,16 @@
     "body": "omnis temporibus quasi ab omnis\nfacilis et omnis illum quae quasi aut\nminus iure ex rem ut reprehenderit\nin non fugit",
     "replies": [
       {
+        "postId": 7,
         "id": 2000,
         "parentId": 2001,
         "name": "kpl",
         "body": "make this viral please.",
         "replies": [
           {
+            "postId": 7,
             "id": 2001,
-            "parentId": null,
+            "parentId": 123456,
             "name": "kyle",
             "body": "how much did you get?",
             "replies": []
@@ -271,8 +287,9 @@
         ]
       },
       {
+        "postId": 7,
         "id": 2000,
-        "parentId": null,
+        "parentId": 1234567,
         "name": "nirei",
         "body": "thoughtful of you",
         "replies": []
@@ -286,14 +303,16 @@
     "body": "dolor mollitia quidem facere et\nvel est ut\nut repudiandae est quidem dolorem sed atque\nrem quia aut adipisci sunt",
     "replies": [
       {
+        "postId": 7,
         "id": 2100,
         "parentId": 2101,
         "name": "Elio.",
         "body": "This is just a start",
         "replies": [
           {
+            "postId": 7,
             "id": 2101,
-            "parentId": null,
+            "parentId": 12345678,
             "name": "kimi",
             "body": "I completely disagree",
             "replies": []
@@ -316,8 +335,9 @@
     "body": "atque consequatur dolorem sunt\nadipisci autem et\nvoluptatibus et quae necessitatibus rerum eaque aperiam nostrum nemo\neligendi sed et beatae et inventore",
     "replies": [
       {
+        "postId": 8,
         "id": 2300,
-        "parentId": null,
+        "parentId": 123456789,
         "name": "kiara",
         "body": "I share your sentiments.",
         "replies": []
