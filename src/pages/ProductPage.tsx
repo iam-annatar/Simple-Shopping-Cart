@@ -19,8 +19,10 @@ export const ProductPage = () => {
       <div className="mt-4">
         {product != null ? <Product {...product} /> : <ProductError />}
       </div>
-      <h2 className="text-xl mb-4 mt-8">Comments</h2>
-      <CommentsList />
+      <div className="mb-8">
+        <h2 className="text-xl mb-4 mt-8">Comments</h2>
+        <CommentsList />
+      </div>
     </>
   );
 };

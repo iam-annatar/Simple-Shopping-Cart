@@ -40,7 +40,7 @@ export const CommentForm = ({
         <div className="flex items-end gap-2">
           <textarea
             placeholder="What are your thoughts?"
-            className="resize-none flex-grow  text-sm p-[.5em] h-[4.5rem]  bg-slate-50 dark:bg-slate-950 border-2 rounded-sm "
+            className="resize-none flex-grow  text-sm p-[.5em] h-[10rem]  bg-slate-50 dark:bg-slate-950 border-2 rounded-sm "
             id="comment"
             autoFocus={autoFocus}
             value={message}

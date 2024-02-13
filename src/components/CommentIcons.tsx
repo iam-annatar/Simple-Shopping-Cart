@@ -22,7 +22,7 @@ export const CommentIcons = ({
             : 'text-muted-foreground'
         } ${
           isActive && 'icon-btn-active text-red-400 hover:text-red-500'
-        } w-7 first:hover:text-red-600 hover:text-blue-600 transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110  duration-300 `}
+        } w-7 first:hover:text-red-600 hover:text-blue-600 transition ease-in-out  hover:-translate-y-1 hover:scale-110  duration-300 `}
         {...props}
       >
         <span className={`${children != null ? 'mr-1' : ''} ${color || ''}`}>

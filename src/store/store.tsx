@@ -73,7 +73,7 @@ export const useCommentStore = create<CommentType>((set) => ({
     if (comment.body.length >= 2) {
       set((state) => ({
         ...state,
-        comments: [...state.comments, comment],
+        comments: [comment, ...state.comments],
       }));
     }
   },
