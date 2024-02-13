@@ -1,7 +1,7 @@
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 
-export const LazyLoading = () => {
+export const StoreLazyLoading = () => {
   return (
     <Card className=" z-[-99] mb-9 shadow-md dark:bg-slate-900 sm:mx-3">
       <Skeleton className="h-[21.5rem]">

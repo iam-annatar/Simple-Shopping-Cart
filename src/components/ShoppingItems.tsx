@@ -3,7 +3,7 @@ import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { useShoppingContext } from '@/hooks/useShoppingContext';
 import { formatCurrency } from '@/utilities/formattCurrency';
 import { toast } from 'sonner';
-import { LazyLoading } from './LazyLoading';
+import { StoreLazyLoading } from './StoreLazyLoading';
 import { Link } from 'react-router-dom';
 
 type ShoppingItemsProps = {
@@ -24,7 +24,7 @@ export const ShoppingItems = ({
   const count = getItemsCount(id);
 
   if (isLoading) {
-    return <LazyLoading />;
+    return <StoreLazyLoading />;
   }
 
   return (
