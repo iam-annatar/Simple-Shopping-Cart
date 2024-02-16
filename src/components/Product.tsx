@@ -1,18 +1,20 @@
-import { Link } from 'react-router-dom';
-import { Button } from './ui/button';
-import { formatCurrency } from '@/utilities/formattCurrency';
-import { useShoppingContext } from '@/hooks/useShoppingContext';
-import { useState } from 'react';
-import { toast } from 'sonner';
-import { HeartLike } from './ui/heart';
-import { Rate } from './ui/rate';
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { toast } from "sonner";
 
-type ProductProps = {
+import { useShoppingContext } from "@/hooks/useShoppingContext";
+import { formatCurrency } from "@/utilities/formattCurrency";
+
+import { Button } from "./ui/button";
+import { HeartLike } from "./ui/heart";
+import { Rate } from "./ui/rate";
+
+interface ProductProps {
   id: number;
   imgUrl: string;
   name: string;
   price: number;
-};
+}
 
 export const Product = ({ id, imgUrl, name, price }: ProductProps) => {
   const [count, setCount] = useState(1);
@@ -21,33 +23,36 @@ export const Product = ({ id, imgUrl, name, price }: ProductProps) => {
   const increaseHanler = () => {
     setCount((c) => c + 1);
   };
+
   const decreaseHandler = () => {
-    count > 1 && setCount((c) => c - 1);
+    if (count > 1) {
+      setCount((c) => c - 1);
+    }
   };
 
   const totalPrice = formatCurrency(price * count);
 
   return (
     <>
-      <div className="flex gap-2 text-gray-400 mb-4">
-        <Link to={'/'}>Home</Link>
-        <span className="font-bold">{'>'}</span>
-        <Link to={'/store'}>Store</Link>
-        <span className="font-bold">{'>'}</span>
-        <Link className="text-gray-700 dark:text-gray-200" to={'#'}>
+      <div className="mb-4 flex gap-2 text-gray-400">
+        <Link to="/">Home</Link>
+        <span className="font-bold">{">"}</span>
+        <Link to="/store">Store</Link>
+        <span className="font-bold">{">"}</span>
+        <Link className="text-gray-700 dark:text-gray-200" to="#">
           Product {id}
         </Link>
       </div>
-      <div className="md:flex gap-6 ">
+      <div className="gap-6 md:flex ">
         <div className="mb-4">
           <img
-            className="sm:h-[25rem] sm:w-[160rem] object-cover"
+            className="object-cover sm:h-[25rem] sm:w-[160rem]"
             src={imgUrl}
             alt="img"
           />
-          <div className="flex items-center justify-between mt-2">
+          <div className="mt-2 flex items-center justify-between">
             <div className="flex gap-2">
-              <button className="text-muted-foreground w-7 hover:text-blue-600 transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110  duration-300">
+              <button className="w-7 text-muted-foreground transition delay-150 duration-300 ease-in-out  hover:-translate-y-1 hover:scale-110  hover:text-blue-600">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -60,7 +65,7 @@ export const Product = ({ id, imgUrl, name, price }: ProductProps) => {
                 </svg>
               </button>
 
-              <button className="text-muted-foreground w-7 hover:text-blue-600  transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110  duration-300">
+              <button className="w-7 text-muted-foreground transition  delay-150 duration-300 ease-in-out  hover:-translate-y-1 hover:scale-110  hover:text-blue-600">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -80,17 +85,17 @@ export const Product = ({ id, imgUrl, name, price }: ProductProps) => {
             <HeartLike />
           </div>
         </div>
-        <main className="sm:flex flex-col">
-          <div className="grid gap-4 2xs:flex items-center justify-between mb-8">
+        <main className="flex-col sm:flex">
+          <div className="mb-8 grid items-center justify-between gap-4 2xs:flex">
             <h1 className="text-3xl">{name}</h1>
-            <div className="flex items-center gap-1 flex-col">
-              <span className="self-start 2xs:text-sm 2xs:self-center text-muted-foreground">
+            <div className="flex flex-col items-center gap-1">
+              <span className="self-start text-muted-foreground 2xs:self-center 2xs:text-sm">
                 Click to rate!
               </span>
               <Rate />
             </div>
           </div>
-          <p className="text-sm mb-4 text-gray-400">
+          <p className="mb-4 text-sm text-gray-400">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
             commodo varius lacus vel dignissim. Mauris dignissim placerat ex, a
             fringilla orci. Donec aliquet quis sapien porta condimentum.Mauris
@@ -99,59 +104,59 @@ export const Product = ({ id, imgUrl, name, price }: ProductProps) => {
           </p>
           <span className="text-2xl font-bold ">{formatCurrency(price)}</span>
 
-          <div className="grid place-items-start gap-6 mb-8 mt-4  sm:flex sm:mb-8 sm:gap-2 sm:items-center sm:justify-between">
-            <div className="grid  sm:place-items-center gap-2 ">
+          <div className="mb-8 mt-4 grid place-items-start gap-6  sm:mb-8 sm:flex sm:items-center sm:justify-between sm:gap-2">
+            <div className="grid  gap-2 sm:place-items-center ">
               <div className="text-lg text-muted-foreground">Choose Color</div>
               <div className="flex gap-3">
                 <Button
-                  size={'sm'}
-                  className="rounded-full  outline outline-2 outline-white bg-slate-600 h-6 hover:bg-slate-600"
-                ></Button>
+                  size="sm"
+                  className="h-6  rounded-full bg-slate-600 outline outline-2 outline-white hover:bg-slate-600"
+                />
                 <Button
-                  size={'sm'}
-                  className="rounded-full outline outline-2 outline-white h-6 bg-black hover:bg-black"
-                ></Button>
+                  size="sm"
+                  className="h-6 rounded-full bg-black outline outline-2 outline-white hover:bg-black"
+                />
                 <Button
-                  size={'sm'}
-                  className="rounded-full outline outline-2 outline-white bg-stone-700 h-6 hover:bg-stone-700"
-                ></Button>
+                  size="sm"
+                  className="h-6 rounded-full bg-stone-700 outline outline-2 outline-white hover:bg-stone-700"
+                />
               </div>
             </div>
-            <div className=" grid sm:place-items-center gap-[6px]">
+            <div className=" grid gap-[6px] sm:place-items-center">
               <div className="text-lg text-muted-foreground">
                 Choose quantity
               </div>
               <div className="flex gap-2">
                 <Button
                   onClick={decreaseHandler}
-                  size={'sm'}
-                  className="w-7 h-7 bg-blue-600 hover:bg-blue-600/90 text-white"
+                  size="sm"
+                  className="size-7 bg-blue-600 text-white hover:bg-blue-600/90"
                 >
                   -
                 </Button>
                 <span>{count}</span>
                 <Button
                   onClick={increaseHanler}
-                  size={'sm'}
-                  className="w-7 h-7 bg-blue-600 hover:bg-blue-600/90 text-white"
+                  size="sm"
+                  className="size-7 bg-blue-600 text-white hover:bg-blue-600/90"
                 >
                   +
                 </Button>
               </div>
             </div>
           </div>
-          <div className="flex items-center gap-4 py-4  border-t ">
+          <div className="flex items-center gap-4 border-t  py-4 ">
             <Button
               onClick={() => {
                 if (id == null) return;
                 toast.success(`Item "${name}" added to your cart`);
                 increaseCount(id, count);
               }}
-              className="w-full text-lg bg-blue-600 hover:bg-blue-600/90 text-white"
+              className="w-full bg-blue-600 text-lg text-white hover:bg-blue-600/90"
             >
               Add to cart
             </Button>
-            <div className="3xs:text-2xl font-bold">
+            <div className="font-bold 3xs:text-2xl">
               {count === 1 ? formatCurrency(price) : totalPrice}
             </div>
           </div>

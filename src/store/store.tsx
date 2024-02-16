@@ -1,7 +1,8 @@
-import { create } from 'zustand';
-import comments from '@/data/user.json';
+import { create } from "zustand";
 
-export type Comment = {
+import comments from "@/data/user.json";
+
+export interface Comment {
   postId?: number;
   parentId: number;
   name: string;
@@ -12,44 +13,47 @@ export type Comment = {
     id?: number;
     body: string;
     name: string;
-    replies: Comment['replies'];
+    replies: Comment["replies"];
   }[];
-};
+}
 
-type CommentType = {
+interface CommentType {
   comments: Comment[];
   getComments: (id: number) => Comment | undefined;
   getReplies: (
-    comments: Comment[],
+    commentsReplies: Comment[],
     parentId: number | null,
-    id: number
+    id: number,
   ) => Comment[];
   addComment: (comment: Comment) => void;
   removeComment: (id: number) => void;
-};
+}
 
 // function for getting the replies recursively
 const getRepliesRecursive = (
-  comments: Comment[],
+  commentsReplies: Comment[],
   parentId: number,
-  id: number
+  id: number,
 ): Comment[] => {
   const replies = [];
-  for (const comment of comments) {
+
+  // eslint-disable-next-line fp/no-loops
+  for (const comment of commentsReplies) {
     if (comment.parentId === parentId) {
       replies.push(comment);
       if (comment.replies)
         replies.push(...getRepliesRecursive(comment.replies, parentId, id));
     }
   }
+
   const rep = replies.map((r) => r.replies).filter((r) => r !== undefined);
 
   return rep.flat().filter((r) => r?.id === parentId);
 };
 
-//function for recursively removing the comments
-const removeRecursive = (comments: Comment[], parentId: number) => {
-  return comments.filter((c) => {
+// function for recursively removing the comments
+const removeRecursive = (commentsArr: Comment[], parentId: number) => {
+  return commentsArr.filter((c) => {
     if (c.parentId === parentId) {
       return false;
     } else {
@@ -60,14 +64,14 @@ const removeRecursive = (comments: Comment[], parentId: number) => {
 };
 
 export const useCommentStore = create<CommentType>((set) => ({
-  comments: comments,
+  comments,
   getComments: (id) => {
     if (id == null) return;
     return comments.find((comment) => comment.postId === id);
   },
-  getReplies: (comments, parentId, id) => {
+  getReplies: (commentsReplies, parentId, id) => {
     if (parentId == null || id === null) return [];
-    return getRepliesRecursive(comments, parentId, id);
+    return getRepliesRecursive(commentsReplies, parentId, id);
   },
   addComment: (comment) => {
     if (comment.body.length >= 2) {

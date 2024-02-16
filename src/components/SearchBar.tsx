@@ -1,10 +1,13 @@
-import { ChangeEvent, useState } from 'react';
-import { Input } from './ui/input';
-import { useSearchContext } from '@/hooks/useSearchContext';
-import { SearchIcon } from 'lucide-react';
-import { Button } from './ui/button';
-import { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
-import { useNavigate } from 'react-router-dom';
+import { SearchIcon } from "lucide-react";
+import type { ChangeEvent } from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+import { useSearchContext } from "@/hooks/useSearchContext";
+
+import { Button } from "./ui/button";
+import { Input } from "./ui/input";
+import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 
 export const Search = () => {
   const { setSearchValue, filterItems, searchValue } = useSearchContext();
@@ -21,7 +24,7 @@ export const Search = () => {
     <Popover defaultOpen={isOpen} onOpenChange={() => setIsOpen(true)}>
       <PopoverTrigger asChild>
         <Button variant="ghost" size="icon">
-          <SearchIcon className="h-[1.125rem] w-[1.125rem]" />
+          <SearchIcon className="size-[1.125rem]" />
         </Button>
       </PopoverTrigger>
       <PopoverContent align="start">
@@ -33,7 +36,7 @@ export const Search = () => {
           onChange={handleSearch}
         />
         {filterItems(searchValue).length === 0 ? (
-          <div className="text-center text-muted-foreground mt-2">
+          <div className="mt-2 text-center text-muted-foreground">
             Item Not Found !
           </div>
         ) : (
@@ -41,13 +44,14 @@ export const Search = () => {
             {filterItems(searchValue).map((item) => {
               return (
                 searchValue && (
-                  <li
-                    className="list-none hover:text-white mt-2 cursor-pointer"
+                  // eslint-disable-next-line jsx-a11y/click-events-have-key-events
+                  <div
+                    className="mt-2 cursor-pointer list-none hover:text-white"
                     key={item.id}
                     onClick={() => navigate(`/store/${item.id}`)}
                   >
                     {item.name}
-                  </li>
+                  </div>
                 )
               );
             })}

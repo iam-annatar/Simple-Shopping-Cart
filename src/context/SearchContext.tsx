@@ -1,39 +1,34 @@
-import {
-  Dispatch,
-  ReactNode,
-  SetStateAction,
-  createContext,
-  useState,
-} from 'react';
+import type { Dispatch, ReactNode, SetStateAction } from "react";
+import { createContext, useMemo, useState } from "react";
 
-import storeItems from '@/data/item.json';
+import storeItems from "@/data/item.json";
 
 type Filter = (typeof storeItems)[number];
 
-type SearchState = {
+interface SearchState {
   searchValue: string;
   setSearchValue: Dispatch<SetStateAction<string>>;
   filterItems: (query: string) => Filter[];
-};
+}
 
 export const Context = createContext({} as SearchState);
 
-type SearchContextProps = {
+interface SearchContextProps {
   children: ReactNode;
-};
+}
 
 export const SearchContextProvider = ({ children }: SearchContextProps) => {
-  const [searchValue, setSearchValue] = useState('');
+  const [searchValue, setSearchValue] = useState("");
 
   const filterItems = (query: string) => {
     return storeItems.filter((item) =>
-      item.name.toLowerCase().includes(query.toLowerCase())
+      item.name.toLowerCase().includes(query.toLowerCase()),
     );
   };
 
-  return (
-    <Context.Provider value={{ searchValue, setSearchValue, filterItems }}>
-      {children}
-    </Context.Provider>
-  );
+  const value = useMemo(() => {
+    return { searchValue, setSearchValue, filterItems };
+  }, [searchValue]);
+
+  return <Context.Provider value={value}>{children}</Context.Provider>;
 };
