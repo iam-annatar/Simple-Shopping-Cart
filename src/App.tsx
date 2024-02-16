@@ -1,13 +1,14 @@
-import { Route, Routes } from 'react-router-dom';
-import { Navbar } from './components/Navbar';
-import { About } from './pages/About';
-import { Store } from './pages/Store';
-import { Home } from './pages/Home';
-import { ThemeProvider } from './context/ThemeProvider';
-import { ShoppingCartContext } from './context/ShoppingCartContext';
-import { Toaster } from 'sonner';
-import { ProductPage } from './pages/ProductPage';
-import { SearchContextProvider } from './context/SearchContext';
+import { Route, Routes } from "react-router-dom";
+import { Toaster } from "sonner";
+
+import { Navbar } from "./components/Navbar";
+import { SearchContextProvider } from "./context/SearchContext";
+import { ShoppingCartContext } from "./context/ShoppingCartContext";
+import { ThemeProvider } from "./context/ThemeProvider";
+import { About } from "./pages/About";
+import { Home } from "./pages/Home";
+import { ProductPage } from "./pages/ProductPage";
+import { Store } from "./pages/Store";
 
 const App = () => {
   return (

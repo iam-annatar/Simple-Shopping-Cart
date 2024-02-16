@@ -1,8 +1,10 @@
-import { CommentsList } from '@/components/CommentsList';
-import { Product } from '@/components/Product';
-import storeItems from '@/data/item.json';
-import { useEffect } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import { useEffect } from "react";
+import { useLocation, useParams } from "react-router-dom";
+
+import { CommentsList } from "@/components/CommentsList";
+import { Product } from "@/components/Product";
+import { ProductError } from "@/components/ProductError";
+import storeItems from "@/data/item.json";
 
 export const ProductPage = () => {
   const { productId } = useParams();
@@ -20,13 +22,9 @@ export const ProductPage = () => {
         {product != null ? <Product {...product} /> : <ProductError />}
       </div>
       <div className="mb-8">
-        <h2 className="text-xl mb-4 mt-8">Comments</h2>
+        <h2 className="mb-4 mt-8 text-xl">Comments</h2>
         <CommentsList />
       </div>
     </>
   );
-};
-
-const ProductError = () => {
-  return <div className="text-center text-3xl">Product Not Found!</div>;
 };

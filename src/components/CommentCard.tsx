@@ -1,21 +1,23 @@
-import { EditIcon, HeartIcon, ReplyIcon, TrashIcon } from 'lucide-react';
-import { CommentIcons } from './CommentIcons';
-import { Card, CardContent } from './ui/card';
-import { useCommentStore } from '@/store/store';
-import { useState } from 'react';
-import { ReplyForm } from './ReplyForm';
+import { EditIcon, HeartIcon, ReplyIcon, TrashIcon } from "lucide-react";
+import { useState } from "react";
 
-type CommentCardProps = {
-  postId?: number;
+import { useCommentStore } from "@/store/store";
+
+import { CommentIcons } from "./CommentIcons";
+import { ReplyForm } from "./ReplyForm";
+import { Card, CardContent } from "./ui/card";
+
+interface CommentCardProps {
+  // postId?: number;
   body: string;
   userName?: string;
   name: string;
   parentId: number;
-};
+}
 
 const dateFormatter = new Intl.DateTimeFormat(undefined, {
-  dateStyle: 'medium',
-  timeStyle: 'short',
+  dateStyle: "medium",
+  timeStyle: "short",
 });
 
 export const CommentCard = ({
@@ -41,26 +43,26 @@ export const CommentCard = ({
 
   return (
     <div className="flex-1">
-      <Card className="w-full border shadow-sm rounded-md mt-4 p-2 bg-slate-50 dark:bg-slate-950 dark:border ">
-        <div className="2xs:flex items-center justify-between">
+      <Card className="mt-4 w-full rounded-md border bg-slate-50 p-2 shadow-sm dark:border dark:bg-slate-950 ">
+        <div className="items-center justify-between 2xs:flex">
           <div className="flex  items-center gap-2">
-            <span className="text-muted-foreground font-bold">{name} </span>
+            <span className="font-bold text-muted-foreground">{name} </span>
             <span
               className={`   ${
-                userName == null && 'hidden'
+                userName == null && "hidden"
               } text-sm font-normal text-muted-foreground sm:ml-4 `}
             >
               Reply to
             </span>
             <span
               className={`${
-                userName == null && 'hidden'
-              } text-blue-500 cursor-pointer font-normal`}
+                userName == null && "hidden"
+              } cursor-pointer font-normal text-blue-500`}
             >
               {`@${userName}`}
             </span>
           </div>
-          <span className="text-muted-foreground text-sm ">
+          <span className="text-sm text-muted-foreground ">
             {dateFormatter.format(new Date())}
           </span>
         </div>
@@ -90,8 +92,8 @@ export const CommentCard = ({
           />
         </div>
       </Card>
-      <div className={`${isOpen && 'mt-4'}`}>
-        {isOpen && (
+      <div className={`${isOpen && "mt-4"}`}>
+        {isOpen ? (
           <ReplyForm
             autoFocus
             userName={name}
@@ -100,7 +102,7 @@ export const CommentCard = ({
               setIsAcive(false);
             }}
           />
-        )}
+        ) : null}
       </div>
     </div>
   );

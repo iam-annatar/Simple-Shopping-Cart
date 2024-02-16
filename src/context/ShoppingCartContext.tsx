@@ -1,17 +1,19 @@
-import { ShoppingCart } from '@/components/ShoppingCart';
-import { useLocalStorage } from '@/hooks/useLocalStorage';
-import { ReactNode, createContext, useEffect, useState } from 'react';
+import type { ReactNode } from "react";
+import { createContext, useEffect, useState } from "react";
 
-type ShoppingCartContextProps = {
+import { ShoppingCart } from "@/components/ShoppingCart";
+import { useLocalStorage } from "@/hooks/useLocalStorage";
+
+interface ShoppingCartContextProps {
   children: ReactNode;
-};
+}
 
-type CartItem = {
+interface CartItem {
   id: number;
   count: number;
-};
+}
 
-type ShoppingContextType = {
+interface ShoppingContextType {
   getItemsCount: (id: number) => number;
   increaseCount: (id: number, count?: number) => void;
   decreaseCount: (id: number) => void;
@@ -26,12 +28,12 @@ type ShoppingContextType = {
   rateCount: number;
   rateHandler: (value: number) => void;
   isLoading: boolean;
-};
+}
 
 export const ShoppingContext = createContext({} as ShoppingContextType);
 
 export const ShoppingCartContext = ({ children }: ShoppingCartContextProps) => {
-  const [items, setItems] = useLocalStorage<CartItem[]>('ShoppingInfo', []);
+  const [items, setItems] = useLocalStorage<CartItem[]>("ShoppingInfo", []);
 
   const [isOpen, setIsOpen] = useState(false);
   const [likesCount, setLikesCount] = useState(0);
@@ -67,10 +69,11 @@ export const ShoppingCartContext = ({ children }: ShoppingCartContextProps) => {
   function getItemsCount(id: number) {
     return items.find((item) => item.id === id)?.count || 0;
   }
+
   function increaseCount(id: number, count: number = 1) {
     setItems((currentItem) => {
       if (currentItem.find((item) => item.id === id) == null) {
-        return [...currentItem, { id, count: count }];
+        return [...currentItem, { id, count }];
       } else {
         return currentItem.map((item) => {
           if (item.id === id) {
@@ -82,6 +85,7 @@ export const ShoppingCartContext = ({ children }: ShoppingCartContextProps) => {
       }
     });
   }
+
   function decreaseCount(id: number) {
     setItems((currentItem) => {
       if (currentItem.find((item) => item.id === id)?.count === 1) {
@@ -97,6 +101,7 @@ export const ShoppingCartContext = ({ children }: ShoppingCartContextProps) => {
       }
     });
   }
+
   function removeItem(id: number) {
     setItems((currentItem) => {
       return currentItem.filter((item) => item.id !== id);
@@ -105,6 +110,7 @@ export const ShoppingCartContext = ({ children }: ShoppingCartContextProps) => {
 
   return (
     <ShoppingContext.Provider
+      // eslint-disable-next-line react/jsx-no-constructed-context-values
       value={{
         getItemsCount,
         increaseCount,

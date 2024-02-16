@@ -1,12 +1,15 @@
-import { ChangeEvent, useState } from 'react';
-import { Button } from './ui/button';
-import { useCommentStore } from '@/store/store';
+import type { ChangeEvent } from "react";
+import { useState } from "react";
 
-type CommentFormProps = {
+import { useCommentStore } from "@/store/store";
+
+import { Button } from "./ui/button";
+
+interface CommentFormProps {
   initialValue: string;
   autoFocus?: boolean;
   postId: number;
-};
+}
 
 export const CommentForm = ({
   initialValue,
@@ -19,19 +22,20 @@ export const CommentForm = ({
 
   const submitHandler = (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     if (message.length <= 1) {
       setError(true);
     } else {
       setError(false);
     }
     addComment({
-      postId: postId,
+      postId,
       parentId: Math.floor(Math.random() * 1000),
       body: message,
-      name: 'User',
+      name: "User",
       replies: [],
     });
-    setMessage('');
+    setMessage("");
   };
 
   return (
@@ -40,7 +44,7 @@ export const CommentForm = ({
         <div className="flex items-end gap-2">
           <textarea
             placeholder="What are your thoughts?"
-            className="resize-none flex-grow  text-sm p-[.5em] h-[10rem]  bg-slate-50 dark:bg-slate-950 border-2 rounded-sm "
+            className="h-[10rem] grow  resize-none rounded-sm border-2  bg-slate-50 p-[.5em] text-sm dark:bg-slate-950 "
             id="comment"
             autoFocus={autoFocus}
             value={message}
@@ -48,13 +52,13 @@ export const CommentForm = ({
           />
           <Button
             type="submit"
-            className="text-base bg-slate-500 font-bold hover:bg-slate-600 dark:text-white"
+            className="bg-slate-500 text-base font-bold hover:bg-slate-600 dark:text-white"
           >
             Post
           </Button>
         </div>
       </form>
-      {error && <div className="text-red-500">Error</div>}
+      {error ? <div className="text-red-500">Error</div> : null}
     </>
   );
 };
