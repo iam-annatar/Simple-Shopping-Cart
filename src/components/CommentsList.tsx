@@ -1,13 +1,15 @@
-import { useCommentStore } from '@/store/store';
-import { Comments } from './Comments';
-import { useParams } from 'react-router-dom';
-import { CommentForm } from './CommentForm';
+import { useParams } from "react-router-dom";
+
+import { useCommentStore } from "@/store/store";
+
+import { CommentForm } from "./CommentForm";
+import { Comments } from "./Comments";
 
 export const CommentsList = () => {
   const { productId } = useParams();
   const comments = useCommentStore((state) => state.comments);
   const rootComments = useCommentStore((state) =>
-    state.getComments(Number(productId))
+    state.getComments(Number(productId)),
   );
 
   if (rootComments == null) return;
@@ -19,7 +21,7 @@ export const CommentsList = () => {
         (comment) =>
           comment.postId === rootComments.postId && (
             <Comments key={comment.parentId} {...comment} />
-          )
+          ),
       )}
     </>
   );

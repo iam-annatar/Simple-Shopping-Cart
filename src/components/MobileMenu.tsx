@@ -1,8 +1,9 @@
-import { Menu, X } from 'lucide-react';
-import { Button } from './ui/button';
-import { Sheet, SheetClose, SheetContent } from './ui/sheet';
-import { NavLink } from 'react-router-dom';
-import { useState } from 'react';
+import { Menu, X } from "lucide-react";
+import { useState } from "react";
+import { NavLink } from "react-router-dom";
+
+import { Button } from "./ui/button";
+import { Sheet, SheetClose, SheetContent } from "./ui/sheet";
 
 export const MobileMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,12 +16,12 @@ export const MobileMenu = () => {
         variant="ghost"
         size="icon"
       >
-        <Menu className="h-[1.3rem] w-[1.3rem]" />
+        <Menu className="size-[1.3rem]" />
         <span className="sr-only">Toggle Menu</span>
       </Button>
       <Sheet open={isOpen} onOpenChange={() => setIsOpen(false)}>
-        <SheetContent className="w-full  dark:bg-slate-950" side={'left'}>
-          <nav className="grid gap-5 place-items-center text-gray-400 hover:*:text-black dark:hover:*:text-white">
+        <SheetContent className="w-full  dark:bg-slate-950" side="left">
+          <nav className="grid place-items-center gap-5 text-gray-400 hover:*:text-black dark:hover:*:text-white">
             <NavLink onClick={() => setIsOpen(false)} to="/">
               Home
             </NavLink>
@@ -32,7 +33,7 @@ export const MobileMenu = () => {
             </NavLink>
           </nav>
           <SheetClose className="absolute left-7 top-[25.7px] rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-secondary">
-            <X className="h-5 w-5" />
+            <X className="size-5" />
             <span className="sr-only">Close</span>
           </SheetClose>
         </SheetContent>

@@ -1,20 +1,21 @@
-import { ReactNode, createContext, useEffect, useState } from 'react';
+import type { ReactNode } from "react";
+import { createContext, useEffect, useMemo, useState } from "react";
 
-type ThemeProviderProps = {
+interface ThemeProviderProps {
   children: ReactNode;
   defaultTheme?: Theme;
   storageKey?: string;
-};
+}
 
-type Theme = 'light' | 'dark' | 'system';
+type Theme = "dark" | "light" | "system";
 
-type ThemeContextState = {
+interface ThemeContextState {
   theme: Theme;
   setTheme: (theme: Theme) => void;
-};
+}
 
 const initialValue: ThemeContextState = {
-  theme: 'system',
+  theme: "system",
   setTheme: () => null,
 };
 
@@ -23,24 +24,24 @@ export const ThemeProviderContext =
 
 export const ThemeProvider = ({
   children,
-  defaultTheme = 'system',
-  storageKey = 'Theme',
+  defaultTheme = "system",
+  storageKey = "Theme",
   ...props
 }: ThemeProviderProps) => {
   const [theme, setTheme] = useState<Theme>(
-    () => (localStorage.getItem(storageKey) as Theme) || defaultTheme
+    () => (localStorage.getItem(storageKey) as Theme) || defaultTheme,
   );
 
   useEffect(() => {
     const root = window.document.documentElement;
 
-    root.classList.remove('dark', 'light');
+    root.classList.remove("dark", "light");
 
-    if (theme === 'system') {
-      const systemTheme = window.matchMedia('(prefers-color-scheme: dark)')
+    if (theme === "system") {
+      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
         .matches
-        ? 'dark'
-        : 'light';
+        ? "dark"
+        : "light";
 
       root.classList.add(systemTheme);
       return;
@@ -49,13 +50,15 @@ export const ThemeProvider = ({
     root.classList.add(theme);
   }, [theme]);
 
-  const value = {
-    theme,
-    setTheme: (theme: Theme) => {
-      localStorage.setItem(storageKey, theme);
-      setTheme(theme);
-    },
-  };
+  const value = useMemo(() => {
+    return {
+      theme,
+      setTheme: (t: Theme) => {
+        localStorage.setItem(storageKey, theme);
+        setTheme(t);
+      },
+    };
+  }, [theme, storageKey]);
 
   return (
     <ThemeProviderContext.Provider value={value} {...props}>

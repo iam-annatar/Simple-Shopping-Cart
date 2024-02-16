@@ -82,7 +82,7 @@
   }
 
   .icon-btn-active::before {
-    content: '\00D7';
+    content: "\00D7";
     color: hsl(12, 54%, 52%);
     position: absolute;
     font-size: 1em;
@@ -107,7 +107,7 @@
   }
 
   .child::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     bottom: 0;
@@ -120,7 +120,7 @@
   .heart-icon {
     width: 100px;
     height: 100px;
-    background: url('/imgs/heart.png');
+    background: url("/imgs/heart.png");
     background-position: left;
     cursor: pointer;
     position: absolute;

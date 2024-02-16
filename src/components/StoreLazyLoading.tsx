@@ -1,13 +1,13 @@
-import { Card, CardContent, CardFooter } from '@/components/ui/card';
-import { Skeleton } from '@/components/ui/skeleton';
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export const StoreLazyLoading = () => {
   return (
     <Card className=" z-[-99] mb-9 shadow-md dark:bg-slate-900 sm:mx-3">
       <Skeleton className="h-[21.5rem]">
-        <div className="flex items-center justify-center w-full h-[200px] bg-gray-300 dark:bg-slate-600 rounded-t-sm">
+        <div className="flex h-[200px] w-full items-center justify-center rounded-t-sm bg-gray-300 dark:bg-slate-600">
           <svg
-            className=" w-10 h-10 text-gray-200 dark:text-gray-800"
+            className=" size-10 text-gray-200 dark:text-gray-800"
             aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
             fill="currentColor"
@@ -17,10 +17,10 @@ export const StoreLazyLoading = () => {
           </svg>
         </div>
         <CardContent>
-          <div className=" w-full h-4 mt-6 rounded-full  bg-gray-300 dark:bg-slate-600"></div>
+          <div className=" mt-6 h-4 w-full rounded-full  bg-gray-300 dark:bg-slate-600" />
         </CardContent>
         <CardFooter>
-          <div className="w-full h-10 rounded-md bg-gray-300 dark:bg-slate-600"></div>
+          <div className="h-10 w-full rounded-md bg-gray-300 dark:bg-slate-600" />
         </CardFooter>
       </Skeleton>
     </Card>
