@@ -5,9 +5,7 @@ module.exports = init({
   ignorePatterns: ["dist", ".eslintrc.cjs"],
   plugins: ["react-refresh"],
   modules: {
-    prettier: true,
-    auto: true, // If you need auto module detection (refer to Auto Module Detection).
-    // Modules configuration check (optional). (refer to Module API)
+    auto: true,
   },
   rules: {
     "react-refresh/only-export-components": [
