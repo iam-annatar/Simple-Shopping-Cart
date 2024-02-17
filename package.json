@@ -12,7 +12,7 @@
     "prepare": "husky install"
   },
   "lint-staged": {
-    "*.{js,html,css,tsx,ts}": "eslint . --fix"
+    "*.{js,html,css,tsx,ts,json,md}": "eslint . --fix"
   },
   "dependencies": {
     "@material-tailwind/react": "^2.1.8",
