@@ -11,6 +11,9 @@
     "preview": "vite preview",
     "prepare": "husky install"
   },
+  "lint-staged": {
+    "*.{js,html,css,tsx,ts,json,md}": "eslint --fix ."
+  },
   "dependencies": {
     "@material-tailwind/react": "^2.1.8",
     "@radix-ui/react-dialog": "^1.0.5",
