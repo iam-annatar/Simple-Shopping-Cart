@@ -30,6 +30,7 @@ export const CommentForm = ({
     }
     addComment({
       postId,
+      id: Math.floor(Math.random() * 1000),
       parentId: Math.floor(Math.random() * 1000),
       body: message,
       name: "User",
@@ -40,7 +41,7 @@ export const CommentForm = ({
 
   return (
     <>
-      <form id="comment" onSubmit={submitHandler}>
+      <form className="mb-8" id="comment" onSubmit={submitHandler}>
         <div className="flex items-end gap-2">
           <textarea
             placeholder="What are your thoughts?"

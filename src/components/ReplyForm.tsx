@@ -1,24 +1,43 @@
 import type { ChangeEvent } from "react";
 import { useState } from "react";
 
+import { useCommentStore } from "@/store/store";
+
 import { Button } from "./ui/button";
 import { Card } from "./ui/card";
 
 interface ReplyFormProps {
+  id: number;
+  postId?: number;
   autoFocus: boolean;
   userName?: string;
   onClose: () => void;
 }
 
 export const ReplyForm = ({
+  postId,
+  id,
   onClose,
   userName,
   autoFocus = false,
 }: ReplyFormProps) => {
   const [message, setMessage] = useState("");
+  const updateReplies = useCommentStore((state) => state.updateReplies);
 
   const submitHandler = (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
+    updateReplies(
+      {
+        postId,
+        parentId: Math.floor(Math.random() * 10000),
+        id,
+        name: `User-${crypto.randomUUID().slice(0, 2)}`,
+        body: message,
+        replies: [],
+      },
+      id,
+    );
+    onClose();
   };
 
   return (

@@ -1,38 +1,32 @@
 import { useState } from "react";
 
-import users from "@/data/user.json";
-import { useCommentStore } from "@/store/store";
-
 import { CommentCard } from "./CommentCard";
 import { Button } from "./ui/button";
 
 interface CommentProps {
   parentId: number;
-  id?: number;
+  id: number;
   name: string;
   body: string;
-  // postId?: number;
+  postId?: number;
+  replies: CommentProps[];
 }
 
 export const Comments = ({
   name,
-  // postId,
+  postId,
   parentId,
   body,
   id,
+  replies,
 }: CommentProps) => {
-  const childComments = useCommentStore((state) =>
-    state.getReplies(users, parentId, id ?? 0),
-  );
-
   const [hideChild, setHideChild] = useState(true);
-
-  const rep = childComments.map((r) => r.replies?.length);
 
   return (
     <div className="mb-4">
       <CommentCard
-        // postId={postId}
+        id={id}
+        postId={postId}
         parentId={parentId}
         body={body}
         name={name}
@@ -40,14 +34,14 @@ export const Comments = ({
       <Button
         size="sm"
         className={`mt-2 bg-slate-500 hover:bg-slate-600 dark:text-white ${
-          !hideChild || rep.length === 0 ? "hidden" : ""
+          !hideChild || replies.length === 0 ? "hidden" : ""
         }`}
         onClick={() => setHideChild(false)}
       >
         Show Replies
       </Button>
-      {childComments.map((comment) => (
-        <div className={`${hideChild ? "hidden" : ""}`} key={comment.name}>
+      {replies.map((comment) => (
+        <div className={`${hideChild ? "hidden" : ""}`} key={comment.parentId}>
           <div key={comment.parentId} className="flex  justify-end">
             <button
               className="child"
@@ -55,10 +49,10 @@ export const Comments = ({
               onClick={() => setHideChild(true)}
             />
             <CommentCard
+              postId={postId}
+              id={id}
               parentId={comment.parentId}
-              userName={
-                comment.replies?.map((c) => c.id === parentId) ? name : ""
-              }
+              userName={name}
               body={comment.body}
               name={comment.name}
             />
@@ -72,6 +66,8 @@ export const Comments = ({
                     onClick={() => setHideChild(true)}
                   />
                   <CommentCard
+                    postId={postId}
+                    id={id}
                     parentId={reply.parentId}
                     userName={comment.name}
                     body={reply.body}
