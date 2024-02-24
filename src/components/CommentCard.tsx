@@ -8,11 +8,12 @@ import { ReplyForm } from "./ReplyForm";
 import { Card, CardContent } from "./ui/card";
 
 interface CommentCardProps {
-  // postId?: number;
+  postId?: number;
   body: string;
   userName?: string;
   name: string;
   parentId: number;
+  id: number;
 }
 
 const dateFormatter = new Intl.DateTimeFormat(undefined, {
@@ -21,7 +22,8 @@ const dateFormatter = new Intl.DateTimeFormat(undefined, {
 });
 
 export const CommentCard = ({
-  // postId,
+  postId,
+  id,
   body,
   name,
   userName,
@@ -95,6 +97,8 @@ export const CommentCard = ({
       <div className={`${isOpen && "mt-4"}`}>
         {isOpen ? (
           <ReplyForm
+            id={id}
+            postId={postId}
             autoFocus
             userName={name}
             onClose={() => {
