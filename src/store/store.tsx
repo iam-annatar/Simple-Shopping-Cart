@@ -57,29 +57,16 @@ export const useCommentStore = create<CommentType>((set) => ({
       comments: removeRecursive(state.comments, id),
     }));
   },
-  updateReplies: (newReply, id) => {
+  updateReplies: (comment, id) => {
     set((state) => {
-      // eslint-disable-next-line fp/no-let
-      let reply;
-      const c = state.comments.find((cm) => cm.id === id);
-      const r = c?.replies.find((rp) => rp.id === id);
+      const updatedComment = state.comments.map((c) => {
+        if (c.id === id) {
+          c.replies = [...c.replies, comment];
+        }
 
-      if (c) {
-        reply = c.replies.push(newReply);
-      }
-
-      if (r) {
-        reply = r.replies.push(newReply);
-      }
-
-      return {
-        comments: [
-          ...state.comments,
-          {
-            replies: reply,
-          },
-        ],
-      };
+        return c;
+      });
+      return { comments: updatedComment };
     });
   },
 }));
