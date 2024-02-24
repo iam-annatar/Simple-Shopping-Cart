@@ -1,5 +1,6 @@
 import { EditIcon, HeartIcon, ReplyIcon, TrashIcon } from "lucide-react";
 import { useState } from "react";
+import { twMerge } from "tailwind-merge";
 
 import { useCommentStore } from "@/store/store";
 
@@ -50,16 +51,18 @@ export const CommentCard = ({
           <div className="flex  items-center gap-2">
             <span className="font-bold text-muted-foreground">{name} </span>
             <span
-              className={`   ${
-                userName == null && "hidden"
-              } text-sm font-normal text-muted-foreground sm:ml-4 `}
+              className={twMerge(
+                userName == null && "hidden",
+                "text-sm font-normal text-muted-foreground sm:ml-4",
+              )}
             >
               Reply to
             </span>
             <span
-              className={`${
-                userName == null && "hidden"
-              } cursor-pointer font-normal text-blue-500`}
+              className={twMerge(
+                userName == null && "hidden",
+                "cursor-pointer font-normal text-blue-500",
+              )}
             >
               {`@${userName}`}
             </span>
@@ -69,7 +72,7 @@ export const CommentCard = ({
           </span>
         </div>
         <CardContent className="p-4">
-          <div className="">{body}</div>
+          <div>{body}</div>
         </CardContent>
         <div className="flex gap-2 ">
           <CommentIcons icon={<HeartIcon className="w-5" />} aria-label="Like">
@@ -94,7 +97,7 @@ export const CommentCard = ({
           />
         </div>
       </Card>
-      <div className={`${isOpen && "mt-4"}`}>
+      <div className={twMerge(isOpen && "mt-4")}>
         {isOpen ? (
           <ReplyForm
             id={id}

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { twMerge } from "tailwind-merge";
 
 import { CommentCard } from "./CommentCard";
 import { Button } from "./ui/button";
@@ -33,15 +34,19 @@ export const Comments = ({
       />
       <Button
         size="sm"
-        className={`mt-2 bg-slate-500 hover:bg-slate-600 dark:text-white ${
-          !hideChild || replies.length === 0 ? "hidden" : ""
-        }`}
+        className={twMerge(
+          "mt-2 bg-slate-500 hover:bg-slate-600 dark:text-white",
+          !hideChild || replies.length === 0 ? "hidden" : "",
+        )}
         onClick={() => setHideChild(false)}
       >
         Show Replies
       </Button>
       {replies.map((comment) => (
-        <div className={`${hideChild ? "hidden" : ""}`} key={comment.parentId}>
+        <div
+          className={twMerge(hideChild ? "hidden" : "")}
+          key={comment.parentId}
+        >
           <div key={comment.parentId} className="flex  justify-end">
             <button
               className="child"

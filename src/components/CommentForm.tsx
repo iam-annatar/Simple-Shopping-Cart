@@ -53,7 +53,7 @@ export const CommentForm = ({
           />
           <Button
             type="submit"
-            className="bg-slate-500 text-base font-bold hover:bg-slate-600 dark:text-white"
+            className="bg-blue-600 text-base font-bold text-white hover:bg-blue-700 "
           >
             Post
           </Button>
