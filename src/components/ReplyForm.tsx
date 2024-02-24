@@ -1,5 +1,6 @@
 import type { ChangeEvent } from "react";
 import { useState } from "react";
+import { twMerge } from "tailwind-merge";
 
 import { useCommentStore } from "@/store/store";
 
@@ -48,9 +49,10 @@ export const ReplyForm = ({
           Reply to
         </span>
         <span
-          className={` ${
-            userName == null && "hidden"
-          } cursor-pointer font-normal text-blue-500`}
+          className={twMerge(
+            userName == null && "hidden",
+            "cursor-pointer font-normal text-blue-500",
+          )}
         >
           {`@${userName}`}
         </span>
@@ -70,14 +72,14 @@ export const ReplyForm = ({
             <Button
               onClick={onClose}
               size="sm"
-              className="bg-slate-500 text-base  hover:bg-slate-600 dark:text-white"
+              className="bg-red-500 text-base text-white hover:bg-red-600"
             >
               Cancel
             </Button>
             <Button
               size="sm"
               type="submit"
-              className="bg-slate-500 text-base  hover:bg-slate-600 dark:text-white"
+              className="bg-blue-600 text-base text-white  hover:bg-blue-700 "
             >
               Post
             </Button>
