@@ -1,12 +1,8 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import { toast } from "sonner";
+import { Link, useNavigate } from "react-router-dom";
 
-import { useShoppingContext } from "@/hooks/useShoppingContext";
-import { formatCurrency } from "@/utilities/formattCurrency";
-
-import { Button } from "./ui/button";
-import { HeartLike } from "./ui/heart";
+import { Description } from "./Description";
+import { HeartLike } from "./heart";
+import { HoverCard, HoverCardContent, HoverCardTrigger } from "./ui/hover-card";
 import { Rate } from "./ui/rate";
 
 interface ProductProps {
@@ -17,20 +13,7 @@ interface ProductProps {
 }
 
 export const Product = ({ id, imgUrl, name, price }: ProductProps) => {
-  const [count, setCount] = useState(1);
-  const { increaseCount } = useShoppingContext();
-
-  const increaseHanler = () => {
-    setCount((c) => c + 1);
-  };
-
-  const decreaseHandler = () => {
-    if (count > 1) {
-      setCount((c) => c - 1);
-    }
-  };
-
-  const totalPrice = formatCurrency(price * count);
+  const navigate = useNavigate();
 
   return (
     <>
@@ -51,36 +34,68 @@ export const Product = ({ id, imgUrl, name, price }: ProductProps) => {
             alt="img"
           />
           <div className="mt-2 flex items-center justify-between">
-            <div className="flex gap-2">
-              <button className="w-7 text-muted-foreground transition delay-150 duration-300 ease-in-out  hover:-translate-y-1 hover:scale-110  hover:text-blue-600">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
+            <div className="flex items-center gap-2">
+              <HoverCard>
+                <HoverCardTrigger>
+                  <button
+                    onClick={() => navigate("/wishlist", { state: id })}
+                    className="mt-1 w-7 text-muted-foreground transition delay-150 duration-300 ease-in-out  hover:-translate-y-1 hover:scale-110  hover:text-blue-600"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="1.5"
+                        d="M10 10h4m-2-2v4m-6 7.58V6.42a3 3 0 0 1 3-3h6a3 3 0 0 1 3 3v13.16a1 1 0 0 1-1.55.84l-4.45-3-4.45 3A1 1 0 0 1 6 19.58Z"
+                      />
+                    </svg>
+                  </button>
+                </HoverCardTrigger>
+                <HoverCardContent
+                  className="w-auto bg-blue-600 p-2"
+                  sideOffset={1}
+                  onClick={() => navigate("/wishlist")}
+                  align="start"
                 >
-                  <path
-                    fill="currentColor"
-                    d="M18.25 14.64a2.56 2.56 0 0 0-3 .58l-5.34-2.58c.11-.42.11-.86 0-1.28l5.35-2.58a2.57 2.57 0 1 0-.65-1.35l-5.49 2.65a2.57 2.57 0 1 0 0 3.84l5.49 2.65a2.56 2.56 0 1 0 3.64-1.93Z"
-                  />
-                </svg>
-              </button>
-
-              <button className="w-7 text-muted-foreground transition  delay-150 duration-300 ease-in-out  hover:-translate-y-1 hover:scale-110  hover:text-blue-600">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
+                  <div className="cursor-pointer text-white ">
+                    View your wishList
+                  </div>
+                </HoverCardContent>
+              </HoverCard>
+              <HoverCard>
+                <HoverCardTrigger asChild>
+                  <button className="w-7 text-muted-foreground transition  delay-150 duration-300 ease-in-out  hover:-translate-y-1 hover:scale-110  hover:text-blue-600">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        fill="currentColor"
+                        d="M15.23 6h-9.6a3 3 0 0 0-3 3v5.86a3 3 0 0 0 2.2 2.89 1 1 0 0 1 .8 1v1.92a.49.49 0 0 0 .85.35l2.84-2.83a1 1 0 0 1 .7-.29h5.21a3 3 0 0 0 3-3V9a3 3 0 0 0-3-3Zm-7.8 6.86a1 1 0 1 1 1-1 1 1 0 0 1-1 .99v.01Zm3 0a1 1 0 1 1 1-1 1 1 0 0 1-1 .99v.01Zm3 0a1 1 0 1 1 1-1 1 1 0 0 1-1 .99v.01Z"
+                      />
+                      <path
+                        fill="currentColor"
+                        d="M21.37 5.86v5.85a3 3 0 0 1-1.68 2.69V7.53a3 3 0 0 0-3-3H6.09a3 3 0 0 1 2.68-1.67h9.6a3 3 0 0 1 3 3Z"
+                      />
+                    </svg>
+                  </button>
+                </HoverCardTrigger>
+                <HoverCardContent
+                  className="w-auto bg-blue-600 p-2"
+                  sideOffset={6}
+                  align="start"
                 >
-                  <path
-                    fill="currentColor"
-                    d="M15.23 6h-9.6a3 3 0 0 0-3 3v5.86a3 3 0 0 0 2.2 2.89 1 1 0 0 1 .8 1v1.92a.49.49 0 0 0 .85.35l2.84-2.83a1 1 0 0 1 .7-.29h5.21a3 3 0 0 0 3-3V9a3 3 0 0 0-3-3Zm-7.8 6.86a1 1 0 1 1 1-1 1 1 0 0 1-1 .99v.01Zm3 0a1 1 0 1 1 1-1 1 1 0 0 1-1 .99v.01Zm3 0a1 1 0 1 1 1-1 1 1 0 0 1-1 .99v.01Z"
-                  />
-                  <path
-                    fill="currentColor"
-                    d="M21.37 5.86v5.85a3 3 0 0 1-1.68 2.69V7.53a3 3 0 0 0-3-3H6.09a3 3 0 0 1 2.68-1.67h9.6a3 3 0 0 1 3 3Z"
-                  />
-                </svg>
-              </button>
+                  <div className="  cursor-pointer text-white ">
+                    View Comments
+                  </div>
+                </HoverCardContent>
+              </HoverCard>
             </div>
             <HeartLike />
           </div>
@@ -95,71 +110,7 @@ export const Product = ({ id, imgUrl, name, price }: ProductProps) => {
               <Rate />
             </div>
           </div>
-          <p className="mb-4 text-sm text-gray-400">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
-            commodo varius lacus vel dignissim. Mauris dignissim placerat ex, a
-            fringilla orci. Donec aliquet quis sapien porta condimentum.Mauris
-            dignissim, ante non fringilla finibus, libero lectus dui, at
-            interdum urna nisi ac ex. Vestibulum in tempus nibh.
-          </p>
-          <span className="text-2xl font-bold ">{formatCurrency(price)}</span>
-
-          <div className="mb-8 mt-4 grid place-items-start gap-6  sm:mb-8 sm:flex sm:items-center sm:justify-between sm:gap-2">
-            <div className="grid  gap-2 sm:place-items-center ">
-              <div className="text-lg text-muted-foreground">Choose Color</div>
-              <div className="flex gap-3">
-                <Button
-                  size="sm"
-                  className="h-6  rounded-full bg-slate-600 outline outline-2 outline-white hover:bg-slate-600"
-                />
-                <Button
-                  size="sm"
-                  className="h-6 rounded-full bg-black outline outline-2 outline-white hover:bg-black"
-                />
-                <Button
-                  size="sm"
-                  className="h-6 rounded-full bg-stone-700 outline outline-2 outline-white hover:bg-stone-700"
-                />
-              </div>
-            </div>
-            <div className=" grid gap-[6px] sm:place-items-center">
-              <div className="text-lg text-muted-foreground">
-                Choose quantity
-              </div>
-              <div className="flex gap-2">
-                <Button
-                  onClick={decreaseHandler}
-                  size="sm"
-                  className="size-7 bg-blue-600 text-white hover:bg-blue-600/90"
-                >
-                  -
-                </Button>
-                <span>{count}</span>
-                <Button
-                  onClick={increaseHanler}
-                  size="sm"
-                  className="size-7 bg-blue-600 text-white hover:bg-blue-600/90"
-                >
-                  +
-                </Button>
-              </div>
-            </div>
-          </div>
-          <div className="flex items-center gap-4 border-t  py-4 ">
-            <Button
-              onClick={() => {
-                if (id == null) return;
-                toast.success(`Item "${name}" added to your cart`);
-                increaseCount(id, count);
-              }}
-              className="w-full bg-blue-600 text-lg text-white hover:bg-blue-600/90"
-            >
-              Add to cart
-            </Button>
-            <div className="font-bold 3xs:text-2xl">
-              {count === 1 ? formatCurrency(price) : totalPrice}
-            </div>
-          </div>
+          <Description name={name} price={price} id={id} />
         </main>
       </div>
     </>

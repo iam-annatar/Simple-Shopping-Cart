@@ -2,11 +2,14 @@ import type { ReactNode } from "react";
 import { createContext, useEffect, useState } from "react";
 
 import { ShoppingCart } from "@/components/ShoppingCart";
+import allItems from "@/data/item.json";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 
 interface ShoppingCartContextProps {
   children: ReactNode;
 }
+
+type ItemType = (typeof allItems)[number];
 
 interface CartItem {
   id: number;
@@ -22,12 +25,13 @@ interface ShoppingContextType {
   cartCount: number;
   openCart: () => void;
   closeCart: () => void;
-  toggleLike: () => void;
-  liked: boolean;
-  likesCount: number;
   rateCount: number;
   rateHandler: (value: number) => void;
   isLoading: boolean;
+  liked: boolean;
+  likesCount: number;
+  toggleLike: () => void;
+  likedItem: (id: number) => ItemType[];
 }
 
 export const ShoppingContext = createContext({} as ShoppingContextType);
@@ -36,10 +40,24 @@ export const ShoppingCartContext = ({ children }: ShoppingCartContextProps) => {
   const [items, setItems] = useLocalStorage<CartItem[]>("ShoppingInfo", []);
 
   const [isOpen, setIsOpen] = useState(false);
-  const [likesCount, setLikesCount] = useState(0);
-  const [liked, setLiked] = useState(false);
   const [rateCount, setRateCount] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
+  const [likesCount, setLikesCount] = useState(0);
+  const [liked, setLiked] = useState(false);
+
+  const toggleLike = () => {
+    if (!liked) {
+      setLikesCount((c) => c + 1);
+      setLiked(true);
+    } else {
+      setLikesCount((c) => c - 1);
+      setLiked(false);
+    }
+  };
+
+  const likedItem = (id: number) => {
+    return allItems.filter((item) => item.id === id);
+  };
 
   useEffect(() => {
     setTimeout(() => {
@@ -54,23 +72,13 @@ export const ShoppingCartContext = ({ children }: ShoppingCartContextProps) => {
   const openCart = () => setIsOpen(true);
   const closeCart = () => setIsOpen(false);
 
-  const toggleLike = () => {
-    if (!liked) {
-      setLikesCount((c) => c + 1);
-      setLiked(true);
-    } else {
-      setLikesCount((c) => c - 1);
-      setLiked(false);
-    }
-  };
-
   const cartCount = items.reduce((count, item) => count + item.count, 0);
 
-  function getItemsCount(id: number) {
+  const getItemsCount = (id: number) => {
     return items.find((item) => item.id === id)?.count || 0;
-  }
+  };
 
-  function increaseCount(id: number, count: number = 1) {
+  const increaseCount = (id: number, count: number = 1) => {
     setItems((currentItem) => {
       if (currentItem.find((item) => item.id === id) == null) {
         return [...currentItem, { id, count }];
@@ -84,9 +92,9 @@ export const ShoppingCartContext = ({ children }: ShoppingCartContextProps) => {
         });
       }
     });
-  }
+  };
 
-  function decreaseCount(id: number) {
+  const decreaseCount = (id: number) => {
     setItems((currentItem) => {
       if (currentItem.find((item) => item.id === id)?.count === 1) {
         return currentItem.filter((item) => item.id !== id);
@@ -100,13 +108,13 @@ export const ShoppingCartContext = ({ children }: ShoppingCartContextProps) => {
         });
       }
     });
-  }
+  };
 
-  function removeItem(id: number) {
+  const removeItem = (id: number) => {
     setItems((currentItem) => {
       return currentItem.filter((item) => item.id !== id);
     });
-  }
+  };
 
   return (
     <ShoppingContext.Provider
@@ -120,12 +128,13 @@ export const ShoppingCartContext = ({ children }: ShoppingCartContextProps) => {
         openCart,
         closeCart,
         items,
-        liked,
-        likesCount,
-        toggleLike,
         rateCount,
         rateHandler,
         isLoading,
+        liked,
+        likesCount,
+        toggleLike,
+        likedItem,
       }}
     >
       {children}

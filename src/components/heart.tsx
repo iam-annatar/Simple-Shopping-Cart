@@ -1,5 +1,3 @@
-// import { useState } from 'react';
-
 import { useShoppingContext } from "@/hooks/useShoppingContext";
 
 export const HeartLike = () => {
