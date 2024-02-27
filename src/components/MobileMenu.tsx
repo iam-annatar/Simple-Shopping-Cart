@@ -21,12 +21,15 @@ export const MobileMenu = () => {
       </Button>
       <Sheet open={isOpen} onOpenChange={() => setIsOpen(false)}>
         <SheetContent className="w-full  dark:bg-slate-950" side="left">
-          <nav className="grid place-items-center gap-5 text-gray-400 hover:*:text-black dark:hover:*:text-white">
+          <nav className="container mt-16 grid place-items-start gap-5 text-gray-400 hover:*:text-black dark:hover:*:text-white">
             <NavLink onClick={() => setIsOpen(false)} to="/">
               Home
             </NavLink>
             <NavLink onClick={() => setIsOpen(false)} to="/store">
               Store
+            </NavLink>
+            <NavLink onClick={() => setIsOpen(false)} to="/wishlist">
+              WishList
             </NavLink>
             <NavLink onClick={() => setIsOpen(false)} to="/about">
               About

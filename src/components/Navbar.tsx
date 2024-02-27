@@ -14,6 +14,7 @@ export const Navbar = () => {
   const pages = {
     home: "/",
     store: "/store",
+    wishlist: "/wishlist",
     about: "/about",
   };
 
@@ -21,9 +22,10 @@ export const Navbar = () => {
     <div className="container sticky top-0 z-10 bg-white dark:bg-slate-950">
       <div className="flex items-center justify-between border-b bg-white py-3 dark:border-b dark:bg-slate-950 ">
         <div className="flex items-center gap-x-2">
-          <nav className="hidden items-center gap-4 text-gray-400  hover:*:text-black dark:hover:*:text-white sm:flex ">
+          <nav className="hidden items-center gap-8 text-gray-400  hover:*:text-black dark:hover:*:text-white sm:flex ">
             <NavLink to={pages.home}>Home</NavLink>
             <NavLink to={pages.store}>Store</NavLink>
+            <NavLink to={pages.wishlist}>WishList</NavLink>
             <NavLink to={pages.about}>About</NavLink>
           </nav>
           <div className="flex gap-x-2">

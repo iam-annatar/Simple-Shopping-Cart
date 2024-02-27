@@ -5,8 +5,8 @@ export const WhishListPage = () => {
   const { wishList } = useWishListContext();
 
   return (
-    <div className="mt-8">
-      <div className="mb-8 text-center text-2xl">WishList</div>
+    <div className="mt-4">
+      <div className="mb-8 text-xl font-bold">WishList</div>
       {wishList.map((item) => {
         return <WishList key={item.id} {...item} />;
       })}
