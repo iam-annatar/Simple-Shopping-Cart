@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import { createContext, useCallback, useMemo, useState } from "react";
 
 import allItems from "@/data/item.json";
+import { useLocalStorage } from "@/hooks/useLocalStorage";
 
 type ItemInfo = (typeof allItems)[number];
 
@@ -20,28 +21,8 @@ interface WishListState {
 export const WishContext = createContext({} as WishListState);
 
 export const WishListContextProvider = ({ children }: WishListContextProps) => {
-  const [wishList, setWishList] = useState<ItemInfo[]>([]);
+  const [wishList, setWishList] = useLocalStorage<ItemInfo[]>("wishlist", []);
   const [liked, setLiked] = useState<ItemInfo["liked"]>(false);
-
-  const addToWishList = (id: number) => {
-    setWishList((prevItem) => {
-      if (prevItem.find((itm) => itm.id === id)) {
-        return prevItem;
-      } else {
-        const newItem = allItems.find((i) => i.id === id);
-
-        if (newItem) {
-          return [...prevItem, newItem];
-        }
-      }
-
-      return prevItem;
-    });
-  };
-
-  const removeFromWishList = (id: number) => {
-    setWishList((item) => item.filter((i) => i.id !== id));
-  };
 
   const toggleLike = useCallback(() => {
     if (!liked) {
@@ -52,6 +33,26 @@ export const WishListContextProvider = ({ children }: WishListContextProps) => {
   }, [liked]);
 
   const value = useMemo(() => {
+    const addToWishList = (id: number) => {
+      setWishList((prevItem) => {
+        if (prevItem.find((itm) => itm.id === id)) {
+          return prevItem;
+        } else {
+          const newItem = allItems.find((i) => i.id === id);
+
+          if (newItem) {
+            return [...prevItem, newItem];
+          }
+        }
+
+        return prevItem;
+      });
+    };
+
+    const removeFromWishList = (id: number) => {
+      setWishList((item) => item.filter((i) => i.id !== id));
+    };
+
     return {
       wishList,
       addToWishList,
@@ -59,6 +60,7 @@ export const WishListContextProvider = ({ children }: WishListContextProps) => {
       toggleLike,
       removeFromWishList,
     };
-  }, [wishList, toggleLike, liked]);
+  }, [wishList, liked, toggleLike, setWishList]);
+
   return <WishContext.Provider value={value}>{children}</WishContext.Provider>;
 };
