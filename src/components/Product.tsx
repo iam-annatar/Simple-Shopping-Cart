@@ -38,7 +38,7 @@ export const Product = ({ id, imgUrl, name, price }: ProductProps) => {
               <HoverCard>
                 <HoverCardTrigger>
                   <button
-                    onClick={() => navigate("/wishlist", { state: id })}
+                    onClick={() => navigate("/wishlist")}
                     className="mt-1 w-7 text-muted-foreground transition delay-150 duration-300 ease-in-out  hover:-translate-y-1 hover:scale-110  hover:text-blue-600"
                   >
                     <svg
@@ -97,7 +97,7 @@ export const Product = ({ id, imgUrl, name, price }: ProductProps) => {
                 </HoverCardContent>
               </HoverCard>
             </div>
-            <HeartLike />
+            <HeartLike id={id} name={name} />
           </div>
         </div>
         <main className="flex-col sm:flex">

@@ -2,14 +2,11 @@ import type { ReactNode } from "react";
 import { createContext, useEffect, useState } from "react";
 
 import { ShoppingCart } from "@/components/ShoppingCart";
-import allItems from "@/data/item.json";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 
 interface ShoppingCartContextProps {
   children: ReactNode;
 }
-
-type ItemType = (typeof allItems)[number];
 
 interface CartItem {
   id: number;
@@ -28,10 +25,6 @@ interface ShoppingContextType {
   rateCount: number;
   rateHandler: (value: number) => void;
   isLoading: boolean;
-  liked: boolean;
-  likesCount: number;
-  toggleLike: () => void;
-  likedItem: (id: number) => ItemType[];
 }
 
 export const ShoppingContext = createContext({} as ShoppingContextType);
@@ -42,22 +35,6 @@ export const ShoppingCartContext = ({ children }: ShoppingCartContextProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [rateCount, setRateCount] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
-  const [likesCount, setLikesCount] = useState(0);
-  const [liked, setLiked] = useState(false);
-
-  const toggleLike = () => {
-    if (!liked) {
-      setLikesCount((c) => c + 1);
-      setLiked(true);
-    } else {
-      setLikesCount((c) => c - 1);
-      setLiked(false);
-    }
-  };
-
-  const likedItem = (id: number) => {
-    return allItems.filter((item) => item.id === id);
-  };
 
   useEffect(() => {
     setTimeout(() => {
@@ -131,10 +108,6 @@ export const ShoppingCartContext = ({ children }: ShoppingCartContextProps) => {
         rateCount,
         rateHandler,
         isLoading,
-        liked,
-        likesCount,
-        toggleLike,
-        likedItem,
       }}
     >
       {children}
