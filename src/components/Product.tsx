@@ -10,9 +10,10 @@ interface ProductProps {
   imgUrl: string;
   name: string;
   price: number;
+  liked: boolean;
 }
 
-export const Product = ({ id, imgUrl, name, price }: ProductProps) => {
+export const Product = ({ id, imgUrl, name, price, liked }: ProductProps) => {
   const navigate = useNavigate();
 
   return (

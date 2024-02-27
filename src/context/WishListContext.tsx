@@ -12,8 +12,8 @@ interface WishListContextProps {
 interface WishListState {
   wishList: ItemInfo[];
   addToWishList: (id: number) => void;
-  liked: boolean;
-  likesCount: number;
+  removeFromWishList: (id: number) => void;
+  liked: ItemInfo["liked"];
   toggleLike: () => void;
 }
 
@@ -21,19 +21,7 @@ export const WishContext = createContext({} as WishListState);
 
 export const WishListContextProvider = ({ children }: WishListContextProps) => {
   const [wishList, setWishList] = useState<ItemInfo[]>([]);
-
-  const [likesCount, setLikesCount] = useState(0);
-  const [liked, setLiked] = useState(false);
-
-  const toggleLike = useCallback(() => {
-    if (!liked) {
-      setLikesCount((c) => c + 1);
-      setLiked(true);
-    } else {
-      setLikesCount((c) => c - 1);
-      setLiked(false);
-    }
-  }, [liked]);
+  const [liked, setLiked] = useState<ItemInfo["liked"]>(false);
 
   const addToWishList = (id: number) => {
     setWishList((prevItem) => {
@@ -51,8 +39,26 @@ export const WishListContextProvider = ({ children }: WishListContextProps) => {
     });
   };
 
+  const removeFromWishList = (id: number) => {
+    setWishList((item) => item.filter((i) => i.id !== id));
+  };
+
+  const toggleLike = useCallback(() => {
+    if (!liked) {
+      setLiked(true);
+    } else {
+      setLiked(false);
+    }
+  }, [liked]);
+
   const value = useMemo(() => {
-    return { wishList, addToWishList, liked, likesCount, toggleLike };
-  }, [wishList, liked, likesCount, toggleLike]);
+    return {
+      wishList,
+      addToWishList,
+      liked,
+      toggleLike,
+      removeFromWishList,
+    };
+  }, [wishList, toggleLike, liked]);
   return <WishContext.Provider value={value}>{children}</WishContext.Provider>;
 };

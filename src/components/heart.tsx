@@ -5,10 +5,12 @@ import { useWishListContext } from "@/hooks/useWishListContext";
 interface HeartLikeProps {
   id: number;
   name: string;
+  // liked: boolean;
 }
 
 export const HeartLike = ({ id, name }: HeartLikeProps) => {
-  const { addToWishList, liked, likesCount, toggleLike } = useWishListContext();
+  const { toggleLike, addToWishList, removeFromWishList, liked } =
+    useWishListContext();
 
   const handelLike = () => {
     toggleLike();
@@ -17,6 +19,7 @@ export const HeartLike = ({ id, name }: HeartLikeProps) => {
       addToWishList(id);
       toast.success(`item "${name}" added to wish list`);
     } else {
+      removeFromWishList(id);
       toast.warning(`item "${name}" removed from wish list`);
     }
   };
@@ -30,7 +33,6 @@ export const HeartLike = ({ id, name }: HeartLikeProps) => {
           onClick={handelLike}
         />
       </div>
-      <div className="text-muted-foreground">{likesCount}</div>
     </div>
   );
 };
