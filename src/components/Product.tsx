@@ -10,10 +10,10 @@ interface ProductProps {
   imgUrl: string;
   name: string;
   price: number;
-  // liked: boolean;
+  liked: boolean;
 }
 
-export const Product = ({ id, imgUrl, name, price }: ProductProps) => {
+export const Product = ({ id, imgUrl, name, price, liked }: ProductProps) => {
   const navigate = useNavigate();
 
   return (
@@ -39,8 +39,8 @@ export const Product = ({ id, imgUrl, name, price }: ProductProps) => {
               <HoverCard>
                 <HoverCardTrigger>
                   <button
-                    onClick={() => navigate("/wishlist")}
-                    className="mt-1 w-7 text-muted-foreground transition delay-150 duration-300 ease-in-out  hover:-translate-y-1 hover:scale-110  hover:text-blue-600"
+                    // onClick={() => navigate("/wishlist")}
+                    className="mt-1 w-7 cursor-default text-muted-foreground transition delay-150 duration-300 ease-in-out  hover:-translate-y-1 hover:scale-110  hover:text-blue-600"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -70,7 +70,7 @@ export const Product = ({ id, imgUrl, name, price }: ProductProps) => {
               </HoverCard>
               <HoverCard>
                 <HoverCardTrigger asChild>
-                  <button className="w-7 text-muted-foreground transition  delay-150 duration-300 ease-in-out  hover:-translate-y-1 hover:scale-110  hover:text-blue-600">
+                  <button className="w-7 cursor-default text-muted-foreground transition  delay-150 duration-300 ease-in-out  hover:-translate-y-1 hover:scale-110  hover:text-blue-600">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -98,7 +98,7 @@ export const Product = ({ id, imgUrl, name, price }: ProductProps) => {
                 </HoverCardContent>
               </HoverCard>
             </div>
-            <HeartLike id={id} name={name} />
+            <HeartLike id={id} liked={liked} name={name} />
           </div>
         </div>
         <main className="flex-col sm:flex">
