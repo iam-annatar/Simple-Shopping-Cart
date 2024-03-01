@@ -1,33 +1,27 @@
-import { useState } from "react";
 import { toast } from "sonner";
+import { twMerge } from "tailwind-merge";
 
 import { useWishListContext } from "@/hooks/useWishListContext";
-
-// type ItemInfo = (typeof allItems)[number];
 
 interface HeartLikeProps {
   id: number;
   name: string;
   liked: boolean;
+  handleToggle: (id: number) => void;
 }
 
-export const HeartLike = ({ id, name, liked }: HeartLikeProps) => {
+export const HeartLike = ({
+  id,
+  name,
+  liked,
+  handleToggle,
+}: HeartLikeProps) => {
   const { addToWishList, removeFromWishList } = useWishListContext();
 
-  const [like, setLiked] = useState(liked);
+  const handleLike = () => {
+    handleToggle(id);
 
-  const toggleLike = () => {
-    if (!like) {
-      setLiked((prev) => !prev);
-    } else {
-      setLiked((prev) => !prev);
-    }
-  };
-
-  const handelLike = () => {
-    toggleLike();
-
-    if (!like) {
+    if (!liked) {
       addToWishList(id);
       toast.success(`item "${name}" added to wishList`);
     } else {
@@ -39,10 +33,9 @@ export const HeartLike = ({ id, name, liked }: HeartLikeProps) => {
   return (
     <div className="relative flex items-center gap-2">
       <div className="heart-bg">
-        {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events */}
-        <div
-          className={`heart-icon ${like ? "liked" : ""}`}
-          onClick={handelLike}
+        <button
+          className={twMerge("heart-icon", liked ? "liked" : "")}
+          onClick={handleLike}
         />
       </div>
     </div>

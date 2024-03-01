@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import { Toaster } from "sonner";
 
 import { Navbar } from "./components/Navbar";
+import { LikeContextProvider } from "./context/LikeContext";
 import { SearchContextProvider } from "./context/SearchContext";
 import { ShoppingCartContext } from "./context/ShoppingCartContext";
 import { ThemeProvider } from "./context/ThemeProvider";
@@ -17,19 +18,21 @@ const App = () => {
     <ThemeProvider defaultTheme="system" storageKey="Theme">
       <ShoppingCartContext>
         <SearchContextProvider>
-          <WishListContextProvider>
-            <Navbar />
-            <div className="container">
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/store" element={<Store />} />
-                <Route path="/store/:productId" element={<ProductPage />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/wishlist" element={<WhishListPage />} />
-              </Routes>
-            </div>
-            <Toaster duration={2000} richColors closeButton />
-          </WishListContextProvider>
+          <LikeContextProvider>
+            <WishListContextProvider>
+              <Navbar />
+              <div className="container">
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/store" element={<Store />} />
+                  <Route path="/store/:productId" element={<ProductPage />} />
+                  <Route path="/about" element={<About />} />
+                  <Route path="/wishlist" element={<WhishListPage />} />
+                </Routes>
+              </div>
+              <Toaster duration={2000} richColors closeButton />
+            </WishListContextProvider>
+          </LikeContextProvider>
         </SearchContextProvider>
       </ShoppingCartContext>
     </ThemeProvider>
