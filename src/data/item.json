@@ -3,56 +3,48 @@
     "id": 1,
     "name": "Console",
     "price": 549.99,
-    "imgUrl": "/imgs/ps5.jpg",
-    "liked": false
+    "imgUrl": "/imgs/ps5.jpg"
   },
   {
     "id": 2,
     "name": "Laptop",
     "price": 1199,
-    "imgUrl": "/imgs/computer.jpg",
-    "liked": false
+    "imgUrl": "/imgs/computer.jpg"
   },
   {
     "id": 3,
     "name": "Phone",
     "price": 490.99,
-    "imgUrl": "/imgs/phone.jpg",
-    "liked": false
+    "imgUrl": "/imgs/phone.jpg"
   },
   {
     "id": 4,
     "name": "Gamepad",
     "price": 76.99,
-    "imgUrl": "/imgs/gamepad.jpg",
-    "liked": false
+    "imgUrl": "/imgs/gamepad.jpg"
   },
   {
     "id": 5,
     "name": "Speakers",
     "price": 98.99,
-    "imgUrl": "/imgs/speakers.jpg",
-    "liked": false
+    "imgUrl": "/imgs/speakers.jpg"
   },
   {
     "id": 6,
     "name": "Keyboard",
     "price": 135,
-    "imgUrl": "/imgs/keyboard.jpg",
-    "liked": false
+    "imgUrl": "/imgs/keyboard.jpg"
   },
   {
     "id": 7,
     "name": "Headphone",
     "price": 78.99,
-    "imgUrl": "/imgs/headphone.jpg",
-    "liked": false
+    "imgUrl": "/imgs/headphone.jpg"
   },
   {
     "id": 8,
     "name": "Mouse",
     "price": 47.99,
-    "imgUrl": "/imgs/mouse.jpg",
-    "liked": false
+    "imgUrl": "/imgs/mouse.jpg"
   }
 ]

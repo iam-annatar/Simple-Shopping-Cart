@@ -14,8 +14,6 @@ interface WishListState {
   wishList: ItemInfo[];
   addToWishList: (id: number) => void;
   removeFromWishList: (id: number) => void;
-  // liked: ItemInfo["liked"];
-  // toggleLike: () => void;
 }
 
 export const WishContext = createContext({} as WishListState);
@@ -41,14 +39,12 @@ export const WishListContextProvider = ({ children }: WishListContextProps) => {
     };
 
     const removeFromWishList = (id: number) => {
-      setWishList((item) => item.filter((i) => i.id !== id));
+      return setWishList((item) => item.filter((i) => i.id !== id));
     };
 
     return {
       wishList,
       addToWishList,
-      // liked,
-      // toggleLike,
       removeFromWishList,
     };
   }, [wishList, setWishList]);

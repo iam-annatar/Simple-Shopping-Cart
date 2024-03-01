@@ -1,5 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 
+import { useLikeContext } from "@/hooks/useLikeContext";
+
 import { Description } from "./Description";
 import { HeartLike } from "./heart";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "./ui/hover-card";
@@ -10,11 +12,13 @@ interface ProductProps {
   imgUrl: string;
   name: string;
   price: number;
-  liked: boolean;
 }
 
-export const Product = ({ id, imgUrl, name, price, liked }: ProductProps) => {
+export const Product = ({ id, imgUrl, name, price }: ProductProps) => {
   const navigate = useNavigate();
+  const { likedItems, toggleLike } = useLikeContext();
+
+  const isLiked = likedItems.some((item) => item.id === id);
 
   return (
     <>
@@ -98,7 +102,12 @@ export const Product = ({ id, imgUrl, name, price, liked }: ProductProps) => {
                 </HoverCardContent>
               </HoverCard>
             </div>
-            <HeartLike id={id} liked={liked} name={name} />
+            <HeartLike
+              id={id}
+              liked={isLiked}
+              handleToggle={toggleLike}
+              name={name}
+            />
           </div>
         </div>
         <main className="flex-col sm:flex">
