@@ -1,69 +1,44 @@
 import type { ChangeEvent } from "react";
 import { useState } from "react";
-import { twMerge } from "tailwind-merge";
 
 import { useCommentStore } from "@/store/CommentStore";
 
 import { Button } from "./ui/button";
 import { Card } from "./ui/card";
 
-interface ReplyFormProps {
+interface EditFormProps {
   id: number;
-  postId?: number;
+  // postId?: number;
   autoFocus: boolean;
-  userName?: string;
+  body: string;
   onClose: () => void;
+  name: string;
 }
 
-export const ReplyForm = ({
-  postId,
+export const EditForm = ({
   id,
+  // postId,
+  name,
   onClose,
-  userName,
-  autoFocus = false,
-}: ReplyFormProps) => {
-  const [message, setMessage] = useState("");
-  const updateReplies = useCommentStore((state) => state.updateReplies);
+  body,
+  autoFocus,
+}: EditFormProps) => {
+  const [message, setMessage] = useState(body);
+  const editComments = useCommentStore((state) => state.editComments);
 
-  const username = `User-${crypto.randomUUID().slice(0, 2)}`;
-
-  const submitHandler = (e: ChangeEvent<HTMLFormElement>) => {
+  const onSubmit = (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    if (message.length >= 2) {
-      updateReplies(
-        {
-          postId,
-          parentId: Math.floor(Math.random() * 10000),
-          id,
-          name: username,
-          body: message,
-          replies: [],
-        },
-        id,
-      );
-    }
+    editComments(message, id);
     onClose();
   };
 
   return (
     <Card className="mb-4 border-none bg-none px-4 shadow-none">
       <div className="flex items-center gap-2">
-        <span className="font-bold text-muted-foreground">User</span>
-        <span className="text-sm font-normal text-muted-foreground">
-          Reply to
-        </span>
-        <span
-          className={twMerge(
-            userName == null && "hidden",
-            "cursor-pointer font-normal text-blue-500",
-          )}
-        >
-          {`@${userName}`}
-        </span>
+        <span className="font-bold text-muted-foreground">{name}</span>
       </div>
 
-      <form id="comment" onSubmit={submitHandler}>
+      <form id="comment" onSubmit={onSubmit}>
         <div className="flex flex-col gap-2">
           <textarea
             placeholder="What are your thoughts?"
@@ -86,7 +61,7 @@ export const ReplyForm = ({
               type="submit"
               className="bg-blue-600 text-base text-white  hover:bg-blue-700 "
             >
-              Post
+              Save
             </Button>
           </div>
         </div>
