@@ -24,6 +24,7 @@ interface CommentType {
   addComment: (comment: Comment) => void;
   removeComment: (id: number) => void;
   updateReplies: (comments: Comment, id: number) => void;
+  editComments: (message: Comment["body"], id: number) => void;
 }
 
 // function for recursively removing the comments
@@ -59,13 +60,38 @@ export const useCommentStore = create<CommentType>((set) => ({
   },
   updateReplies: (comment, id) => {
     set((state) => {
-      const updatedComment = state.comments.map((c) => {
-        if (c.id === id) {
-          c.replies = [...c.replies, comment];
-        }
+      const updatedComment = (replies: Comment[]) =>
+        replies.map((c) => {
+          if (c.id === id) {
+            if (!c.replies) {
+              c.replies = [];
+            }
+            c.replies.push(comment);
+          } else if (c.replies) {
+            c.replies = updatedComment(c.replies);
+          }
 
-        return c;
-      });
+          return c;
+        });
+      return { comments: updatedComment(state.comments) };
+    });
+  },
+  editComments: (message, id) => {
+    set((state) => {
+      const editCm = (commentsForEdit: Comment[], targetId: number) => {
+        return commentsForEdit.map((c) => {
+          if (c.id === targetId) {
+            c = { ...c, body: message };
+            console.log(c);
+          } else if (c.replies) {
+            c.replies = editCm(c.replies, targetId);
+          }
+
+          return c;
+        });
+      };
+
+      const updatedComment = editCm(state.comments, id);
       return { comments: updatedComment };
     });
   },

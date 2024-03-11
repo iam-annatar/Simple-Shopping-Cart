@@ -1,7 +1,7 @@
 import type { ChangeEvent } from "react";
 import { useState } from "react";
 
-import { useCommentStore } from "@/store/store";
+import { useCommentStore } from "@/store/CommentStore";
 
 import { Button } from "./ui/button";
 

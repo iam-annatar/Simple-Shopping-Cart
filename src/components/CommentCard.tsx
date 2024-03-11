@@ -2,9 +2,10 @@ import { EditIcon, HeartIcon, ReplyIcon, TrashIcon } from "lucide-react";
 import { useState } from "react";
 import { twMerge } from "tailwind-merge";
 
-import { useCommentStore } from "@/store/store";
+import { useCommentStore } from "@/store/CommentStore";
 
 import { CommentIcons } from "./CommentIcons";
+import { EditForm } from "./EditForm";
 import { ReplyForm } from "./ReplyForm";
 import { Card, CardContent } from "./ui/card";
 
@@ -31,16 +32,28 @@ export const CommentCard = ({
   parentId,
 }: CommentCardProps) => {
   const removeComment = useCommentStore((state) => state.removeComment);
-  const [isOpen, setIsOpen] = useState(false);
-  const [isActive, setIsAcive] = useState(false);
+  const [isReplyOpen, setIsReplyOpen] = useState(false);
+  const [isReplyActive, setIsReplyAcive] = useState(false);
+  const [isEditOpen, setIsEditOpen] = useState(false);
+  const [isEditActive, setIsEditActive] = useState(false);
 
-  const ReplyHandler = () => {
-    if (!isOpen) {
-      setIsOpen(true);
-      setIsAcive(true);
+  const editHandler = () => {
+    if (!isEditOpen && !isReplyOpen) {
+      setIsEditOpen(true);
+      setIsEditActive(true);
     } else {
-      setIsOpen(false);
-      setIsAcive(false);
+      setIsEditOpen(false);
+      setIsEditActive(false);
+    }
+  };
+
+  const replyHandler = () => {
+    if (!isReplyOpen && !isEditOpen) {
+      setIsReplyOpen(true);
+      setIsReplyAcive(true);
+    } else {
+      setIsReplyOpen(false);
+      setIsReplyAcive(false);
     }
   };
 
@@ -80,11 +93,15 @@ export const CommentCard = ({
           </CommentIcons>
 
           <CommentIcons
-            isActive={isActive}
-            icon={<ReplyIcon onClick={ReplyHandler} className="w-5" />}
+            isActive={isReplyActive}
+            icon={<ReplyIcon onClick={replyHandler} className="w-5" />}
             aria-label="Reply"
           />
-          <CommentIcons icon={<EditIcon className="w-5" />} aria-label="Edit" />
+          <CommentIcons
+            isActive={isEditActive}
+            icon={<EditIcon onClick={editHandler} className="w-5" />}
+            aria-label="Edit"
+          />
           <CommentIcons
             icon={
               <TrashIcon
@@ -97,17 +114,30 @@ export const CommentCard = ({
           />
         </div>
       </Card>
-      <div className={twMerge(isOpen && "mt-4")}>
-        {isOpen ? (
+      <div className={twMerge(isReplyOpen || isEditOpen ? "mt-4" : "")}>
+        {isReplyOpen ? (
           <ReplyForm
             id={id}
             postId={postId}
             autoFocus
             userName={name}
             onClose={() => {
-              setIsOpen(false);
-              setIsAcive(false);
+              setIsReplyOpen(false);
+              setIsReplyAcive(false);
             }}
+          />
+        ) : null}
+        {isEditOpen ? (
+          <EditForm
+            id={id}
+            // postId={postId}
+            onClose={() => {
+              setIsEditOpen(false);
+              setIsEditActive(false);
+            }}
+            body={body}
+            name={name}
+            autoFocus
           />
         ) : null}
       </div>

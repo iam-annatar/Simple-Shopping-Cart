@@ -23,6 +23,27 @@ export const Comments = ({
 }: CommentProps) => {
   const [hideChild, setHideChild] = useState(true);
 
+  const renderComments = (comment: CommentProps) => (
+    <div key={comment.id}>
+      <div className="flex justify-end">
+        <button
+          className="child"
+          aria-label="hide replies"
+          onClick={() => setHideChild(true)}
+        />
+        <CommentCard
+          postId={comment.postId}
+          id={comment.id}
+          parentId={comment.parentId}
+          userName={comment.name}
+          body={comment.body}
+          name={comment.name}
+        />
+      </div>
+      {comment.replies.map((reply) => renderComments(reply))}
+    </div>
+  );
+
   return (
     <div className="mb-4">
       <CommentCard
@@ -43,44 +64,8 @@ export const Comments = ({
         Show Replies
       </Button>
       {replies.map((comment) => (
-        <div
-          className={twMerge(hideChild ? "hidden" : "")}
-          key={comment.parentId}
-        >
-          <div key={comment.parentId} className="flex  justify-end">
-            <button
-              className="child"
-              aria-label="hide replies"
-              onClick={() => setHideChild(true)}
-            />
-            <CommentCard
-              postId={postId}
-              id={id}
-              parentId={comment.parentId}
-              userName={name}
-              body={comment.body}
-              name={comment.name}
-            />
-          </div>
-          {comment.replies
-            ? comment.replies.map((reply) => (
-                <div key={reply.id} className="flex justify-end">
-                  <button
-                    className="child"
-                    aria-label="hide replies"
-                    onClick={() => setHideChild(true)}
-                  />
-                  <CommentCard
-                    postId={postId}
-                    id={id}
-                    parentId={reply.parentId}
-                    userName={comment.name}
-                    body={reply.body}
-                    name={reply.name}
-                  />
-                </div>
-              ))
-            : null}
+        <div className={twMerge(hideChild ? "hidden" : "")} key={comment.id}>
+          {renderComments(comment)}
         </div>
       ))}
     </div>

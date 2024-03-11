@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 
-import { useCommentStore } from "@/store/store";
+import { useCommentStore } from "@/store/CommentStore";
 
 import { CommentForm } from "./CommentForm";
 import { Comments } from "./Comments";
