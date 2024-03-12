@@ -1,3 +1,4 @@
+// import { useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import { useLikeContext } from "@/hooks/useLikeContext";
@@ -17,8 +18,18 @@ interface ProductProps {
 export const Product = ({ id, imgUrl, name, price }: ProductProps) => {
   const navigate = useNavigate();
   const { likedItems, toggleLike } = useLikeContext();
+  // const commentRef = useRef<HTMLDivElement>(null);
 
   const isLiked = likedItems.some((item) => item.id === id);
+
+  // const handleViewComment = () => {
+  //   if (commentRef.current) {
+  //     commentRef.current.scrollIntoView({
+  //       behavior: "smooth",
+  //       block: "start",
+  //     });
+  //   }
+  // };
 
   return (
     <>
@@ -42,10 +53,7 @@ export const Product = ({ id, imgUrl, name, price }: ProductProps) => {
             <div className="flex items-center gap-2">
               <HoverCard>
                 <HoverCardTrigger>
-                  <button
-                    // onClick={() => navigate("/wishlist")}
-                    className="mt-1 w-7 cursor-default text-muted-foreground transition delay-150 duration-300 ease-in-out  hover:-translate-y-1 hover:scale-110  hover:text-blue-600"
-                  >
+                  <button className="mt-1 w-7 cursor-default text-muted-foreground transition duration-300 ease-in-out   hover:text-blue-600">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -74,7 +82,7 @@ export const Product = ({ id, imgUrl, name, price }: ProductProps) => {
               </HoverCard>
               <HoverCard>
                 <HoverCardTrigger asChild>
-                  <button className="w-7 cursor-default text-muted-foreground transition  delay-150 duration-300 ease-in-out  hover:-translate-y-1 hover:scale-110  hover:text-blue-600">
+                  <button className="w-7 cursor-default text-muted-foreground transition  duration-300 ease-in-out   hover:text-blue-600">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -92,6 +100,7 @@ export const Product = ({ id, imgUrl, name, price }: ProductProps) => {
                   </button>
                 </HoverCardTrigger>
                 <HoverCardContent
+                  // onClick={handleViewComment}
                   className="w-auto bg-blue-600 p-2"
                   sideOffset={6}
                   align="start"

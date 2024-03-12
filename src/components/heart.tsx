@@ -1,3 +1,4 @@
+import { HeartIcon } from "lucide-react";
 import { toast } from "sonner";
 import { twMerge } from "tailwind-merge";
 
@@ -31,13 +32,15 @@ export const HeartLike = ({
   };
 
   return (
-    <div className="relative flex items-center gap-2">
-      <div className="heart-bg">
-        <button
-          className={twMerge("heart-icon", liked ? "liked" : "")}
-          onClick={handleLike}
-        />
-      </div>
+    <div>
+      <HeartIcon
+        size="1.8rem"
+        className={twMerge(
+          "heart-bg cursor-pointer duration-300 transition-all ease-in-out active:scale-150 text-muted-foreground",
+          liked ? "fill-red-500 text-red-500" : "",
+        )}
+        onClick={handleLike}
+      />
     </div>
   );
 };

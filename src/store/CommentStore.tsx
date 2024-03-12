@@ -3,19 +3,17 @@ import { create } from "zustand";
 import comments from "@/data/user.json";
 
 export interface Comment {
-  postId?: number;
+  postId: number;
   parentId: number;
   id: number;
   name: string;
   body: string;
-  replies: {
-    postId?: number;
-    parentId: number;
-    id: number;
-    body: string;
-    name: string;
-    replies: Comment["replies"];
-  }[];
+  replies: Comment[];
+}
+
+interface Like {
+  id: number;
+  count: number;
 }
 
 interface CommentType {
@@ -25,6 +23,9 @@ interface CommentType {
   removeComment: (id: number) => void;
   updateReplies: (comments: Comment, id: number) => void;
   editComments: (message: Comment["body"], id: number) => void;
+  likes: Like[];
+  toggleLike: (id: number) => void;
+  countLikes: (likes: Like[], id: number) => number;
 }
 
 // function for recursively removing the comments
@@ -94,5 +95,29 @@ export const useCommentStore = create<CommentType>((set) => ({
       const updatedComment = editCm(state.comments, id);
       return { comments: updatedComment };
     });
+  },
+  likes: [],
+  toggleLike: (id) => {
+    set((state) => {
+      const isLiked = state.likes.find((like) => like.id === id);
+
+      if (isLiked) {
+        return {
+          ...state,
+          likes: state.likes.filter((like) => like.id !== id),
+        };
+      } else {
+        return { ...state, likes: [...state.likes, { id, count: 1 }] };
+      }
+    });
+  },
+  countLikes: (likes, id) => {
+    return likes.reduce((totalLikes, like) => {
+      if (like.id === id) {
+        return totalLikes + like.count;
+      }
+
+      return totalLikes;
+    }, 0);
   },
 }));

@@ -10,7 +10,7 @@ import { ReplyForm } from "./ReplyForm";
 import { Card, CardContent } from "./ui/card";
 
 interface CommentCardProps {
-  postId?: number;
+  postId: number;
   body: string;
   userName?: string;
   name: string;
@@ -31,11 +31,18 @@ export const CommentCard = ({
   userName,
   parentId,
 }: CommentCardProps) => {
-  const removeComment = useCommentStore((state) => state.removeComment);
   const [isReplyOpen, setIsReplyOpen] = useState(false);
   const [isReplyActive, setIsReplyAcive] = useState(false);
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [isEditActive, setIsEditActive] = useState(false);
+
+  const removeComment = useCommentStore((state) => state.removeComment);
+  const countLikes = useCommentStore((state) => state.countLikes);
+  const likes = useCommentStore((state) => state.likes);
+  const toggleLike = useCommentStore((state) => state.toggleLike);
+
+  const isLiked = likes.some((like) => like.id === id);
+  const count = countLikes(likes, id);
 
   const editHandler = () => {
     if (!isEditOpen && !isReplyOpen) {
@@ -88,8 +95,22 @@ export const CommentCard = ({
           <div>{body}</div>
         </CardContent>
         <div className="flex gap-2 ">
-          <CommentIcons icon={<HeartIcon className="w-5" />} aria-label="Like">
-            2
+          <CommentIcons
+            icon={
+              <HeartIcon
+                onClick={() => {
+                  toggleLike(id);
+                  countLikes(likes, id);
+                }}
+                className={twMerge(
+                  "w-5 heart-bg cursor-pointer duration-300 transition-all ease-in-out active:scale-150 ",
+                  isLiked ? "fill-red-500 text-red-500" : "",
+                )}
+              />
+            }
+            aria-label="Like"
+          >
+            {count}
           </CommentIcons>
 
           <CommentIcons
@@ -130,13 +151,12 @@ export const CommentCard = ({
         {isEditOpen ? (
           <EditForm
             id={id}
-            // postId={postId}
+            body={body}
+            name={name}
             onClose={() => {
               setIsEditOpen(false);
               setIsEditActive(false);
             }}
-            body={body}
-            name={name}
             autoFocus
           />
         ) : null}

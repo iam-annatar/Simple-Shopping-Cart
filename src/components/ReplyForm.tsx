@@ -9,7 +9,7 @@ import { Card } from "./ui/card";
 
 interface ReplyFormProps {
   id: number;
-  postId?: number;
+  postId: number;
   autoFocus: boolean;
   userName?: string;
   onClose: () => void;
@@ -35,7 +35,7 @@ export const ReplyForm = ({
         {
           postId,
           parentId: Math.floor(Math.random() * 10000),
-          id,
+          id: Math.floor(Math.random() * 20000),
           name: username,
           body: message,
           replies: [],
