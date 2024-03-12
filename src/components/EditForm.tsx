@@ -8,7 +8,6 @@ import { Card } from "./ui/card";
 
 interface EditFormProps {
   id: number;
-  // postId?: number;
   autoFocus: boolean;
   body: string;
   onClose: () => void;
@@ -17,7 +16,6 @@ interface EditFormProps {
 
 export const EditForm = ({
   id,
-  // postId,
   name,
   onClose,
   body,

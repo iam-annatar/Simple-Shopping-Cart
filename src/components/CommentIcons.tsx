@@ -19,7 +19,7 @@ export const CommentIcons = ({
     <button
       className={twMerge(
         "flex first:mr-2",
-        "w-7 transition duration-300 ease-in-out hover:-translate-y-1  hover:scale-110 hover:text-blue-600  first:hover:text-red-600",
+        "w-7 transition-all duration-500 ease-in-out hover:text-blue-600 first:hover:text-muted-foreground ",
         color === "red"
           ? "text-red-500 hover:text-red-600"
           : "text-muted-foreground",
@@ -27,7 +27,7 @@ export const CommentIcons = ({
       )}
       {...props}
     >
-      <span className={`${children != null ? "mr-1" : ""} ${color || ""}`}>
+      <span className={twMerge(children != null ? "mr-1" : "", color || "")}>
         {icon}
       </span>
       {children}

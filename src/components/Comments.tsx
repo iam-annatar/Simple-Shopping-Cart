@@ -9,7 +9,7 @@ interface CommentProps {
   id: number;
   name: string;
   body: string;
-  postId?: number;
+  postId: number;
   replies: CommentProps[];
 }
 
