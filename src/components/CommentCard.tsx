@@ -103,8 +103,8 @@ export const CommentCard = ({
                   countLikes(likes, id);
                 }}
                 className={twMerge(
-                  "w-5 heart-bg cursor-pointer duration-300 transition-all ease-in-out active:scale-150 ",
-                  isLiked ? "fill-red-500 text-red-500" : "",
+                  "w-5 heart-bg cursor-pointer duration-300 transition-all",
+                  isLiked ? "like-pulse fill-red-500 text-red-500" : "",
                 )}
               />
             }
