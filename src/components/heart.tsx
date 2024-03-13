@@ -36,8 +36,8 @@ export const HeartLike = ({
       <HeartIcon
         size="1.8rem"
         className={twMerge(
-          "heart-bg cursor-pointer duration-300 transition-all ease-in-out active:scale-150 text-muted-foreground",
-          liked ? "fill-red-500 text-red-500" : "",
+          "heart-bg cursor-pointer duration-300 transition-all text-muted-foreground",
+          liked ? "like-pulse fill-red-500 text-red-500 " : "",
         )}
         onClick={handleLike}
       />

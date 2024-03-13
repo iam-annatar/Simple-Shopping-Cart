@@ -124,6 +124,15 @@
     transition: background-color 100ms ease-in-out;
   }
 
+  @keyframes pulse {
+    50% {
+      opacity: 0.5;
+    }
+  }
+  .like-pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1);
+  }
+
   @media (hover: hover), (-ms-high-contrast: none) {
     .heart-bg:hover {
       color: rgb(235, 33, 73);
