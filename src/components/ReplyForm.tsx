@@ -1,5 +1,5 @@
 import type { ChangeEvent } from "react";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { twMerge } from "tailwind-merge";
 
 import { useCommentStore } from "@/store/CommentStore";
@@ -11,7 +11,6 @@ interface ReplyFormProps {
   id: number;
   postId: number;
   autoFocus: boolean;
-  userName?: string;
   onClose: () => void;
 }
 
@@ -19,13 +18,16 @@ export const ReplyForm = ({
   postId,
   id,
   onClose,
-  userName,
   autoFocus = false,
 }: ReplyFormProps) => {
   const [message, setMessage] = useState("");
   const updateReplies = useCommentStore((state) => state.updateReplies);
+  const comments = useCommentStore((state) => state.comments);
+  const username = useCommentStore((state) => state.getUsername(comments, id));
 
-  const username = `User-${crypto.randomUUID().slice(0, 2)}`;
+  const user = useMemo(() => {
+    return `User-${crypto.randomUUID().slice(0, 2)}`;
+  }, [username]);
 
   const submitHandler = (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -36,7 +38,7 @@ export const ReplyForm = ({
           postId,
           parentId: Math.floor(Math.random() * 10000),
           id: Math.floor(Math.random() * 20000),
-          name: username,
+          name: user,
           body: message,
           replies: [],
         },
@@ -49,17 +51,17 @@ export const ReplyForm = ({
   return (
     <Card className="mb-4 border-none bg-none px-4 shadow-none">
       <div className="flex items-center gap-2">
-        <span className="font-bold text-muted-foreground">User</span>
+        <span className="font-bold text-muted-foreground">{user}</span>
         <span className="text-sm font-normal text-muted-foreground">
           Reply to
         </span>
         <span
           className={twMerge(
-            userName == null && "hidden",
+            username == null && "hidden",
             "cursor-pointer font-normal text-blue-500",
           )}
         >
-          {`@${userName}`}
+          {`@${username}`}
         </span>
       </div>
 

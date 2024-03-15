@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { twMerge } from "tailwind-merge";
 
+import { useCommentStore } from "@/store/CommentStore";
+
 import { CommentCard } from "./CommentCard";
 import { Button } from "./ui/button";
 
@@ -22,6 +24,8 @@ export const Comments = ({
   replies,
 }: CommentProps) => {
   const [hideChild, setHideChild] = useState(true);
+  const comments = useCommentStore((state) => state.comments);
+  const username = useCommentStore((state) => state.getUsername(comments, id));
 
   const renderComments = (comment: CommentProps) => (
     <div key={comment.id}>
@@ -35,9 +39,9 @@ export const Comments = ({
           postId={comment.postId}
           id={comment.id}
           parentId={comment.parentId}
-          userName={comment.name}
           body={comment.body}
           name={comment.name}
+          username={username}
         />
       </div>
       {comment.replies.map((reply) => renderComments(reply))}
@@ -52,6 +56,7 @@ export const Comments = ({
         parentId={parentId}
         body={body}
         name={name}
+        // username={username}
       />
       <Button
         size="sm"
@@ -63,9 +68,9 @@ export const Comments = ({
       >
         Show Replies
       </Button>
-      {replies.map((comment) => (
-        <div className={twMerge(hideChild ? "hidden" : "")} key={comment.id}>
-          {renderComments(comment)}
+      {replies.map((rep) => (
+        <div className={twMerge(hideChild ? "hidden" : "")} key={rep.id}>
+          {renderComments(rep)}
         </div>
       ))}
     </div>
