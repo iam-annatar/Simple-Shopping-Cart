@@ -1,3 +1,4 @@
+/* eslint-disable fp/no-loops */
 import { create } from "zustand";
 
 import comments from "@/data/user.json";
@@ -18,7 +19,6 @@ interface Like {
 
 interface CommentType {
   comments: Comment[];
-  getComments: (id: number) => Comment | undefined;
   addComment: (comment: Comment) => void;
   removeComment: (id: number) => void;
   updateReplies: (comments: Comment, id: number) => void;
@@ -26,6 +26,7 @@ interface CommentType {
   likes: Like[];
   toggleLike: (id: number) => void;
   countLikes: (likes: Like[], id: number) => number;
+  getUsername: (cms: Comment[], id: number) => string | undefined;
 }
 
 // function for recursively removing the comments
@@ -42,11 +43,6 @@ const removeRecursive = (commentsArr: Comment[], parentId: number) => {
 
 export const useCommentStore = create<CommentType>((set) => ({
   comments,
-  getComments: (id) => {
-    if (id == null) return;
-    return comments.find((comment) => comment.postId === id);
-  },
-
   addComment: (comment) => {
     if (comment.body.length >= 2) {
       set((state) => ({
@@ -64,10 +60,7 @@ export const useCommentStore = create<CommentType>((set) => ({
       const updatedComment = (replies: Comment[]) =>
         replies.map((c) => {
           if (c.id === id) {
-            if (!c.replies) {
-              c.replies = [];
-            }
-            c.replies.push(comment);
+            c.replies = [...c.replies, comment];
           } else if (c.replies) {
             c.replies = updatedComment(c.replies);
           }
@@ -83,7 +76,6 @@ export const useCommentStore = create<CommentType>((set) => ({
         return commentsForEdit.map((c) => {
           if (c.id === targetId) {
             c = { ...c, body: message };
-            console.log(c);
           } else if (c.replies) {
             c.replies = editCm(c.replies, targetId);
           }
@@ -119,5 +111,27 @@ export const useCommentStore = create<CommentType>((set) => ({
 
       return totalLikes;
     }, 0);
+  },
+  getUsername: (cms, id) => {
+    const findUsername = (cm: Comment[]): string | undefined => {
+      for (const comment of cm) {
+        if (comment.id === id) {
+          return comment.name;
+        }
+
+        if (comment.replies && comment.replies.length > 0) {
+          const replyUsername = findUsername(comment.replies);
+
+          if (replyUsername) {
+            return replyUsername;
+          }
+        }
+      }
+
+      return undefined;
+    };
+
+    const username = findUsername(cms);
+    return username;
   },
 }));

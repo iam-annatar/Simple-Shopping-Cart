@@ -20,6 +20,8 @@ export const CommentForm = ({
   const addComment = useCommentStore((state) => state.addComment);
   const [error, setError] = useState(false);
 
+  const user = `User-${crypto.randomUUID().slice(0, 4)}`;
+
   const submitHandler = (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -33,7 +35,7 @@ export const CommentForm = ({
       id: Math.floor(Math.random() * 1000),
       parentId: Math.floor(Math.random() * 1000),
       body: message,
-      name: "User",
+      name: user,
       replies: [],
     });
     setMessage("");

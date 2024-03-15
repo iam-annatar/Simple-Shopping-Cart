@@ -1,5 +1,6 @@
 import { TrashIcon } from "lucide-react";
 
+import { useLikeContext } from "@/hooks/useLikeContext";
 import { useShoppingContext } from "@/hooks/useShoppingContext";
 import { useWishListContext } from "@/hooks/useWishListContext";
 
@@ -15,6 +16,7 @@ interface WishListProps {
 export const WishList = ({ name, price, imgUrl, id }: WishListProps) => {
   const { increaseCount } = useShoppingContext();
   const { removeFromWishList } = useWishListContext();
+  const { toggleLike } = useLikeContext();
 
   return (
     <div className="mb-8 flex  justify-evenly gap-4 border-b-2 p-4 sm:justify-evenly sm:p-8">
@@ -37,7 +39,10 @@ export const WishList = ({ name, price, imgUrl, id }: WishListProps) => {
             Add to cart
           </Button>
           <TrashIcon
-            onClick={() => removeFromWishList(id)}
+            onClick={() => {
+              removeFromWishList(id);
+              toggleLike(id);
+            }}
             className="block cursor-pointer text-red-400 transition-all  duration-500 hover:text-red-600 sm:hidden"
           />
           <Button

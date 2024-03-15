@@ -12,10 +12,10 @@ import { Card, CardContent } from "./ui/card";
 interface CommentCardProps {
   postId: number;
   body: string;
-  userName?: string;
   name: string;
   parentId: number;
   id: number;
+  username?: string;
 }
 
 const dateFormatter = new Intl.DateTimeFormat(undefined, {
@@ -28,8 +28,8 @@ export const CommentCard = ({
   id,
   body,
   name,
-  userName,
   parentId,
+  username,
 }: CommentCardProps) => {
   const [isReplyOpen, setIsReplyOpen] = useState(false);
   const [isReplyActive, setIsReplyAcive] = useState(false);
@@ -72,7 +72,7 @@ export const CommentCard = ({
             <span className="font-bold text-muted-foreground">{name} </span>
             <span
               className={twMerge(
-                userName == null && "hidden",
+                username == null && "hidden",
                 "text-sm font-normal text-muted-foreground sm:ml-4",
               )}
             >
@@ -80,11 +80,11 @@ export const CommentCard = ({
             </span>
             <span
               className={twMerge(
-                userName == null && "hidden",
+                username == null && "hidden",
                 "cursor-pointer font-normal text-blue-500",
               )}
             >
-              {`@${userName}`}
+              {`@${username}`}
             </span>
           </div>
           <span className="text-sm text-muted-foreground ">
@@ -103,7 +103,7 @@ export const CommentCard = ({
                   countLikes(likes, id);
                 }}
                 className={twMerge(
-                  "w-5 heart-bg cursor-pointer duration-300 transition-all",
+                  "w-5 heart-bg cursor-pointer duration-300 transition-all ease-linear",
                   isLiked ? "like-pulse fill-red-500 text-red-500" : "",
                 )}
               />
@@ -115,7 +115,14 @@ export const CommentCard = ({
 
           <CommentIcons
             isActive={isReplyActive}
-            icon={<ReplyIcon onClick={replyHandler} className="w-5" />}
+            icon={
+              <ReplyIcon
+                onClick={() => {
+                  replyHandler();
+                }}
+                className="w-5"
+              />
+            }
             aria-label="Reply"
           />
           <CommentIcons
@@ -141,7 +148,6 @@ export const CommentCard = ({
             id={id}
             postId={postId}
             autoFocus
-            userName={name}
             onClose={() => {
               setIsReplyOpen(false);
               setIsReplyAcive(false);
