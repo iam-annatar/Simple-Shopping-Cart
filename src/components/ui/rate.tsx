@@ -1,6 +1,6 @@
 import { Rating, Typography } from "@material-tailwind/react";
 
-import { useShoppingContext } from "@/hooks/useShoppingContext";
+import { useShoppingContext } from "@/_features/ShoppingStore/hooks/useShoppingContext";
 
 export const Rate = () => {
   const { rateCount, rateHandler } = useShoppingContext();

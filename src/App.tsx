@@ -1,25 +1,27 @@
+import "./styles/index.css";
+
 import { Route, Routes } from "react-router-dom";
 import { Toaster } from "sonner";
 
-import { Navbar } from "./components/Navbar";
-import { LikeContextProvider } from "./context/LikeContext";
-import { SearchContextProvider } from "./context/SearchContext";
-import { ShoppingCartContext } from "./context/ShoppingCartContext";
-import { ThemeProvider } from "./context/ThemeProvider";
-import { WishListContextProvider } from "./context/WishListContext";
-import { About } from "./pages/AboutPage";
-import { Home } from "./pages/HomePage";
-import { ProductPage } from "./pages/ProductPage";
-import { Store } from "./pages/StorePage";
-import { WhishListPage } from "./pages/WishListPage";
+import { About } from "./_features/About/page/AboutPage";
+import { Home } from "./_features/Home/page/HomePage";
+import { Navbar } from "./_features/Navbar/components/Navbar";
+import { ProductPage } from "./_features/Product/page/ProductPage";
+import { SearchContext } from "./_features/Search/context/SearchContext";
+import { ShoppingCartContext } from "./_features/ShoppingStore/context/ShoppingCartContext";
+import { Store } from "./_features/ShoppingStore/page/StorePage";
+import { LikeContext } from "./_features/WishList/context/LikeContext";
+import { WishListContext } from "./_features/WishList/context/WishListContext";
+import { WishListPage } from "./_features/WishList/page/WishListPage";
+import { ThemeProvider } from "./shared/context/ThemeProvider";
 
 const App = () => {
   return (
     <ThemeProvider defaultTheme="system" storageKey="Theme">
       <ShoppingCartContext>
-        <SearchContextProvider>
-          <LikeContextProvider>
-            <WishListContextProvider>
+        <SearchContext>
+          <LikeContext>
+            <WishListContext>
               <Navbar />
               <div className="container">
                 <Routes>
@@ -27,13 +29,13 @@ const App = () => {
                   <Route path="/store" element={<Store />} />
                   <Route path="/store/:productId" element={<ProductPage />} />
                   <Route path="/about" element={<About />} />
-                  <Route path="/wishlist" element={<WhishListPage />} />
+                  <Route path="/wishlist" element={<WishListPage />} />
                 </Routes>
               </div>
               <Toaster duration={2000} richColors closeButton />
-            </WishListContextProvider>
-          </LikeContextProvider>
-        </SearchContextProvider>
+            </WishListContext>
+          </LikeContext>
+        </SearchContext>
       </ShoppingCartContext>
     </ThemeProvider>
   );
