@@ -12,7 +12,7 @@ export const Navbar = () => {
   const location = useLocation();
 
   const pages = {
-    home: "/",
+    home: "/home",
     store: "/store",
     wishlist: "/wishlist",
     about: "/about",
