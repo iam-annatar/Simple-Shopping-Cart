@@ -1,6 +1,6 @@
 import "./styles/index.css";
 
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import { Toaster } from "sonner";
 
 import { About } from "./_features/About/page/AboutPage";
@@ -25,7 +25,10 @@ const App = () => {
               <Navbar />
               <div className="container">
                 <Routes>
-                  <Route path="/" element={<Home />} />
+                  <Route path="/">
+                    <Route index element={<Navigate to="/store" replace />} />
+                  </Route>
+                  <Route path="/home" element={<Home />} />
                   <Route path="/store" element={<Store />} />
                   <Route path="/store/:productId" element={<ProductPage />} />
                   <Route path="/about" element={<About />} />
