@@ -2,7 +2,6 @@ import { SearchIcon } from "lucide-react";
 import type { ChangeEvent } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { twMerge } from "tailwind-merge";
 
 import { useSearchContext } from "@/_features/Search/hook/useSearchContext";
 import { Button } from "@/components/ui/button";
