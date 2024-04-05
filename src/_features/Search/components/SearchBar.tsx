@@ -30,20 +30,19 @@ export const Search = () => {
           <SearchIcon className="size-[1.125rem]" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent align="start">
+      <PopoverContent sideOffset={15}>
         <Input
-          className=""
           type="search"
           id="quary"
-          placeholder="Search ..."
+          placeholder="What are you looking for?"
           onChange={handleSearch}
         />
         {filterItems(searchValue).length === 0 ? (
-          <div className="mt-2 text-center text-muted-foreground">
+          <div className="mt-4 text-center text-muted-foreground">
             Item Not Found !
           </div>
         ) : (
-          <div className="text-start text-muted-foreground ">
+          <div className=" mt-4 text-start text-muted-foreground ">
             {filterItems(searchValue).map((item) => {
               return (
                 searchValue && (
