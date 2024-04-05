@@ -2,6 +2,7 @@ import { SearchIcon } from "lucide-react";
 import type { ChangeEvent } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { twMerge } from "tailwind-merge";
 
 import { useSearchContext } from "@/_features/Search/hook/useSearchContext";
 import { Button } from "@/components/ui/button";
@@ -30,10 +31,11 @@ export const Search = () => {
           <SearchIcon className="size-[1.125rem]" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent sideOffset={15}>
+      <PopoverContent sideOffset={15} align="center">
         <Input
           type="search"
           id="quary"
+          className="text-xs"
           placeholder="What are you looking for?"
           onChange={handleSearch}
         />
