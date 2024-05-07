@@ -2,6 +2,7 @@ import { EditIcon, HeartIcon, ReplyIcon, TrashIcon } from "lucide-react";
 import { useState } from "react";
 import { twMerge } from "tailwind-merge";
 
+import type { Comment } from "@/_features/Comments/store/CommentStore";
 import { useCommentStore } from "@/_features/Comments/store/CommentStore";
 import { Card, CardContent } from "@/components/ui/card";
 
@@ -10,11 +11,7 @@ import { EditForm } from "./EditForm";
 import { ReplyForm } from "./ReplyForm";
 
 interface CommentCardProps {
-  postId: number;
-  body: string;
-  name: string;
-  parentId: number;
-  id: number;
+  comment: Comment;
   username?: string;
 }
 
@@ -23,14 +20,7 @@ const dateFormatter = new Intl.DateTimeFormat(undefined, {
   timeStyle: "short",
 });
 
-export const CommentCard = ({
-  postId,
-  id,
-  body,
-  name,
-  parentId,
-  username,
-}: CommentCardProps) => {
+export const CommentCard = ({ comment, username }: CommentCardProps) => {
   const [isReplyOpen, setIsReplyOpen] = useState(false);
   const [isReplyActive, setIsReplyAcive] = useState(false);
   const [isEditOpen, setIsEditOpen] = useState(false);
@@ -41,8 +31,8 @@ export const CommentCard = ({
   const likes = useCommentStore((state) => state.likes);
   const toggleLike = useCommentStore((state) => state.toggleLike);
 
-  const isLiked = likes.some((like) => like.id === id);
-  const count = countLikes(likes, id);
+  const isLiked = likes.some((like) => like.id === comment.id);
+  const count = countLikes(likes, comment.id);
 
   const editHandler = () => {
     if (!isEditOpen && !isReplyOpen) {
@@ -69,7 +59,9 @@ export const CommentCard = ({
       <Card className="mt-4 w-full rounded-md border bg-slate-50 p-2 shadow-sm dark:border dark:bg-slate-950 ">
         <div className="items-center justify-between 2xs:flex">
           <div className="flex  items-center gap-2">
-            <span className="font-bold text-muted-foreground">{name} </span>
+            <span className="font-bold text-muted-foreground">
+              {comment.name}{" "}
+            </span>
             <span
               className={twMerge(
                 username == null && "hidden",
@@ -92,15 +84,15 @@ export const CommentCard = ({
           </span>
         </div>
         <CardContent className="p-4">
-          <div>{body}</div>
+          <div>{comment.body}</div>
         </CardContent>
         <div className="flex gap-2 ">
           <CommentIcons
             icon={
               <HeartIcon
                 onClick={() => {
-                  toggleLike(id);
-                  countLikes(likes, id);
+                  toggleLike(comment.id);
+                  countLikes(likes, comment.id);
                 }}
                 className={twMerge(
                   "w-5 heart-bg cursor-pointer duration-300 transition-all ease-linear",
@@ -133,7 +125,7 @@ export const CommentCard = ({
           <CommentIcons
             icon={
               <TrashIcon
-                onClick={() => removeComment(parentId)}
+                onClick={() => removeComment(comment.parentId)}
                 className="w-5"
               />
             }
@@ -145,8 +137,8 @@ export const CommentCard = ({
       <div className={twMerge(isReplyOpen || isEditOpen ? "mt-4" : "")}>
         {isReplyOpen ? (
           <ReplyForm
-            id={id}
-            postId={postId}
+            id={comment.id}
+            postId={comment.postId}
             autoFocus
             onClose={() => {
               setIsReplyOpen(false);
@@ -156,9 +148,7 @@ export const CommentCard = ({
         ) : null}
         {isEditOpen ? (
           <EditForm
-            id={id}
-            body={body}
-            name={name}
+            comment={comment}
             onClose={() => {
               setIsEditOpen(false);
               setIsEditActive(false);

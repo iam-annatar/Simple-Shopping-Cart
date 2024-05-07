@@ -1,38 +1,31 @@
 import type { ChangeEvent } from "react";
 import { useState } from "react";
 
+import type { Comment } from "@/_features/Comments/store/CommentStore";
 import { useCommentStore } from "@/_features/Comments/store/CommentStore";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 
 interface EditFormProps {
-  id: number;
+  comment: Comment;
   autoFocus: boolean;
-  body: string;
   onClose: () => void;
-  name: string;
 }
 
-export const EditForm = ({
-  id,
-  name,
-  onClose,
-  body,
-  autoFocus,
-}: EditFormProps) => {
-  const [message, setMessage] = useState(body);
+export const EditForm = ({ comment, onClose, autoFocus }: EditFormProps) => {
+  const [message, setMessage] = useState(comment.body);
   const editComments = useCommentStore((state) => state.editComments);
 
   const onSubmit = (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
-    editComments(message, id);
+    editComments(message, comment.id);
     onClose();
   };
 
   return (
     <Card className="mb-4 border-none bg-none px-4 shadow-none">
       <div className="flex items-center gap-2">
-        <span className="font-bold text-muted-foreground">{name}</span>
+        <span className="font-bold text-muted-foreground">{comment.name}</span>
       </div>
       <form id="comment" onSubmit={onSubmit}>
         <div className="flex flex-col gap-2">

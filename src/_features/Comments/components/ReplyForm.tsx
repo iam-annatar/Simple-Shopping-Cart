@@ -2,13 +2,14 @@ import type { ChangeEvent } from "react";
 import { useMemo, useState } from "react";
 import { twMerge } from "tailwind-merge";
 
+import type { Comment } from "@/_features/Comments/store/CommentStore";
 import { useCommentStore } from "@/_features/Comments/store/CommentStore";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 
 interface ReplyFormProps {
-  id: number;
-  postId: number;
+  id: Comment["id"];
+  postId: Comment["postId"];
   autoFocus: boolean;
   onClose: () => void;
 }
@@ -26,6 +27,7 @@ export const ReplyForm = ({
 
   const user = useMemo(() => {
     return `User-${crypto.randomUUID().slice(0, 2)}`;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [username]);
 
   const submitHandler = (e: ChangeEvent<HTMLFormElement>) => {
