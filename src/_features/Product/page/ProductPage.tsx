@@ -2,9 +2,9 @@ import { useEffect } from "react";
 import { useLocation, useParams } from "react-router-dom";
 
 import { CommentsList } from "@/_features/Comments/components/CommentsList";
-import { Product } from "@/_features/Product/components/Product";
-import { ProductError } from "@/_features/Product/components/ProductError";
 import storeItems from "@/shared/data/item.json";
+
+import { Product, ProductError } from "../components";
 
 export const ProductPage = () => {
   const { productId } = useParams();
