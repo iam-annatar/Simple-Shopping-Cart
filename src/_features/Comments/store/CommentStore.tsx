@@ -1,7 +1,7 @@
 /* eslint-disable fp/no-loops */
 import { create } from "zustand";
 
-import comments from "@/_features/Comments/data/user.json";
+import initComments from "@/_features/Comments/data/user.json";
 
 export interface Comment {
   postId: number;
@@ -42,7 +42,7 @@ const removeRecursive = (commentsArr: Comment[], parentId: number) => {
 };
 
 export const useCommentStore = create<CommentType>((set) => ({
-  comments,
+  comments: initComments,
   addComment: (comment) => {
     if (comment.body.length >= 2) {
       set((state) => ({

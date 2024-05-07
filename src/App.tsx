@@ -8,11 +8,12 @@ import { Home } from "./_features/Home/page/HomePage";
 import { Navbar } from "./_features/Navbar/components/Navbar";
 import { ProductPage } from "./_features/Product/page/ProductPage";
 import { SearchContext } from "./_features/Search/context/SearchContext";
-import { ShoppingCartContext } from "./_features/ShoppingStore/context/ShoppingCartContext";
-import { Store } from "./_features/ShoppingStore/page/StorePage";
-import { LikeContext } from "./_features/WishList/context/LikeContext";
-import { WishListContext } from "./_features/WishList/context/WishListContext";
-import { WishListPage } from "./_features/WishList/page/WishListPage";
+import { ShoppingCartContext, Store } from "./_features/ShoppingStore";
+import {
+  LikeContext,
+  WishListContext,
+  WishListPage,
+} from "./_features/WishList";
 import { ThemeProvider } from "./shared/context/ThemeProvider";
 
 const App = () => {
