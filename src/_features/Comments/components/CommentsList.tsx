@@ -15,7 +15,7 @@ export const CommentsList = () => {
       {comments.map(
         (comment) =>
           comment.postId === Number(productId) && (
-            <Comments key={comment.parentId} {...comment} />
+            <Comments key={comment.parentId} comment={comment} />
           ),
       )}
     </>

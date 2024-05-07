@@ -1,13 +1,14 @@
 import type { ChangeEvent } from "react";
 import { useState } from "react";
 
+import type { Comment } from "@/_features/Comments/store/CommentStore";
 import { useCommentStore } from "@/_features/Comments/store/CommentStore";
 import { Button } from "@/components/ui/button";
 
 interface CommentFormProps {
   initialValue: string;
   autoFocus?: boolean;
-  postId: number;
+  postId: Comment["postId"];
 }
 
 export const CommentForm = ({
