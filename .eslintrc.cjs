@@ -14,6 +14,6 @@ module.exports = init({
     ],
     "@typescript-eslint/no-var-requires": 0,
     "import/no-unresolved": "off",
-    "import/extensions": ["error", { json: "always" }],
+    "import/extensions": ["error", { svg: "always", json: "always" }],
   },
 });
