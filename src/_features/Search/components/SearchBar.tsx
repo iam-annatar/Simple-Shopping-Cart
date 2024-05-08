@@ -1,5 +1,4 @@
 import { SearchIcon } from "lucide-react";
-import type { ChangeEvent } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -18,11 +17,6 @@ export const Search = () => {
 
   const navigate = useNavigate();
 
-  const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
-    const query = e.target.value;
-    setSearchValue(query);
-  };
-
   return (
     <Popover defaultOpen={isOpen} onOpenChange={() => setIsOpen(true)}>
       <PopoverTrigger asChild>
@@ -30,31 +24,30 @@ export const Search = () => {
           <SearchIcon className="size-[1.125rem]" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent sideOffset={15} align="center">
+      <PopoverContent sideOffset={15}>
         <Input
           type="search"
-          id="quary"
           className="text-xs"
           placeholder="What are you looking for?"
-          onChange={handleSearch}
+          onChange={(e) => setSearchValue(e.target.value)}
         />
-        {filterItems(searchValue).length === 0 ? (
+        {filterItems().length === 0 ? (
           <div className="mt-4 text-center text-muted-foreground">
             Item Not Found !
           </div>
         ) : (
           <div className=" mt-4 text-start text-muted-foreground ">
-            {filterItems(searchValue).map((item) => {
+            {filterItems().map((item) => {
               return (
                 searchValue && (
-                  // eslint-disable-next-line jsx-a11y/click-events-have-key-events
-                  <div
+                  <Button
+                    variant="ghost"
                     className="mt-2 cursor-pointer list-none hover:text-white"
                     key={item.id}
                     onClick={() => navigate(`/store/${item.id}`)}
                   >
                     {item.name}
-                  </div>
+                  </Button>
                 )
               );
             })}
