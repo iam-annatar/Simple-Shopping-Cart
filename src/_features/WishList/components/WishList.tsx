@@ -1,4 +1,5 @@
-import { TrashIcon } from "lucide-react";
+/* eslint-disable tailwindcss/classnames-order */
+import { PlusCircle, TrashIcon } from "lucide-react";
 
 import { useShoppingContext } from "@/_features/ShoppingStore/hooks/useShoppingContext";
 import { useLikeContext } from "@/_features/WishList/hooks/useLikeContext";
@@ -18,22 +19,27 @@ export const WishList = ({ name, price, imgUrl, id }: WishListProps) => {
   const { toggleLike } = useLikeContext();
 
   return (
-    <div className="mb-8 flex  justify-evenly gap-4 border-b-2 p-4 sm:justify-evenly sm:p-8">
+    <div className="flex gap-4 flex-wrap items-center justify-center p-4 border-b ">
       <img
         src={imgUrl}
-        className="w-2/4 rounded-lg object-cover sm:w-2/5"
+        className="w-[15rem] rounded-lg object-cover "
         alt="img"
       />
-      <div className="grid  items-center justify-between gap-4 align-bottom sm:flex">
-        <div className="grid  items-center gap-3 sm:flex sm:gap-8">
-          <span className="text-lg">{name}</span>
-          <span className=" text-muted-foreground">{price}</span>
-        </div>
-        <div className="flex  items-center gap-2">
+
+      <div className="flex items-center gap-3">
+        <span className="text-lg">{name}</span>
+        <span className=" text-muted-foreground">{price}</span>
+        <div className="flex items-center gap-2">
+          <PlusCircle
+            onClick={() => {
+              increaseCount(id);
+            }}
+            className="block cursor-pointer text-blue-400 transition-all  duration-500 hover:text-blue-600 sm:hidden"
+          />
           <Button
             onClick={() => increaseCount(id)}
             variant="ghost"
-            className="bg-blue-600 text-white transition-all hover:bg-blue-600/70 sm:w-full"
+            className="hidden bg-blue-600 text-white transition-all hover:bg-blue-600/70 sm:block sm:w-full"
           >
             Add to cart
           </Button>
