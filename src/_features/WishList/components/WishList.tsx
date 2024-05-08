@@ -45,7 +45,10 @@ export const WishList = ({ name, price, imgUrl, id }: WishListProps) => {
             className="block cursor-pointer text-red-400 transition-all  duration-500 hover:text-red-600 sm:hidden"
           />
           <Button
-            onClick={() => removeFromWishList(id)}
+            onClick={() => {
+              removeFromWishList(id);
+              toggleLike(id);
+            }}
             variant="ghost"
             className="hidden bg-red-500 text-white  transition-all duration-500 hover:bg-red-600 sm:block sm:w-full "
           >
