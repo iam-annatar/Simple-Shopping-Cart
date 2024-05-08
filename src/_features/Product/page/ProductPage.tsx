@@ -21,7 +21,7 @@ export const ProductPage = () => {
       <div className="mt-4">
         {product != null ? <Product {...product} /> : <ProductError />}
       </div>
-      <div className="mb-8">
+      <div id="comments" className="mb-8">
         <h2 className="mb-4 mt-8 text-xl">Comments</h2>
         <CommentsList />
       </div>

@@ -1,4 +1,5 @@
 // import { useRef } from "react";
+
 import { Link, useNavigate } from "react-router-dom";
 
 import { useLikeContext } from "@/_features/WishList/hooks/useLikeContext";
@@ -22,18 +23,8 @@ interface ProductProps {
 export const Product = ({ id, imgUrl, name, price }: ProductProps) => {
   const navigate = useNavigate();
   const { likedItems, toggleLike } = useLikeContext();
-  // const commentRef = useRef<HTMLDivElement>(null);
 
   const isLiked = likedItems.some((item) => item.id === id);
-
-  // const handleViewComment = () => {
-  //   if (commentRef.current) {
-  //     commentRef.current.scrollIntoView({
-  //       behavior: "smooth",
-  //       block: "start",
-  //     });
-  //   }
-  // };
 
   return (
     <>
@@ -104,14 +95,13 @@ export const Product = ({ id, imgUrl, name, price }: ProductProps) => {
                   </button>
                 </HoverCardTrigger>
                 <HoverCardContent
-                  // onClick={handleViewComment}
                   className="w-auto bg-blue-600 p-2"
                   sideOffset={6}
                   align="start"
                 >
-                  <div className="  cursor-pointer text-white ">
+                  <a href="#comments" className="cursor-pointer text-white ">
                     View Comments
-                  </div>
+                  </a>
                 </HoverCardContent>
               </HoverCard>
             </div>
